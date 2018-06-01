@@ -1,0 +1,223 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold"> Transaction</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 ">
+      <div class="nav-item mr-2">
+        <!-- <button class=" btn-white-swm px-4" (click)="Export(this.InitTransactionToExport(this.data_transaction),this.router.url.split('/')[1])">Export</button> -->
+      </div>
+    </div>
+  </div>
+  <div class=" form-datetime my-3">
+    <label class="text-primary-swm ml-3 font-weight-bold d-inline">From Date To Date</label>
+    <div class="datetime-group ml-3 d-inline" style="width: 10%">
+      <input class="date-custom  pl-3" daterangepicker (selected)=" selectedDate($event)" [options]="options" />
+      <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+    </div>
+    <!-- <label class=" btn-white-swm px-4 custom-search-button" (click)=" loadTransactionData()">Search</label> -->
+    <button class="btn-white-swm ml-2 px-4  " (click)=" loadTransactionData()">Search</button>
+  </div>
+  <div class="tab-content">
+    <div class="table-responsive fixed-tableTransaction ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.TRANTYPE '; this.loadTransactionData({}) ">
+                TRANTYPE
+                <i *ngIf="this.propertyName_ff == 'itrn.TRANTYPE' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.TRANTYPE' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_trantype" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.STORERKEY '; this.loadTransactionData({}) ">
+                STORERKEY
+                <i *ngIf="this.propertyName_ff == 'itrn.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.SKU '; this.loadTransactionData({}) ">
+                SKU
+                <i *ngIf="this.propertyName_ff == 'itrn.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.FROMLOC '; this.loadTransactionData({}) ">
+                FROMLOC
+                <i *ngIf="this.propertyName_ff == 'itrn.FROMLOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.FROMLOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_fromloc" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.FROMLPNID '; this.loadTransactionData({}) ">
+                FROMID
+                <i *ngIf="this.propertyName_ff == 'itrn.FROMLPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.FROMLPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_fromId" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.TOLOC '; this.loadTransactionData({}) ">
+                TOLOC
+                <i *ngIf="this.propertyName_ff == 'itrn.TOLOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.TOLOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_toloc" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.TOLPNID '; this.loadTransactionData({}) ">
+                TOLPNID
+                <i *ngIf="this.propertyName_ff == 'itrn.TOLPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.TOLPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_toId" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th class="align-top">LOTTABLE01</th>
+            <th class="align-top">LOTTABLE02</th>
+            <th class="align-top">LOTTABLE03</th>
+            <th class="align-top">LOTTABLE04</th>
+            <th class="align-top">LOTTABLE05</th>
+            <th class="align-top">LOTTABLE06</th>
+            <th class="align-top">LOTTABLE07</th>
+            <th class="align-top">LOTTABLE08</th>
+            <th class="align-top">LOTTABLE09</th>
+            <th class="align-top">LOTTABLE10</th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.SOURCETYPE '; this.loadTransactionData({}) ">
+                SOURCETYPE
+                <i *ngIf="this.propertyName_ff == 'itrn.SOURCETYPE' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.SOURCETYPE' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sourceType" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.STATUS '; this.loadTransactionData({}) ">
+                STATUS
+                <i *ngIf="this.propertyName_ff == 'itrn.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <!-- <th>STATUS
+              <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadTransactionData({'itrn.STATUS like':$event.target.value})">
+            </th> -->
+            <th class="align-top">
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.QTY '; this.loadTransactionData({}) ">
+                QTY
+                <i *ngIf="this.propertyName_ff == 'itrn.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="align-top">PALLET</th>
+            <th class="align-top">CUBE</th>
+            <th class="align-top">GROSSWGT</th>
+            <th class="align-top">NETWGT</th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.PACKKEY '; this.loadTransactionData({}) ">
+                PACKKEY
+                <i *ngIf="this.propertyName_ff == 'itrn.PACKKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.PACKKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_packkey" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <!-- <th>UOM
+              <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadTransactionData({'itrn.UOM like':$event.target.value})">
+            </th> -->
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.UOM '; this.loadTransactionData({}) ">
+                UOM
+                <i *ngIf="this.propertyName_ff == 'itrn.UOM' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.UOM' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_uom" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th class="align-top">HOLDCODE</th>
+            <th class="align-top">
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.ADDDATE '; this.loadTransactionData({}) ">
+                ADDDATE
+                <i *ngIf="this.propertyName_ff == 'itrn.ADDDATE' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.ADDDATE' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'itrn.ADDWHO '; this.loadTransactionData({}) ">
+                ADDWHO
+                <i *ngIf="this.propertyName_ff == 'itrn.ADDWHO' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'itrn.ADDWHO' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_addWho" (keyup.enter)="loadTransactionData({})">
+            </th>
+            <th class="align-top">EDITDATE</th>
+            <th class="align-top">EDITWHO</th>
+            <th class="align-top">OWNER
+            </th>
+            <th class="align-top">REMARK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of data_transaction | paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+            <td>{{i+1}}</td>
+            <td>{{data.TRANTYPE}}</td>
+            <td>{{data.STORERKEY}}</td>
+            <td>{{data.SKU}}</td>
+            <td>{{data.FROMLOC}}</td>
+            <td>{{data.FROMLPNID}}</td>
+            <td>{{data.TOLOC}}</td>
+            <td>{{data.TOLPNID}}</td>
+            <td>{{data.LOTTABLE01}}</td>
+            <td>{{data.LOTTABLE02}}</td>
+            <td>{{data.LOTTABLE03}}</td>
+            <td>{{data.LOTTABLE04|date}}</td>
+            <td>{{data.LOTTABLE05|date}}</td>
+            <td>{{data.LOTTABLE06}}</td>
+            <td>{{data.LOTTABLE07}}</td>
+            <td>{{data.LOTTABLE08}}</td>
+            <td>{{data.LOTTABLE09}}</td>
+            <td>{{data.LOTTABLE10}}</td>
+            <td>{{data.SOURCETYPE}}</td>
+            <td>{{data.STATUS}}</td>
+            <td>{{data.QTY}}</td>
+            <td>{{data.PALLET}}</td>
+            <td>{{data.CUBE}}</td>
+            <td>{{data.GROSSWGT}}</td>
+            <td>{{data.NETWGT}}</td>
+            <td>{{data.PACKKEY}}</td>
+            <td>{{data.UOM}}</td>
+            <td>{{data.HOLDCODE}}</td>
+            <td>{{data.ADDDATE| date:'dd-MM-yyyy'}}</td>
+            <td>{{data.ADDWHO}}</td>
+            <td>{{data.EDITDATE|date}}</td>
+            <td>{{data.EDITWHO}}</td>
+            <td>{{data.OWNER}}</td>
+            <td>{{data.REMARK}}</td>
+          </tr>
+          <tr id="pagination"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadTransactionData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadTransactionData({})"></pagination-controls>
+    </div>
+  </div>
+</div>

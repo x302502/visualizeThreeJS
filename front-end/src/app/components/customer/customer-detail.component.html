@@ -1,0 +1,157 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item" >
+        <button class="btn-primary-swm px-5 text-white border-0" [disabled]="!frrmCustomer.form.valid" (click)="save(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frrmCustomer="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code <span class="form-important">*</span></label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" placeholder="" [(ngModel)]='entity.storerkey' name='storerkey' required [readonly]="entity.id">
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Group</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select class="form-control form-control-sm" name="groupcode[{{i}}]" [(ngModel)]="entity.groupcode">
+            <option *ngFor="let data of data_customergroup" [ngValue]="data.groupcode">{{data.groupname}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Name <span class="form-important">*</span></label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" placeholder="" [(ngModel)]='entity.company' name='descr' required >
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm  col-form-label-sm pl-2">Address </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" placeholder="" [(ngModel)]='entity.address1' name='address1' >
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div id="wrapTableAndAction" *ngIf="entity.id">
+      <grid-control [option]="gridOption" #gridDetail (onSaveRow)="saveRow($event)" (onImportExcel)="importExcel($event)"></grid-control>
+    </div>
+
+  <!-- <div id="wrapTableAndAction">
+    <div class="table-responsive fixed-tabledetail">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th rowspan="2" class="align-bottom table-customer">
+              <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" (click)="this.addNewRow()" >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_shipcode = this.order_shipcode=='ASC' ? 'DESC' : 'ASC'; this.propertyName_shipcode = 'shipcode'; this.loadShipCodeData({}) " >
+                Ship Code
+                <i *ngIf="this.propertyName_shipcode == 'shipcode' && this.order_shipcode=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_shipcode == 'shipcode' && this.order_shipcode=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fs_shipcode" (keyup.enter)="this.loadShipCodeData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_shipcode = this.order_shipcode=='ASC' ? 'DESC' : 'ASC'; this.propertyName_shipcode = 'address'; this.loadShipCodeData({}) " >
+                Address
+                <i *ngIf="this.propertyName_shipcode == 'address' && this.order_shipcode=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_shipcode == 'address' && this.order_shipcode=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fs_address" (keyup.enter)="this.loadShipCodeData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_shipcode = this.order_shipcode=='ASC' ? 'DESC' : 'ASC'; this.propertyName_shipcode = 'contact'; this.loadShipCodeData({}) " >
+                Contact
+                <i *ngIf="this.propertyName_shipcode == 'contact' && this.order_shipcode=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_shipcode == 'contact' && this.order_shipcode=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fs_contact" (keyup.enter)="this.loadShipCodeData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_shipcode = this.order_shipcode=='ASC' ? 'DESC' : 'ASC'; this.propertyName_shipcode = 'phone'; this.loadShipCodeData({}) " >
+                Phone
+                <i *ngIf="this.propertyName_shipcode == 'phone' && this.order_shipcode=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_shipcode == 'phone' && this.order_shipcode=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fs_phone" (keyup.enter)="this.loadShipCodeData({})">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="data_temp">
+            <td>
+              <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer py-0 cursor-pointer" (click)="this.saveRow(data_temp)" >
+                <i class="fa fa-save text-success" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer py-0 cursor-pointer" (click)="this.data_temp = null;">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="shipcode" [(ngModel)]="data_temp.shipcode"/>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="address" [(ngModel)]="data_temp.address"/>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="contact" [(ngModel)]="data_temp.contact"/>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="phone" [(ngModel)]="data_temp.phone"/>
+            </td>
+          </tr>
+          <tr *ngFor="let data of data_shipcode | paginate: { id: 'id_shipcode', itemsPerPage: this.itemsPerPage_shipcode, currentPage: this.currentPage_shipcode, totalItems: this.total_shipcode }; let i = index;" >
+            <td class="align-bottom table-small">
+              <button *ngIf="!data.isEdit" type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" (click)="deleteShipcodeRow(data)">
+                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" *ngIf="data.isEdit" (click)="this.saveRow(data)" >
+                <i class="fa fa-save text-success" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="d-inline-block btn btn-xs btn-link" (click)="data.isEdit = !data.isEdit">
+                <i *ngIf="!data.isEdit" class="fa fa-pencil"></i>
+                <i  *ngIf="data.isEdit" class="fa fa-times"></i>
+              </button>
+            </td>
+            <td>
+              {{data.shipcode}}
+            </td>
+            <td>
+              {{!data.isEdit?data.address:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="address[{{i}}]" [(ngModel)]="data.address" />
+            </td>
+            <td>
+              {{!data.isEdit?data.contact:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="contact[{{i}}]" [(ngModel)]="data.contact" />
+            </td>
+            <td>
+              {{!data.isEdit?data.phone:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="phone[{{i}}]" [(ngModel)]="data.phone" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select name="itemsPerPage_shipcode" [(ngModel)]="this.itemsPerPage_shipcode" (change)="this.itemsPerPage_shipcode = $event.target.value; this.loadShipCodeData()">
+          <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+        </select>
+        <span>&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_shipcode" (pageChange)="this.currentPage_shipcode = $event; this.loadShipCodeData()"></pagination-controls>
+    </div>
+  </div> -->
+</section>

@@ -1,0 +1,11 @@
+.dropdown-item, .nav-item {
+    cursor: pointer;
+}
+
+.nav-pills .nav-link.text-dark.active, .nav-pills .show>.nav-link {
+	border-bottom: 4px solid #16759b;
+	border-radius: 0;	
+	background: none;
+	color: #16759b !important;
+    font-weight: 600;
+}

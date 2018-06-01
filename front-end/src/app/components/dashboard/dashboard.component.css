@@ -1,0 +1,131 @@
+/* web-arch */
+.widget {
+    font-family: 'Roboto';
+    background-color: #bcbcbc;
+    color: #ffffff;
+    position: relative;
+    border-radius: 0.5rem;
+}
+.widget .widget-body {
+    padding: 19px 18px 15px 24px;
+}
+.widget .controller {
+    position: relative;
+    display: block;
+    float: right;
+}
+.widget .widget-button {
+    cursor: pointer;
+    margin-left: 0.1rem;
+    color: rgba(0, 0, 0, 0.28);
+}
+
+.widget .widget-button:hover {
+    color: #FFF;
+}
+
+.widget .widget-title {
+    color: #FFF;
+    text-transform: uppercase;
+    
+    letter-spacing: 0.7px;
+    font-weight: 500;
+}
+.widget-stats {
+    padding-left: 0;
+    display: inline-block;
+}
+.widget-stats .item-title {
+    font-size: 13px;
+    letter-spacing: 0.01em;
+}
+.widget-stats .item-count {
+    font-size: 15px;
+    color: #FFF;
+    display: block;
+    font-weight: 500;
+}
+.widget-stats .wrapper {
+    margin: 5px 0 5px 0;
+    border-right: 1px solid #363a41;
+    margin-right: 7px;
+    padding-right: 7px;
+}
+.widget-stats .wrapper.transparent {
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.progress {
+    height: 3px;
+    background-color: #e9ecee;
+    background-image: none;
+    box-shadow: none;
+    filter: none;
+}
+.progress.no-radius {
+    border-radius: 0px;
+}
+.progress.transparent {
+    background-color: rgba(0, 0, 0, 0.28);
+}
+.progress.progress-small {
+    height: 2px;
+}
+.widget .progress {
+    width: 70%;
+    margin-bottom: 13px;
+}
+.progress.no-radius .progress-bar {
+    border-radius: 0px;
+}
+.progress-bar-white {
+    background-color: #FFF;
+    background-image: none;
+}
+.widget > .widget-body > .description {
+    font-size: 13px;
+    display: block;
+    color: #FFF;
+    display: table-cell;
+    -webkit-font-smoothing: antialiased;
+}
+
+.widget .description .mini-description {
+    position: relative;
+    top: -5px;
+}
+.widget .blend {
+    color: rgba(0, 0, 0, 0.42);
+}
+
+.widget.green {
+    background-color: #0aa699;
+}
+.widget.blue {
+    background-color: #0090d9;
+}
+.widget.purple {
+    background-color: #735f87;
+}
+.widget.red {
+    background-color: #f35958;
+}
+
+.text-white {
+    color: #FFF !important;
+}
+
+.mr-0{
+    margin-right: 0!important;
+}
+
+.ml-0{
+    margin-right: 0!important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+.mt-20 {
+    margin-top: 20px !important;
+}

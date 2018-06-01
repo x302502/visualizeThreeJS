@@ -1,0 +1,393 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+      <div class=" mr-2">
+        <a class=" btn-white-swm px-4" data-toggle="modal" data-target="#ModalCreateNewCheckin"> New Check in</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content">
+    <!-- Tab tariff List -->
+    <div class="tab-pane fade show active" id="tablist">
+      <div class="table-responsive fixed-tablenotab ">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2">No</th>
+              <th rowspan="2">ACTION</th>
+              <!-- <th rowspan="2">TAGID
+                </th> -->
+              <!-- <th rowspan="2">GATENO
+                <input type="text" class="form-control search-table  my-2">
+              </th> -->
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.GATENO'; this.loadCheckinData({}) ">
+                  GATENO
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_gateno" (keyup)="loadCheckinData({})" (keyup.back)="loadCheckinData({})">
+              </th>
+              <!-- <th rowspan="2">FULLNAME
+                <input type="text" class="form-control search-table  my-2">
+              </th> -->
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.FULLNAME'; this.loadCheckinData({}) ">
+                  FULLNAME
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_fullname" (keyup)="loadCheckinData({})" (keyup.back)="loadCheckinData({})">
+              </th>
+              <!-- <th rowspan="2">CHECKDATE
+                  <input type="text" class="form-control search-table  my-2">
+                </th> -->
+              <!-- <th rowspan="2">PASSPORTNUMBER
+                <input type="text" class="form-control search-table  my-2">
+              </th> -->
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.PASSPORTNUMBER'; this.loadCheckinData({}) ">
+                  PASSPORTNUMBER
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_passportnumber" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.CHECKIN'; this.loadCheckinData({}) ">
+                  CHECKIN
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_checkin" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.CHECKOUT'; this.loadCheckinData({}) ">
+                  CHECKOUT
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_checkout" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <!-- <th rowspan="2">TRUCKNO
+                <input type="text" class="form-control search-table  my-2">
+              </th> -->
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.TRUCKNO'; this.loadCheckinData({}) ">
+                  TRUCKNO
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_truckno" (keyup)="loadCheckinData({})" (keyup.back)="loadCheckinData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.TRUCKTYPE'; this.loadCheckinData({}) ">
+                  TRUCKTYPE
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_trucktype" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.CONTAINER'; this.loadCheckinData({}) ">
+                  CONTAINER/SEALNUMBER
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_container" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.QTY'; this.loadCheckinData({}) ">
+                  QTY
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th rowspan="2">
+
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'checkin.STATUS'; this.loadCheckinData({}) ">
+                  STATUS
+                  <i *ngIf="this.propertyName_ff == 'checkin.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'checkin.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadCheckinData({})" (keyup.enter)="loadCheckinData({})">
+              </th>
+              <th rowspan="2">NOTES
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_checkIn| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+              <td>
+                {{i+1}}
+              </td>
+              <td>
+                <div>
+                  <!-- Show Edit and Delete button -->
+                  <div *ngIf="i !== editRow; else none">
+
+                    <i class="fa fa-pencil ml-2" aria-hidden="true" id="edit" (click)="Edit(i)"></i>
+
+                    <i class="fa fa-trash-o ml-2" aria-hidden="true" id="delete" href='#modalDelete' data-toggle="modal"></i>
+                    <!-- </button> -->
+                    <div [hidden]="this.appServices.account.showDialog" class="modal fade" id="modalDelete" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-danger">Delete Check in records</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>Do you want to delete these records?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-danger" (click)="DeleteCheckinData(data)">
+                              <i class="fa fa-thumbs-o-up"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary" data-dismiss="modal">
+                              <i class="fa fa-thumbs-o-down"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #none>
+                    <i class="fa fa-check" aria-hidden="true" (click)="UpdateCheckinRow(data);BacktoEdit(i)"></i>
+
+                    <i class="fa fa-times ml-2" aria-hidden="true" (click)="cancel(i)"></i>
+
+                  </ng-template>
+                </div>
+              </td>
+
+              <!-- <td>
+                  {{data.tagid}}
+                </td> -->
+              <td *ngIf="( i ) === editRow">
+                <input type="text" class="form-control" [(ngModel)]="data.GATENO" name="gateno[{{i}}]">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.GATENO}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" class="form-control" [(ngModel)]="data.FULLNAME" name="fullname[{{i}}]">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.FULLNAME}}
+              </td>
+              <!-- <td>
+                    <div class="datetime-group">
+                      <input class="date-custom  pl-3" [(ngModel)]='data.CHECKDATE' name='checkdate[{{i}}]' value="{{data.checkdate}}"
+                        ngui-datetime-picker date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+                      <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                    </div>
+                  </td> -->
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.PASSPORTNUMBER" name="passportnumber">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.PASSPORTNUMBER}}
+              </td>
+              <td>
+                <!-- <div class="datetime-group"> -->
+                <!-- <input class="date-custom  pl-3" [(ngModel)]='data.checkin' name='checkin[{{i}}]' value="{{data.checkin}}" ngui-datetime-picker
+                    date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i> -->
+                <!-- <input type="text"  class="form-control" value="{{data.checkin}}" name='checkin[{{i}}]'> -->
+                <span>{{data.CHECKIN| date: 'dd/MM/yyyy HH:mm'}} </span>
+                <!-- </div> -->
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="checkbox" class="form-control-sm" (change)="onChoose_checkout($event)" [(ngModel)]="checkout_temp" name="checkout_temp">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                <!-- <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.checkout' name='checkout[{{i}}]' value="{{data.checkout}}" ngui-datetime-picker
+                    date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div> -->
+                <!-- <span>Click edit to confirm Checkout!</span>  -->
+                <span>{{data.CHECKOUT === null ? 'Please Check out' : data.CHECKOUT| date: 'dd/MM/yyyy HH:mm'}} </span>
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.TRUCKNO" name="truckno">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.TRUCKNO}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <select class="form-control form-control-sm" [(ngModel)]="data.TRUCKTYPE" name='trucktype'>
+                  <option *ngFor="let data of data_codelkup" [ngValue]="data.CODE">{{data.description}}</option>
+                </select>
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.TRUCKTYPE}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.CONTAINER" name="container">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.CONTAINER}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" type="number" class="form-control" [(ngModel)]="data.QTY" name="qty">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.QTY}}
+              </td>
+              <!-- <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.status" name="status">
+              </td> -->
+              <td>
+                <span class="badge {{data.STATUS === 'Check In' ? 'badge-pill badge-danger' : 'badge-pill badge-success'}}" style=" font-size:13px;">
+                  {{data.STATUS}}</span>
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.NOTES" name="notes">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.NOTES}}
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal Edit -->
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadCheckinData({})">
+            <option>12</option>
+            <option>24</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadCheckinData({})"></pagination-controls>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- Modal to Create New Checkin -->
+  <div class="modal fade" id="ModalCreateNewCheckin" tabindex="-1">
+    <form #frmCreate="ngForm" (ngSubmit)="newCheckinData(frmCreate.value)">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create new check in data </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- <div class="col-4">
+                  <div class="form-group row mt-1">
+                    <span class="col-4 font-weight-bold ">TAGID</span>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" ngModel name='tagid'>
+                    </div>
+                  </div>
+                </div> -->
+              <div class="col-4">
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">GATENO</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='gateno'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">FULLNAME</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='fullname'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">ID CARD</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='passportnumber'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <!-- <span class="col-4 font-weight-bold ">CHECK IN</span>
+                  <div class="col-8">
+                    <input class="w-100 pl-3 custom-datetime" [(ngModel)]="checkin" name="checkin" placeholder="--Select Date--" ngui-datetime-picker
+                      date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+                    <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                  </div> -->
+
+                  <span class="col-4 font-weight-bold ">CHECKIN</span>
+                  <div class="col-8">
+                    <input type="checkbox" (change)="onChoose_checkin($event)" [(ngModel)]="checkin_temp" required>
+                  </div>
+
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">TRUCKNO</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='truckno' required>
+                  </div>
+                </div>
+                <!-- <div class="form-group row mt-1">
+                    <span class="col-4 font-weight-bold ">CHECK OUT</span>
+                    <div class="col-8">
+                      <input class=" w-100 pl-3 custom-datetime" [(ngModel)]="checkout" name="checkout" placeholder="--Select Date--" ngui-datetime-picker
+                      date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+                      <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                    </div>
+                  </div> -->
+              </div>
+              <div class="col-4">
+
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">CONTAINER/SEALNUMBER</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='container'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">TRUCKTYPE</span>
+                  <div class="col-8">
+                    <select class=" form-control form-control-sm" ngModel name='trucktype'>
+                      <option [ngValue]="undefined" disabled selected>Select Truck type</option>
+                      <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">QTY</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" ngModel name='qty'>
+                  </div>
+                </div>
+                <!-- <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">NOTES</span>
+                  <div class="col-8">
+                    <input class=" form-control form-control-sm " [(ngModel)]="notes" name="notes" type="text" />
+
+                  </div>
+                </div> -->
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary custom-close" [disabled]="frmCreate.form.invalid">
+              <i class="fa fa-save"></i>
+            </button>
+            <button class="btn btn-secondary" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

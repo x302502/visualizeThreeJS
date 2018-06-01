@@ -1,0 +1,15 @@
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <i class="fa fa-bar-chart"></i>
+        <h3 class="box-title">{{option.title}}</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" (click)="collapsed=!collapsed; toggle()">
+                <i *ngIf="!collapsed" class="fa fa-minus"></i>
+                <i *ngIf="collapsed" class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body" #boxBody>
+        <canvas id="{{id}}"></canvas>
+    </div>
+</div>

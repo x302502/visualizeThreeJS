@@ -1,0 +1,15 @@
+<button class="btn btn-primary" (click)="openTab(menu.dynamicComponentNo1)">Dynamic Component 1</button>
+<button class="btn btn-primary" (click)="openTab(menu.dynamicComponentNo2)">Dynamic Component 2</button>
+<button class="btn btn-primary" (click)="openTab(menu.dynamicComponentNo3)">Dynamic Component 3</button>
+<div id="wrapper">
+  <ul class="nav nav-pills mb-3 table-primary-swm border" role="tablist">
+    <li class="nav-item" *ngFor="let tab of tabs; let idx = index" >
+      <a class="nav-link text-dark" data-toggle="tab" href="#{{tab.id}}" #tabElement>{{tab.title}} <i class="fa fa-times" (click)="closeTab(tab)"></i></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div *ngFor="let tab of tabs;" class="tab-pane fade show" id="{{tab.id}}">
+      <ng-template dynamic-loader></ng-template>
+    </div>
+  </div>
+</div>

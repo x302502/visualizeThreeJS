@@ -1,0 +1,74 @@
+.btn-primary-swm {
+	color: #fff;
+	background-color: #16759B;
+	box-shadow: 1px 1px 1px #dedede;
+	border-radius: 100rem;
+	padding: 5px 20px;
+	font-size: .8rem;
+	/* text-decoration: none; */
+	cursor: pointer !important;
+}
+.btn-primary-swm:hover {
+	color: #fff;
+	outline: none;
+    box-shadow: 1px 10px 20px #d4d4d4;
+    background-color: #16759B;
+	/* text-decoration: none; */
+}
+
+.btn-primary-swm:disabled {
+	opacity: 0.5;
+	cursor: not-allowed !important;
+}
+
+.btn-white-swm {
+	text-decoration: none;
+	color: #16759B;
+	background-color: #fff;
+	box-shadow: 1px 1px 1px #dedede;
+	border-radius: 100rem;
+	padding: 5px 20px;
+	font-size: .8rem;
+	border: 1px solid #dedede;
+	cursor: pointer !important;
+}
+
+.btn-white-swm:hover {
+	text-decoration: none;
+	color: #fff;
+    box-shadow: 1px 10px 20px #d4d4d4;
+    background-color: #16759B;
+}
+.btn-danger-swm{
+	color: #fff;
+	background-color: red;
+	box-shadow: 1px 1px 1px #dedede;
+	border-radius: 100rem;
+	padding: 5px 20px;
+	font-size: .8rem;
+	text-decoration: none;
+	cursor: pointer !important;
+}
+/* Edit by Tinh Nguyen */
+.btn{
+	cursor: pointer !important;
+}
+.btnnew-customer{
+	padding: .4rem 0;
+}
+.btn-colorblue-swm
+{
+	color: #fff;
+	background-color: #16759B;
+	padding: 3px 20px !important;
+	font-size: .8rem;
+	text-decoration: none;
+	cursor: pointer !important;
+}
+.btn-colorblue-swm:hover {
+	color: #fff;
+	outline: none;
+  background-color: #16759B;
+	text-decoration: none;
+}
+/* End */

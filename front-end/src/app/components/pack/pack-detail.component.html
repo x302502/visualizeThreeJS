@@ -1,0 +1,104 @@
+<section *ngIf="selected_pack">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0" [disabled]="!frm.form.valid" (click)="this.save(selected_pack)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frm="ngForm" class="row" autocomplete="off">
+    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 px-5">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input required type="text" class="form-control form-control-sm" name="groupcode" [(ngModel)]="selected_pack.packkey" />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Master Unit
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select required [(ngModel)]="selected_pack.packuom3" name="packuom3" class="form-control form-control-sm">
+            <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Case</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select [(ngModel)]="selected_pack.packuom2" name="packuom2" class="form-control form-control-sm">
+            <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class="pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Pallet</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select [(ngModel)]="selected_pack.packuom4" name="packuom4" class="form-control form-control-sm">
+            <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 px-5">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Name
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control  form-control-sm" name="groupname" [(ngModel)]="selected_pack.packdescr" required/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Qty
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input pattern="[0-9]{0,10}" min="0" type="number" class="form-control form-control-sm" name="qty" [(ngModel)]="selected_pack.qty"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Qty</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input pattern="[0-9]{0,10}" min="0" type="number" class="form-control form-control-sm" name="innerpack" [(ngModel)]="selected_pack.innerpack"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class="pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Qty</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input pattern="[0-9]{0,10}" min="0" type="number" class="form-control form-control-sm" name="pallet" [(ngModel)]="selected_pack.pallet"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+      <div class="form-group row pt-4"></div>
+
+      <div class="row pt-2">
+        <label for="colFormLabelSm" class="col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Set Default</label>
+        <div class="col-8">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="iswhqty2" [(ngModel)]="selected_pack.iswhqty2">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <label for="colFormLabelSm" class="col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Set Default</label>
+        <div class="col-8">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="iswhqty3" [(ngModel)]="selected_pack.iswhqty3">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

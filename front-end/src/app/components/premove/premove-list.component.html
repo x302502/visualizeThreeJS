@@ -1,0 +1,145 @@
+<div id="wrapper">
+  <!-- <section class="d-flex justify-content-between">
+        <div>
+            <h1 class="mt-4  ml-3 text-headline"><span class="icon-ico-premove  text-headline" style="font-size:1.2rem;"></span>Pre Move</h1>
+        </div>
+        <div>
+            <button type="button" class="btn  mt-3 px-5  mr-4 export ">Import</button>
+            <button type="button" class="btn  mt-3 px-5  mr-4 export ">Export</button>
+        </div>
+    </section> -->
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold"> Pre Move</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+      <!-- <div class=" mr-2">
+        <a class=" btn-white-swm px-4" (click)="doExportInventoryList(InitInventoryEmptyLocationListToExport(data_inventory))">Export</a>
+      </div> -->
+    </div>
+  </div>
+  <div class="d-flex d-flex justify-content-end my-3 ">
+
+    <button type="button" class="btn-white-swm px-4  mr-2 " (click)="ConfirmPreMoveData()">Confirm Move
+    </button>
+    <button class=" btn-white-swm px-4  mr-3 " data-toggle="modal" data-target="#modalDelete"> Delete</button>
+    <!-- <button type="button" class="btn btn-outline-danger btn mr-2 export " data-toggle="modal" data-target="#modalDelete">Delete</button> -->
+    <div class="modal fade" id="modalDelete" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-danger">Delete Pre-move records</h5>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to delete these records?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" (click)="DeletePreMoveData()">
+              <i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button class="btn btn-outline-secondary" data-dismiss="modal" (click)="DeletePreMoveData()">
+              <i class="fa fa-thumbs-o-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-content">
+    <div class="table-responsive fixed-tablePremove ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>
+              <input class="align-bottom table-small" type="checkbox" [checked]="isAllChecked()" (change)="checkAll($event)">
+            </th>
+            <th>STORERKEY
+              <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadPreMoveData({'storerkey':{'like': $event.target.value}})">
+            </th>
+            <th>Move-Code
+              <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadPreMoveData({'movecode':{'like': $event.target.value}})">
+            </th>
+            <th>SKU
+              <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadPreMoveData({'sku':{'like': $event.target.value}})">
+            </th>
+            <th>Lot
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>LPNID
+              <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadPreMoveData({'lpnid':{'like': $event.target.value}})">
+            </th>
+            <th>To LPNID
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>From Loc
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>To Loc
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>Qty</th>
+            <th>Reason </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary-swm" *ngFor="let data of data_preMove| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+            <td>
+              <input class="align-bottom table-small" type="checkbox" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.storerkey' name='storerkey[{{i}}]' readonly>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.movecode' name='movecode[{{i}}]' readonly>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.sku' name='sku[{{i}}]' readonly>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.lot' name='lot[{{i}}]' readonly>
+            </td>
+            <td>
+              {{data.lpnid}}
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" required minlength="1" [(ngModel)]='data.tolpnid' name='tolpnid[{{i}}]'>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" required minlength="1" [(ngModel)]='data.fromloc' name='fromloc[{{i}}]'
+                readonly>
+            </td>
+            <td>
+              <!-- <input class="form-control form-control-sm" type="text" required minlength="1" [(ngModel)]='data.toloc' name='toloc[{{i}}]' > -->
+              <ng2-completer inputClass="form-control form-control-sm" inputName="toloc[{{i}}]" [(ngModel)]="data.toloc" [datasource]="data_location"
+                [minSearchLength]="3" [placeholder]="'Select Location'">
+              </ng2-completer>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="number" required minlength="1" [(ngModel)]='data.qty' name='qty[{{i}}]'>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" required minlength="1" [(ngModel)]='data.remark' name='remark[{{i}}]'>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadPreMoveData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadPreMoveData({})"></pagination-controls>
+    </div>
+  </div>
+</div>

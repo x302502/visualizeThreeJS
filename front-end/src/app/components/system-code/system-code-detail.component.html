@@ -1,0 +1,37 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frmCodelist.form.valid" (click)="save(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frmCodelist="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.listname' name='listname' required
+            [readonly]="entity.id" />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Description
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.description' name='description'
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+  <div id="wrapTableAndAction" *ngIf="entity.id">
+    <grid-control [option]="gridOption" #gridDetail (onSaveRow)="saveRow($event)" (onImportExcel)="importExcel($event)"></grid-control>
+  </div>
+</section>

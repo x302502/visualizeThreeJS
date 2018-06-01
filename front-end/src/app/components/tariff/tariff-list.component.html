@@ -1,0 +1,559 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <a class="text-primary-swm font-weight-bold">TARIFF</a>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+      <div class=" mr-2">
+        <a class=" btn-white-swm px-4" data-toggle="modal" data-target="#ModalCreateNewTariff"> New tariff</a>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-pills table-primary-swm border" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" data-toggle="tab" href="#tablist">List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-toggle="tab" href="#tabDetail" #tabDetail (click)="loadTariffdetail()">Detail</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <!-- Tab tariff List -->
+    <div class="tab-pane fade show active" id="tablist">
+      <div class="table-responsive fixed-tablenotab ">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2">No</th>
+              <th rowspan="2">ACTION
+              </th>
+              <th rowspan="2">TARIFFKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">STORERKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">DESCRIPTION
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">SUPPORTFLAG
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">VALIDITYFROM
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">VALIDITYTO
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_tariff| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+              <td>
+                {{i+1}}
+              </td>
+              <td>
+                <div>
+                  <!-- Show Edit and Delete button -->
+                  <div *ngIf="i !== editRow; else none">
+                    <!-- <button type="button" class="btn btn-default" id="detail" href='#modalNewDetail' data-toggle="modal" (click)="Edit(data)"> -->
+                    <i class="fa fa-plus" aria-hidden="true" id="detail" href='#modalNewDetail' data-toggle="modal" (click)="Edit(data)"></i>
+                    <!-- </button> -->
+                    <!-- Modal Make new detail -->
+                    <div class="modal fade" id="modalNewDetail" tabindex="-1">
+                      <form #frmEdit="ngForm" (ngSubmit)="CreateTariffDetail(frmEdit.value)">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-danger">Make detail tariff data</h5>
+                            </div>
+                            <div class="modal-body" *ngIf="editRow">
+                              <div class="row">
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">TARIFFKEY</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.tariffkey' name='tariffkey' readonly>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">TARIFFDETAILKEY</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.tariffdetailkey' name='tariffdetailkey'>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">CHARGETYPE</span>
+                                    <div class="col-8">
+                                      <!-- <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.chargetype' name='chargetype'> -->
+                                      <select class="form-control " (change)="loadChargeCodeFromChargetype($event.target.value)" name="chargetype" [(ngModel)]="editRow.chargetype">
+                                        <option *ngFor="let data of data_chargetype" value="{{data.code}}">{{data.code}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">CHARGECODE</span>
+                                    <div class="col-8">
+                                      <select class="form-control " name="chargecode" [(ngModel)]="editRow.chargecode">
+                                        <option *ngFor="let data of data_charge" value="{{data.chargecode}}">{{data.chargecode}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">DESCRIPTION</span>
+                                    <div class="col-8 ">
+                                      <input class=" form-control form-control-sm" [(ngModel)]="editRow.descriptiondetail" value="{{editRow.descriptiondetail}}"
+                                        name="descriptiondetail" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">VAT(%)</span>
+                                    <div class="col-8 ">
+                                      <input class=" form-control form-control-sm" [(ngModel)]="editRow.rate" value="{{editRow.rate }}" name="rate" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">BASE</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.base' name='base'>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">MIN CHARGE</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.minimumcharge' name='minimumcharge'>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">MASTER UNITS</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.masterunits' name='masterunits'>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-danger">
+                                <i class="fa fa-thumbs-o-up"></i>
+                              </button>
+                              <button class="btn btn-outline-secondary" data-dismiss="modal">
+                                <i class="fa fa-thumbs-o-down"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- Ending Modal -->
+                    <!-- <button type="button" class="btn btn-default" id="edit" (click)="Edit(i)"> -->
+                    <i class="fa fa-pencil ml-2" aria-hidden="true" id="edit" (click)="Edit(i)"></i>
+                    <!-- </button> -->
+                    <!-- <button type="button" id="delete" href='#modalDelete' data-toggle="modal" class="btn btn-danger"> -->
+                    <i class="fa fa-trash-o ml-2" aria-hidden="true" id="delete" href='#modalDelete' data-toggle="modal"></i>
+                    <!-- </button> -->
+                    <div class="modal fade" id="modalDelete" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-danger">Delete Tariff records</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>Do you want to delete these records?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-danger" (click)="DeleteTariffData(data)">
+                              <i class="fa fa-thumbs-o-up"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary" data-dismiss="modal">
+                              <i class="fa fa-thumbs-o-down"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #none>
+                    <!-- <button type="button" id="save" class="btn btn-primary" (click)="UpdateTariffRow(data);BacktoEdit(i)"> -->
+                    <i class="fa fa-check" aria-hidden="true" (click)="UpdateTariffRow(data);BacktoEdit(i)"></i>
+                    <!-- </button> -->
+                    <!-- <button type="button" id="cancel" class="btn btn-default" (click)="cancel(i)"> -->
+                    <i class="fa fa-times ml-2" aria-hidden="true" (click)="cancel(i)"></i>
+                    <!-- </button> -->
+                  </ng-template>
+                </div>
+              </td>
+
+              <td>
+                {{data.tariffkey}}
+              </td>
+              <!-- <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findTariffData(data)">
+                <input type="text" value= "{{data.tariffkey}}" readonly>
+              </td> -->
+              <td>
+                {{data.storerkey}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.description" name="description">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.description}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.supportflag" name="supportflag">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.supportflag}}
+              </td>
+              <td>
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.validityfrom' name='validityfrom[{{i}}]' value="{{data.validityfrom}}"
+                    ngui-datetime-picker date-only="true" />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.validityto' name='validityto[{{i}}]' value="{{data.validityto}}" ngui-datetime-picker
+                    date-only="true" />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal Edit -->
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadTariffData({})">
+            <optgroup>12</optgroup>
+            <optgroup>24</optgroup>
+            <optgroup>50</optgroup>
+            <optgroup>100</optgroup>
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadTariffData({})"></pagination-controls>
+      </div>
+    </div>
+    <!-- Tab Tariff Detail  -->
+    <div class="tab-pane fade" id="tabDetail">
+      <div class="table-responsive fixed-tablenotab ">
+        <table class="table my-0 table-sm table-hover">
+          <thead class="table table-sm table-hover">
+            <tr>
+              <th rowspan="2">No</th>
+              <th rowspan="2">ACTION
+              </th>
+              <th rowspan="2">TARIFFKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">TARIFFDETAILKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">CHARGETYPE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">CHARGECODE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">DESCRIPTION
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">RATE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">BASE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">MIN CHARGE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th rowspan="2">MASTERUNITS
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_tariffdetail| paginate: { id: 'id_detail', itemsPerPage: this.itemsPerPage_detail, currentPage: this.currentPage_detail, totalItems: this.total_detail };let i =index;">
+              <td>
+                {{i+1}}
+              </td>
+              <td>
+                <div>
+                  <!-- Show Edit and Delete button -->
+                  <div *ngIf="i !== editRow; else none">
+                    <!-- <button type="button" class="btn btn-default" id="detail" href='#modalNewDetail1' data-toggle="modal" (click)="Edit(data)"> -->
+                    <i class="fa fa-plus" aria-hidden="true" id="detail" href='#modalNewDetail1' data-toggle="modal" (click)="Edit(data)"></i>
+                    <!-- </button> -->
+                    <!-- Modal Make new detail -->
+                    <div class="modal fade" id="modalNewDetail1" tabindex="-1">
+                      <form #frmEdit="ngForm" (ngSubmit)="CreateTariffDetailTab(frmEdit.value)">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-danger">Make detail tariff data</h5>
+                            </div>
+                            <div class="modal-body" *ngIf="editRow">
+                              <div class="row">
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">TARIFFKEY</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.tariffkey' name='tariffkey' readonly>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">TARIFFDETAILKEY</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.tariffdetailkey' name='tariffdetailkey'>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">CHARGETYPE</span>
+                                    <div class="col-8">
+                                      <!-- <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.chargetype' name='chargetype'> -->
+                                      <!-- <select class="form-control " (change)="loadChargeCodeFromChargetype($event.target.value)" name="chargetype" [(ngModel)]="editRow.chargetype">
+                                            <option *ngFor="let data of data_chargetype" value="{{data.code}}">{{data.code}}</option>
+                                        </select> -->
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.chargetype' name='chargetype' readonly>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">CHARGECODE</span>
+                                    <div class="col-8">
+                                      <!-- <select class="form-control "  name="chargecode" [(ngModel)]="editRow.chargecode">
+                                            <option *ngFor="let data of data_charge" value="{{data.chargecode}}">{{data.chargecode}}</option>
+                                        </select> -->
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.chargecode' name='chargecode' readonly>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">DESCRIPTION</span>
+                                    <div class="col-8 ">
+                                      <input class=" form-control form-control-sm" [(ngModel)]="editRow.descriptiondetail" value="{{editRow.descriptiondetail}}"
+                                        name="descriptiondetail" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">VAT(%)</span>
+                                    <div class="col-8 ">
+                                      <input class=" form-control form-control-sm" [(ngModel)]="editRow.rate" value="{{editRow.rate }}" name="rate" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">BASE</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.base' name='base'>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">MIN CHARGE</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.minimumcharge' name='minimumcharge'>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row mt-1">
+                                    <span class="col-4 font-weight-bold ">MASTER UNITS</span>
+                                    <div class="col-8">
+                                      <input class="form-control form-control-sm" type="text" [(ngModel)]='editRow.masterunits' name='masterunits'>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-danger">
+                                <i class="fa fa-thumbs-o-up"></i>
+                              </button>
+                              <button class="btn btn-outline-secondary" data-dismiss="modal">
+                                <i class="fa fa-thumbs-o-down"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- Ending Modal -->
+                    <!-- <button type="button" class="btn btn-default" id="edit" (click)="Edit(i)"> -->
+                    <i class="fa fa-pencil ml-2" aria-hidden="true" id="edit" (click)="Edit(i)"></i>
+                    <!-- </button> -->
+                    <!-- <button type="button" id="delete" href='#modalDeletedetail' data-toggle="modal" class="btn btn-danger"> -->
+                    <i class="fa fa-trash-o ml-2" aria-hidden="true" id="delete" href='#modalDeletedetail' data-toggle="modal"></i>
+                    <!-- </button> -->
+                    <div class="modal fade" id="modalDeletedetail" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-danger">Delete Tariff detail records</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>Do you want to delete these records?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-danger" (click)="DeleteTariffdetailData(data)">
+                              <i class="fa fa-thumbs-o-up"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary" data-dismiss="modal">
+                              <i class="fa fa-thumbs-o-down"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #none>
+                    <!-- <button type="button" id="save" class="btn btn-primary" (click)="UpdateTariffDetailRow(data);BacktoEdit(i)"> -->
+                    <i class="fa fa-check" aria-hidden="true" (click)="UpdateTariffDetailRow(data);BacktoEdit(i)"></i>
+                    <!-- </button> -->
+                    <!-- <button type="button" id="cancel" class="btn btn-default" (click)="cancelDetail(i)"> -->
+                    <i class="fa fa-times ml-2" aria-hidden="true" (click)="cancelDetail(i)"></i>
+                    <!-- </button> -->
+                  </ng-template>
+                </div>
+              </td>
+              <td>
+                {{data.tariffkey}}
+              </td>
+              <td>
+                {{data.tariffdetailkey}}
+              </td>
+              <td>
+                {{data.chargetype}}
+              </td>
+              <td>
+                {{data.chargecode}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.description" name="description">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.description}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.rate" name="rate">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.rate}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.base" name="base">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.base}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.minimumcharge" name="minimumcharge">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.minimumcharge}}
+              </td>
+              <td *ngIf="( i ) === editRow">
+                <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.masterunits" name="masterunits">
+              </td>
+              <td *ngIf="( i ) !== editRow">
+                {{data.masterunits}}
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage_detail" [(ngModel)]="this.itemsPerPage_detail" (change)="this.itemsPerPage_detail = $event.target.value; this.loadTariffdetail()">
+            <optgroup>12</optgroup>
+            <optgroup>24</optgroup>
+            <optgroup>50</optgroup>
+            <optgroup>100</optgroup>
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_detail" (pageChange)="this.currentPage_detail = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <!-- Modal to Create New tariff -->
+  <div class="modal fade" id="ModalCreateNewTariff" tabindex="-1">
+    <form #frmEdit="ngForm" (ngSubmit)="newtariffData(frmEdit.value)">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create new tariff data </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">TARIFFKEY</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='tariffkey'>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">STORERKEY</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='storerkey'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">DESCRIPTION</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='description'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">SUPPORTFLAG</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='supportflag'>
+                  </div>
+                </div>
+                <!-- <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">VALIDITYFROM</span>
+                  <div class="col-8">
+                    <input class="w-100 pl-3 custom-datetime" [(ngModel)]="myDate" name="validityfrom" placeholder="--Select Date--" ngui-datetime-picker
+                      date-only="true" />
+                    <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">VALIDITYTO</span>
+                  <div class="col-8">
+                    <input class=" w-100 pl-3 custom-datetime" [(ngModel)]="myDate1" name="validityto" placeholder="--Select Date--" ngui-datetime-picker
+                      date-only="true" />
+                    <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary custom-close" [disabled]="!frmEdit.form.valid">
+              <i class="fa fa-save"></i>
+            </button>
+            <button class="btn btn-secondary" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

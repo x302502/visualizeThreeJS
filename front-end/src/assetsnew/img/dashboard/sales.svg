@@ -1,0 +1,151 @@
+<svg id="Group_133" data-name="Group 133" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="7 198.588 684.72 328.785">
+  <defs>
+    <style>
+      .cls-1, .cls-10, .cls-4, .cls-7 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-12, .cls-3, .cls-5, .cls-6 {
+        fill: #576271;
+      }
+
+      .cls-3, .cls-5, .cls-9 {
+        font-size: 14px;
+      }
+
+      .cls-12, .cls-3, .cls-6 {
+        font-family: Roboto-Regular, Roboto;
+      }
+
+      .cls-4 {
+        stroke: #e0e3da;
+      }
+
+      .cls-5 {
+        font-family: Roboto-Light, Roboto;
+        font-weight: 300;
+      }
+
+      .cls-6 {
+        font-size: 13px;
+      }
+
+      .cls-7 {
+        stroke: #16759b;
+      }
+
+      .cls-8 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-9 {
+        fill: #e211f4;
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+
+      .cls-10 {
+        stroke: #eaeaea;
+      }
+
+      .cls-11 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-12 {
+        font-size: 19px;
+      }
+
+      .cls-13 {
+        filter: url(#Path_1);
+      }
+
+      .cls-14 {
+        filter: url(#Rectangle_3);
+      }
+    </style>
+    <filter id="Rectangle_3" x="7" y="198.588" width="684.72" height="328.785" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#fafafa"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1" x="7" y="272.671" width="672.72" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="643.117" height="168.238"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#109bf8"/>
+      <stop offset="1" stop-color="#e211f4"/>
+    </linearGradient>
+  </defs>
+  <g class="cls-14" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <rect id="Rectangle_3-2" data-name="Rectangle 3" class="cls-2" width="666.72" height="310.785" transform="translate(16 204.59)"/>
+  </g>
+  <text id="A_constant_monitor_of_all_Team_Sales" data-name="A constant monitor of all Team Sales" class="cls-3" transform="translate(40.034 263.999)"><tspan x="0" y="0">A constant monitor of all Team Sales</tspan></text>
+  <g class="cls-13" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <path id="Path_1-2" data-name="Path 1" class="cls-4" d="M3090-1500.007h654.72" transform="translate(-3074 1779.18)"/>
+  </g>
+  <g id="Group_5" data-name="Group 5" transform="translate(474.304 236.081)">
+    <text id="Month" class="cls-5" transform="translate(67.13 13)"><tspan x="0" y="0">Month</tspan></text>
+    <text id="Week" class="cls-6" transform="translate(0 12)"><tspan x="0" y="0">Week</tspan></text>
+    <text id="Year" class="cls-5" transform="translate(140.889 13)"><tspan x="0" y="0">Year</tspan></text>
+    <path id="Path_5" data-name="Path 5" class="cls-7" d="M0,33.814V0" transform="translate(34.311 21.465) rotate(90)"/>
+  </g>
+  <g id="Repeat_Grid_1" data-name="Repeat Grid 1" class="cls-8" transform="translate(40.034 323.93)">
+    <g id="Group_14" data-name="Group 14" transform="translate(-309 -264)">
+      <text id="_100" data-name="100" class="cls-9" transform="translate(332 277)"><tspan x="-23.871" y="0">100</tspan></text>
+      <path id="Path_6" data-name="Path 6" class="cls-10" d="M337.189,272h722.806"/>
+    </g>
+    <g id="Group_15" data-name="Group 15" transform="translate(-309 -228)">
+      <text id="_80" data-name="80" class="cls-9" transform="translate(332 277)"><tspan x="-15.914" y="0">80</tspan></text>
+      <path id="Path_7" data-name="Path 7" class="cls-10" d="M337.189,272h722.806"/>
+    </g>
+    <g id="Group_16" data-name="Group 16" transform="translate(-309 -192)">
+      <text id="_60" data-name="60" class="cls-9" transform="translate(332 277)"><tspan x="-15.914" y="0">60</tspan></text>
+      <path id="Path_8" data-name="Path 8" class="cls-10" d="M337.189,272h722.806"/>
+    </g>
+    <g id="Group_17" data-name="Group 17" transform="translate(-309 -156)">
+      <text id="_40" data-name="40" class="cls-9" transform="translate(332 277)"><tspan x="-15.914" y="0">40</tspan></text>
+      <path id="Path_9" data-name="Path 9" class="cls-10" d="M337.189,272h722.806"/>
+    </g>
+    <g id="Group_18" data-name="Group 18" transform="translate(-309 -120)">
+      <text id="_20" data-name="20" class="cls-9" transform="translate(332 277)"><tspan x="-15.914" y="0">20</tspan></text>
+      <path id="Path_10" data-name="Path 10" class="cls-10" d="M337.189,272h722.806"/>
+    </g>
+  </g>
+  <g id="Group_6" data-name="Group 6" transform="translate(81.472 315.642)">
+    <rect id="Rectangle_8" data-name="Rectangle 8" class="cls-11" width="12.431" height="155.807" rx="6.216" transform="translate(0 9.945)"/>
+    <rect id="Rectangle_9" data-name="Rectangle 9" class="cls-11" width="12.431" height="125.971" rx="6.216" transform="translate(29.007 39.78)"/>
+    <rect id="Rectangle_10" data-name="Rectangle 10" class="cls-11" width="12.431" height="141.718" rx="6.216" transform="translate(58.013 24.034)"/>
+    <rect id="Rectangle_11" data-name="Rectangle 11" class="cls-11" width="12.431" height="131.773" rx="6.216" transform="translate(87.02 33.979)"/>
+    <rect id="Rectangle_12" data-name="Rectangle 12" class="cls-11" width="12.431" height="107.739" rx="6.216" transform="translate(116.026 58.013)"/>
+    <rect id="Rectangle_13" data-name="Rectangle 13" class="cls-11" width="12.431" height="118.513" rx="6.216" transform="translate(145.033 47.239)"/>
+    <rect id="Rectangle_14" data-name="Rectangle 14" class="cls-11" width="12.431" height="103.595" rx="6.216" transform="translate(174.039 62.157)"/>
+    <rect id="Rectangle_15" data-name="Rectangle 15" class="cls-11" width="12.431" height="146.69" rx="6.216" transform="translate(203.046 19.061)"/>
+    <rect id="Rectangle_16" data-name="Rectangle 16" class="cls-11" width="12.431" height="165.752" rx="6.216" transform="translate(232.053 0)"/>
+    <rect id="Rectangle_17" data-name="Rectangle 17" class="cls-11" width="12.431" height="153.32" rx="6.216" transform="translate(261.059 12.431)"/>
+    <rect id="Rectangle_18" data-name="Rectangle 18" class="cls-11" width="12.431" height="125.971" rx="6.216" transform="translate(290.066 39.78)"/>
+    <rect id="Rectangle_19" data-name="Rectangle 19" class="cls-11" width="12.431" height="107.739" rx="6.216" transform="translate(319.072 58.013)"/>
+    <rect id="Rectangle_20" data-name="Rectangle 20" class="cls-11" width="12.431" height="118.513" rx="6.216" transform="translate(348.079 47.239)"/>
+    <rect id="Rectangle_21" data-name="Rectangle 21" class="cls-11" width="12.431" height="144.204" rx="6.216" transform="translate(377.085 21.548)"/>
+    <rect id="Rectangle_22" data-name="Rectangle 22" class="cls-11" width="12.431" height="136.745" rx="6.216" transform="translate(406.092 29.007)"/>
+    <rect id="Rectangle_23" data-name="Rectangle 23" class="cls-11" width="12.431" height="157.464" rx="6.216" transform="translate(435.099 8.288)"/>
+    <rect id="Rectangle_24" data-name="Rectangle 24" class="cls-11" width="12.431" height="121.828" rx="6.216" transform="translate(464.105 43.924)"/>
+    <rect id="Rectangle_25" data-name="Rectangle 25" class="cls-11" width="12.431" height="132.601" rx="6.216" transform="translate(493.112 33.15)"/>
+    <rect id="Rectangle_26" data-name="Rectangle 26" class="cls-11" width="12.431" height="144.204" rx="6.216" transform="translate(522.118 21.548)"/>
+    <rect id="Rectangle_27" data-name="Rectangle 27" class="cls-11" width="12.431" height="165.752" rx="6.216" transform="translate(551.125 0)"/>
+  </g>
+  <text id="Sales" class="cls-12" transform="translate(40.034 244.136)"><tspan x="0" y="0">Sales</tspan></text>
+</svg>

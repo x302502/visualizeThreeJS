@@ -1,0 +1,1070 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">Shipment Order</label>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item mr-2">
+        <button class="text-white btn-primary-swm border-0" (click)="new()">New SO</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-white-swm mr-2" data-toggle="modal" data-target="#modalImport">import</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-white-swm px-4" (click)="export()">Export</button>
+      </li>
+      <li class="nav-item">
+        <a class="px-3" href="/assets/Template/TemplateShipmentOrder.xlsx" download>Template</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal excel -->
+  <div class="modal fade" id="modalImport" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Select File</h5>
+          <label class="float-right text-success" id="exOrderMessage"></label>
+        </div>
+        <div class="modal-body">
+          <input type="file" (change)="onFileChange($event)" />
+          <div class="table-responsive mt-3">
+            <div class="col-md-12">
+              <table class="table table-striped" *ngIf="data_row_excel">
+                <thead>
+                  <th *ngFor="let data of data_headers">{{data}}</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of data_row_excel;let i = index;">
+                    <td>{{data.OWNER}}</td>
+                    <td>{{data.TYPE}}</td>
+                    <td>{{data.CUSTOMER}}</td>
+                    <td>{{data.CARRIERCODE}}</td>
+                    <td>{{data.SHIPTO}}</td>
+                    <td>{{data.SONO}}</td>
+                    <td>{{data.CONTAINER}}</td>
+                    <td>{{data.REMARK}}</td>
+                    <td>{{data.ITEMCODE}}</td>
+                    <td>{{data.UOM}}</td>
+                    <td>{{data.ORDERQUANTITY}}</td>
+                    <td>{{data.VALIDATEDQUANTITY}}</td>
+                    <td>{{data.UNITPRICE}}</td>
+                    <td>{{data.BATCHNO}}</td>
+                    <td>{{data.KILOGRAM}}</td>
+                    <td>{{data.COLOR}}</td>
+                    <td>{{data.PRODUCTIONDATE}}</td>
+                    <td>{{data.EXPITEDDATE}}</td>
+                    <td>{{data.DISCOUNT}}</td>
+                    <td>{{data.VAT}}</td>
+                    <td>{{data.LOTTABLE06}}</td>
+                    <td>{{data.LOTTABLE07}}</td>
+                    <td>{{data.LOTTABLE08}}</td>
+                    <td>{{data.LOTTABLE09}}</td>
+                    <td>{{data.LOTTABLE010}}</td>
+                    <td>{{data.LOTTABLE011}}</td>
+                    <td>{{data.LOTTABLE012}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)=" saveDataExcelCheck()">
+            <i class="fa fa-save"></i>
+          </button>
+          <button class="btn btn-danger" data-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End -->
+
+  <ul class="nav nav-pills table-primary-swm border" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" (click)="loadShipmentData()" data-toggle="tab" href="#tablist">List Order</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-toggle="tab" href="#tabdetail" #tabdetail>Detail</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-toggle="tab" href="#tabpickdetail" #tabpickdetail>Pick Detail</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tablist">
+      <div class="navbar navbar-light border">
+        <div>
+        </div>
+        <div class="btn-group" role="group">
+          <button class="text-white btn-primary-swm border-0" data-toggle="dropdown">
+            Master Pick
+          </button>
+          <div class="dropdown-menu button">
+            <a class="dropdown-item text-primary " (click)="showModalAddMasterPick()">
+              <i class="fa fa-plus-square-o"></i> Add MasterPick</a>
+            <a class="dropdown-item text-danger" (click)="showModalRemoveMasterPick()">
+              <i class="fa fa-times"></i> Remove MasterPick</a>
+            <a class="dropdown-item text-muted" (click)="showModalLockMasterPick()">
+              <i class="fa fa-lock"></i> Lock/UnLock MasterPick</a>
+          </div>
+        </div>
+        <div class="modal fade" id="modalAddMasterPick" tabindex="-1">
+          <form #frmAddMasterPick="ngForm" (ngSubmit)="addMasterPick(frmAddMasterPick.value)" autocomplete="off">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Master Pick</h5>
+                </div>
+                <div class="modal-body" *ngIf="data_masterpick">
+                  <div class="input-group">
+                    <span class="input-group-addon">Master Pick</span>
+                    <select [(ngModel)]="data_masterpick.mastercode" name="mastercode" class="form-control" [required]="!isMasterPick">
+                      <option *ngFor="let data of data_masterpick" [ngValue]="data.mastercode">{{data.mastercode}} - {{data.masterdesc}}</option>
+                    </select>
+                  </div>
+                  <small class="badge badge-primary" (click)="isMasterPick = !isMasterPick">New Master Pick
+                    <i class="fa fa-chevron-right" aria-hidden="true" *ngIf="!isMasterPick"></i>
+                    <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="isMasterPick"></i>
+                  </small>
+                  <p class="clearfix"></p>
+                  <div class="input-group" *ngIf="isMasterPick">
+                    <span class="input-group-addon">
+                      <span class="text-danger">&nbsp;*</span> Master Description
+                    </span>
+                    <input type="text" class="form-control" name="masterdesc" ngModel required/>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" [disabled]="!frmAddMasterPick.form.valid">
+                    <i class="fa fa-save"></i>
+                  </button>
+                  <button class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal fade" id="modalRemoveMasterPick" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger">Remove Master Pick</h5>
+              </div>
+              <div class="modal-body">
+                <p>Do you want to remove Master Pick selected these records?</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" (click)="removeMasterPickData()">
+                  <i class="fa fa-thumbs-o-up"></i>
+                </button>
+                <button class="btn btn-outline-secondary" data-dismiss="modal">
+                  <i class="fa fa-thumbs-o-down"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modalLockMasterPick" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger">Lock/UnLock Master Pick</h5>
+              </div>
+              <div class="modal-body">
+                <p>Do you want to lock/unlock Master Pick selected these records?</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" (click)="lockMasterPickData()">
+                  <i class="fa fa-thumbs-o-up"></i>
+                </button>
+                <button class="btn btn-outline-secondary" data-dismiss="modal">
+                  <i class="fa fa-thumbs-o-down"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive fixed-tabletab">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2" class="align-bottom table-small"></th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'whseid'; this.loadShipmentData({}) ">
+                  Whseid
+                  <i *ngIf="this.propertyName == 'whseid' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'whseid' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_whseid" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'orderkey'; this.loadShipmentData({}) ">
+                  Orderkey
+                  <i *ngIf="this.propertyName == 'orderkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'orderkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_orderkey" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'status'; this.loadShipmentData({}) ">
+                  Status
+                  <i *ngIf="this.propertyName == 'status' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'status' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <select class="form-control search-table my-2" [(ngModel)]="f_status" (change)="this.f_status = $event.target.value; this.loadShipmentData({})">
+                  <option value="">All</option>
+                  <option value="04"> Create Internally</option>
+                  <option value="17"> Allocated</option>
+                  <option value="14"> Part Allocate</option>
+                  <option value="55"> Pick Completed</option>
+                  <option value="52"> Part Picking</option>
+                  <option value="95"> Ship Completed</option>
+                  <option value="92"> Part Ship</option>
+                </select>
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'storerkey'; this.loadShipmentData({}) ">
+                  Storerkey
+                  <i *ngIf="this.propertyName == 'storerkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'storerkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_storerkey" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'externorderkey'; this.loadShipmentData({}) ">
+                  Externoderkey
+                  <i *ngIf="this.propertyName == 'externorderkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'externorderkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_externorderkey" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'susr1'; this.loadShipmentData({}) ">
+                  Container
+                  <i *ngIf="this.propertyName == 'susr1' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'susr1' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_susr1" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'susr5'; this.loadShipmentData({}) ">
+                  Master Pick
+                  <i *ngIf="this.propertyName == 'susr5' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'susr5' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_susr5" (keyup.enter)="this.loadShipmentData({})">
+              </th>
+              <th rowspan="2" class="align-top">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'deliverydate'; this.loadShipmentData({}) ">
+                  OrderDate
+                  <i *ngIf="this.propertyName == 'deliverydate' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'deliverydate' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table form-control-sm my-1" hidden>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of data_shipment| paginate: { id: 'id_shipment', itemsPerPage: this.itemsPerPage_shipment, currentPage: this.currentPage_shipment, totalItems: this.total_shipment };">
+              <td class="align-bottom table-small">
+                <input type="checkbox" value="" (change)="onChooseOrder($event, data)" [(ngModel)]="data.state">
+                <button type="button" class="trash ml-2 d-inline-block btn-trash" data-toggle="modal" data-target="#modaldeleteOrder" (click)="this.selected_order = data">
+                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="trash ml-2 d-inline-block btn-trash" (click)="categorySKU(data.storerkey);findOrderData(data)">
+                  <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td class="align-middle" *ngIf="true">{{data.whseid}}</td>
+              <td class="align-middle" *ngIf="true">{{data.orderkey}}</td>
+              <td [ngClass]="{'text-success': data.status === '17', 'text-warning': data.status === '14','text-primary': data.status === '55','text-danger': data.status === '95'}">
+                <span class="text-dark" *ngIf="data.status == 04">Create Internally</span>
+                <span class="text-primary" *ngIf="data.status == 17">Allocated</span>
+                <span class="text-info" *ngIf="data.status == 14">Part Allocate</span>
+                <span class="text-orangered" *ngIf="data.status == 55">Pick Completed</span>
+                <span class="text-warning" *ngIf="data.status == 52">Part Picking</span>
+                <span class="text-success" *ngIf="data.status == 95">Ship Completed</span>
+                <span class="text-orchid" *ngIf="data.status == 92">Part Ship</span>
+              </td>
+              <td class="align-middle" *ngIf="true" (click)="findOrderData(data)">{{data.storerkey}}</td>
+              <td class="align-middle" *ngIf="true" (click)="findOrderData(data)">{{data.externorderkey}}</td>
+              <td class="align-middle" *ngIf="true" (click)="findOrderData(data)">{{data.susr1}}</td>
+              <td class="align-middle" *ngIf="true" (click)="findOrderData(data)">{{data.susr5}}</td>
+              <td class="align-middle" *ngIf="true" (click)="findOrderData(data)">{{data.deliverydate|date}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span>Show &nbsp;</span>
+          <select name="itemsPerPage_shipment" [(ngModel)]="this.itemsPerPage_shipment" (change)="this.itemsPerPage_shipment = $event.target.value; this.loadShipmentData()">
+            <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+          </select>
+          <span>&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_shipment" (pageChange)="this.currentPage_shipment = $event; this.loadShipmentData()"></pagination-controls>
+      </div>
+      <div class="modal fade" id="modaldeleteOrder" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">Delete Order</h5>
+            </div>
+            <div class="modal-body">
+              <p>Do you want to delete
+                <b> {{this.selected_order !== undefined ? this.selected_order.orderkey : ''}} </b>?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" (click)="deleteOrder()">
+                <i class="fa fa-thumbs-o-up"></i>
+              </button>
+              <button class="btn btn-outline-secondary" data-dismiss="modal">
+                <i class="fa fa-thumbs-o-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="tabdetail">
+      <div class="container-fluid w-30 h-100 collapse show float-left" id="collapseNew">
+        <h6 class="receipt-form my-3">Shippment Form</h6>
+        <hr class="my-0">
+        <form #frmOrder="ngForm">
+          <input type="hidden" name="id" [(ngModel)]='record_shipment.id'>
+          <div class="row mt-2">
+            <div class="col-md-6 col-sm-12  text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="asnNumber">SO ID</label>
+              <input type="text" class="form-control form-control-sm" name="orderkey" [(ngModel)]="record_shipment.orderkey" readonly/>
+            </div>
+            <div class="col-md-6 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="status">Status</label>
+              <span class="pl-2 text-dark" *ngIf="record_shipment.status == 04">Create Internally</span>
+              <span class="pl-2 text-primary" *ngIf="record_shipment.status == 17">Allocated</span>
+              <span class="pl-2 text-info" *ngIf="record_shipment.status == 14">Part Allocate</span>
+              <span class="pl-2 text-orangered" *ngIf="record_shipment.status == 55">Pick Completed</span>
+              <span class="pl-2 text-warning" *ngIf="record_shipment.status == 52">Part Picking</span>
+              <span class="pl-2 text-success" *ngIf="record_shipment.status == 95">Ship Completed</span>
+              <span class="pl-2 text-orchid" *ngIf="record_shipment.status == 92">Part Ship</span>
+              <input type="text" class="form-control  form-control-sm" name="status" [(ngModel)]="record_shipment.status" hidden />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="packingList" class="my-0 align-middle">Owner
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select [(ngModel)]="record_shipment.storerkey" name="storerkey" required (change)="changeOwner(record_shipment)" class="form-control  form-control-sm">
+                <option value="" hidden>Select Owner</option>
+                <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.company}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="type" class="my-0 align-middle">Type
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select [(ngModel)]="record_shipment.type" required name="type" class="form-control  form-control-sm">
+                <option value="" hidden>Select Type</option>
+                <option *ngFor="let type of data_ordertype" [ngValue]="type.code">{{type.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="owner" class="my-0 align-middle">Customer
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select [(ngModel)]="record_shipment.consigneekey" required name="consigneekey" class="form-control  form-control-sm">
+                <option value="" hidden>Select Storerkey</option>
+                <option *ngFor="let customer of data_customer" [ngValue]="customer.storerkey">{{customer.company}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Carrier Code
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select [(ngModel)]="record_shipment.carriercode" required name="carriercode" class="form-control  form-control-sm">
+                <option value="" hidden>Select Carrier code</option>
+                <option *ngFor="let carriercode of data_carriercode" [ngValue]="carriercode.storerkey">{{carriercode.company}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Ship to</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <input pattern="[A-Za-z0-9 ]{0,15}" type="text" class="form-control  form-control-sm" name="shipcode" [(ngModel)]="record_shipment.shipcode"
+              />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">So No</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <input pattern="[A-Za-z0-9 ]{0,32}" type="text" class="form-control  form-control-sm" name="externorderkey" [(ngModel)]="record_shipment.externorderkey"
+              />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Container/Truck</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <input pattern="[A-Za-z0-9 ]{0,30}" type="text" class="form-control  form-control-sm" name="susr1" [(ngModel)]="record_shipment.susr1"
+              />
+            </div>
+          </div>
+
+          <div class="row mt-2 mb-2 ">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle ">Remark</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <textarea class="form-control  form-control-sm" id="exampleFormControlTextarea1" rows="4" name="notes" [(ngModel)]="record_shipment.notes"></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-3 col-sm-12  text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="asnNumber">TotalQty</label>
+              <input type="text" class="form-control form-control-sm" placeholder="" readonly>
+            </div>
+            <div class="col-md-3 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="status">TotalAll</label>
+              <input type="text" class="form-control form-control-sm" placeholder="" readonly>
+            </div>
+            <div class="col-md-3 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="status">TotalPicked</label>
+              <input type="text" class="form-control form-control-sm" placeholder="" readonly>
+            </div>
+            <div class="col-md-3 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="status">TotalShiped</label>
+              <input type="text" class="form-control form-control-sm" placeholder="" readonly>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container-fluid px-0 ">
+        <div class="navbar navbar-light border">
+          <a class="btn btn-primary-swm my-2 px-2" data-toggle="collapse" href="#collapseNew" role="button" aria-expanded="false" aria-controls="collapseExample"
+            title="Collapse Order">
+            <i class="fa fa-outdent" aria-hidden="true"></i>
+          </a>
+          <div class="btn-action-asn">
+            <button class=" btn-white-swm" (click)="allocateAllData()">Allocate</button>
+            <button class=" btn-white-swm" (click)="unAllocateAllData()">Un Allocate</button>
+            <button class=" btn-white-swm" (click)="pickAllData()">Pick</button>
+            <button class="btn-white-swm" (click)="unPickAllData()">Un Pick</button>
+            <button class="btn-white-swm" data-toggle="tab" href="#tabpickdetail" #tabpickdetail (click)="loadPickDetail('',frmOrder.value, true)">Pick Detail</button>
+            <button class="btn-white-swm" (click)="shipAllData()">Ship</button>
+            <div class="dropdown d-inline-block">
+              <button aria-expanded="false" aria-haspopup="true" class="nav-link  btn-white-swm dropdown-toggle mx-2" href="#" role="button"
+                id="extend" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Extend </button>
+              <div aria-labelledby="extend" class="dropdown-menu">
+                <a class="dropdown-item" (click)="doPrintPickingList()">Picking List</a>
+                <a class="dropdown-item" href="">Ctnr Load Plan</a>
+                <a class="dropdown-item" href="">Tally Record</a>
+                <a class="dropdown-item" (click)="doPrintDevileryNote()">Delivery Note</a>
+              </div>
+            </div>
+            <button type="button" class="btn-primary-swm border-0 ml-2 px-5" [disabled]="!frmOrder.form.valid"
+              (click)="saveOrderData(frmOrder.value)">Save</button>
+            <button class="btn-white-swm" (click)="frmOrder.reset(); this.data_shipmentdetail = []; this.loadShipmentData()">Cancel</button>
+          </div>
+        </div>
+
+        <div class="navbar bg-light clear-fix py-3 my-0" *ngIf="new_shipmentdetail">
+          <div class="btn-action-asn">
+            <button class=" btn-white-swm " [disabled]="data_rowdetail.length === 0"
+              (click)="explodeRowDetail()">Explode</button>
+          </div>
+
+          <div class="btn-action-asn ">
+            <button class=" btn-white-swm " (click)="addNewRow(new_shipmentdetail)">New line</button>
+            <button class=" btn-white-swm " [disabled]="data_rowdetail.length === 0"
+              data-toggle="modal" data-target="#modalDelete">Delete</button>
+          </div>
+
+          <div class="modal fade" id="modalDelete" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger">Delete Receipt Detail</h5>
+                  <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Do you want to delete these records?</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" data-dismiss="modal" (click)="deleteRowDetail()">
+                    <i class="fa fa-thumbs-o-up"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary" data-dismiss="modal">
+                    <i class="fa fa-thumbs-o-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar bg-light px-0 py-0 " style="z-index:0">
+          <div class="table-responsive fixed-tabledetailasn">
+            <table class="table table-sm table-hover" id="itemtable" *ngIf="new_shipmentdetail">
+              <thead class="border">
+                <tr *ngIf="data_lot">
+                  <th class="align-middle table-small">
+                    <!-- <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [checked]="isAllChecked_Shipment()" (change)="checkAll_Shipment($event)">
+                      <span class="custom-control-label"></span>
+                    </label> -->
+                  </th>
+                  <th rowspan="2">Number Line</th>
+                  <th rowspan="2">Item Code </th>
+                  <th rowspan="2" style="width: 5%">UOM </th>
+                  <th rowspan="2">Original Quantity</th>
+                  <th rowspan="2">Order Quantity </th>
+                  <th rowspan="2">Allocated Quantity </th>
+                  <th rowspan="2">Picked Quantity </th>
+                  <th rowspan="2">Shipped Quantity </th>
+                  <th rowspan="2">Validated Quantity </th>
+                  <th rowspan="2">Unit Price </th>
+                  <th rowspan="2" *ngFor="let lottable of data_lot   | jsontodic">
+                    {{data_lot[lottable].label === '' ? lottable : data_lot[lottable].label }}
+                  </th>
+                  <th rowspan="2">Discount (%) </th>
+                  <th rowspan="2">VAT (%) </th>
+
+                </tr>
+              </thead>
+              <tbody *ngIf="data_lot">
+                <tr class="bg-secondary" *ngIf="new_shipmentdetail">
+                  <td class="align-middle table-small"></td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="orderlinenumber" readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select item" id="sku" name="sku" [(ngModel)]="new_shipmentdetail.sku"
+                        (keyup.enter)="this.openModalSKU('','',record_shipment.storerkey)">
+                      <span class="input-group-addon icon-search" (click)="this.openModalSKU('','',record_shipment.storerkey)"></span>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select uom" id="uom" name="uom" [(ngModel)]="new_shipmentdetail.uom"
+                        (keyup.enter)="this.loadModalUOM(new_shipmentdetail.sku)">
+                      <span class="input-group-addon icon-search" (click)="this.loadModalUOM(new_shipmentdetail.sku)"></span>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="originalqty" [(ngModel)]="new_shipmentdetail.originalqty"
+                      readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="openqty" [(ngModel)]="new_shipmentdetail.openqty"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="qtyallocated" [(ngModel)]="new_shipmentdetail.qtyallocated"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="qtypicked" [(ngModel)]="new_shipmentdetail.qtypicked"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="shippedqty" [(ngModel)]="new_shipmentdetail.shippedqty"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="string" class="form-control form-control-sm" name="susr4" [(ngModel)]="new_shipmentdetail.susr4" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="unitprice" [(ngModel)]="new_shipmentdetail.unitprice"
+                    />
+                  </td>
+                  <td class="align-middle" *ngFor="let lottable of data_lot | jsontodic; let i = index">
+                    <input type="text" class="form-control form-control-sm" *ngIf="(data_lot[lottable].key !== 'lottable04' && data_lot[lottable].key !== 'lottable05' && data_lot[lottable].key !== 'lottable11' && data_lot[lottable].key !== 'lottable12')"
+                      name="{{data_lot[lottable].key}}" [(ngModel)]="new_shipmentdetail[data_lot[lottable].key]" />
+                    <div class="icon-datecalendar" *ngIf=" (data_lot[lottable].key == 'lottable04' || data_lot[lottable].key == 'lottable05' || data_lot[lottable].key == 'lottable11' || data_lot[lottable].key == 'lottable12')">
+                      <input class="date-custom form-control form-control-sm" [(ngModel)]='new_shipmentdetail[data_lot[lottable].key]' name='{{data_lot[lottable].key}}'
+                        ngui-datetime-picker date-only="true" />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="discount" [(ngModel)]="new_shipmentdetail.discount"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="vat" [(ngModel)]="new_shipmentdetail.vat" />
+                  </td>
+                </tr>
+
+                <tr *ngFor="let shipment_detail of data_shipmentdetail | paginate: { id: 'id_orderDetail', itemsPerPage: this.itemsPerPage_shipmentDetail, currentPage: this.currentPage_shipmentDetail, totalItems: this.total_shipmentDetail }; let i = index;">
+                  <td class="align-middle table-small">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" (change)="onChoose($event, shipment_detail)" [(ngModel)]="shipment_detail.state">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="orderlinenumber[{{i}}]" [(ngModel)]="shipment_detail.orderlinenumber"
+                      readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select item" id="{{shipment_detail.sku}}" name="sku[{{i}}]"
+                        [(ngModel)]="shipment_detail.sku" (keyup.enter)="this.openModalSKU(i,shipment_detail.sku,record_shipment.storerkey)"
+                        [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95">
+                      <button class="input-group-addon icon-search" type="button" (click)="this.openModalSKU(i,shipment_detail.sku,record_shipment.storerkey)"
+                        [disabled]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95">
+                      </button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select uom" id="{{shipment_detail.orderlinenumber}}{{shipment_detail.sku}}"
+                        name="uom[{{i}}]" [(ngModel)]="shipment_detail.uom" (keyup.enter)="this.loadModalUOMRemove(i,shipment_detail.orderlinenumber+shipment_detail.sku,shipment_detail.sku)"
+                        [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95">
+                      <button class="input-group-addon icon-search" type="button" (click)="this.loadModalUOMRemove(i,shipment_detail.orderlinenumber+shipment_detail.sku,shipment_detail.sku)"
+                        [disabled]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95">
+                      </button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="originalqty[{{i}}]" [(ngModel)]="shipment_detail.originalqty"
+                      readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="openqty[{{i}}]" [(ngModel)]="shipment_detail.openqty"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="qtyallocated[{{i}}]" [(ngModel)]="shipment_detail.qtyallocated"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="qtypicked[{{i}}]" [(ngModel)]="shipment_detail.qtypicked"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="shippedqty[{{i}}]" [(ngModel)]="shipment_detail.shippedqty"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="string" class="form-control form-control-sm" name="susr4[{{i}}]" [(ngModel)]="shipment_detail.susr4" [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="unitprice[{{i}}]" [(ngModel)]="shipment_detail.unitprice"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle" *ngFor="let lottable of data_lot   | jsontodic; let j = index">
+                    <input type="text" class="form-control form-control-sm" *ngIf="(data_lot[lottable].key !== 'lottable04' && data_lot[lottable].key !== 'lottable05' && data_lot[lottable].key !== 'lottable11' && data_lot[lottable].key !== 'lottable12')"
+                      name="{{data_lot[lottable].key}}[{{i}}]" [(ngModel)]="shipment_detail[data_lot[lottable].key]" [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                    <div class="icon-datecalendar" *ngIf="(data_lot[lottable].key == 'lottable04' || data_lot[lottable].key == 'lottable05' || data_lot[lottable].key == 'lottable11' || data_lot[lottable].key == 'lottable12')">
+                      <input class="date-custom form-control form-control-sm" [(ngModel)]='shipment_detail[data_lot[lottable].key]' name='{{data_lot[lottable].key}}[{{i}}]'
+                        ngui-datetime-picker date-only="true" [disabled]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                      />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="discount[{{i}}]" [(ngModel)]="shipment_detail.discount"
+                      [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="number" min="0" class="form-control form-control-sm" name="vat[{{i}}]" [(ngModel)]="shipment_detail.vat" [readonly]="shipment_detail.status == 17|| shipment_detail.status == 14|| shipment_detail.status == 52|| shipment_detail.status == 55|| shipment_detail.status == 92|| shipment_detail.status == 95"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="navbar navbar-light bg-light px-0 px-2" id="footer" *ngIf="new_shipmentdetail">
+          <div class="show-entries">
+            <span class="show">Show &nbsp;</span>
+            <select class="custom-select custom-select-sm" name="itemsPerPage_shipmentDetail" [(ngModel)]="this.itemsPerPage_shipmentDetail"
+              (change)="this.itemsPerPage_shipmentDetail = $event.target.value; this.loadOrderDetailData(record_shipment)">
+              <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+            </select>
+            <span class="entry">&nbsp;entries</span>
+          </div>
+          <pagination-controls id="id_orderDetail" (pageChange)="this.currentPage_shipmentDetail = $event; this.loadOrderDetailData(record_shipment)"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="tabpickdetail">
+      <div class="navbar navbar-light border">
+        <div></div>
+        <div class="btn-action-asn">
+          <button class=" btn-white-swm" (click)="pickPickDetail()">Pick</button>
+          <button class="btn-white-swm" (click)="unPickAllData()">Un Pick</button>
+          <button class="btn-white-swm" (click)="shipPickDetail()">Ship</button>
+        </div>
+      </div>
+
+      <div class="table-responsive fixed-tabletab">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th class="align-middle table-small"></th>
+              <th rowspan="2">whseid
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'whseid':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">SO
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'orderkey':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">Line No
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'orderlinenumber':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">Status
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'status':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">Item No
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'sku':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">Bin
+                <input type="text" class="form-control search-table form-control-sm my-1 " (keyup.enter)="loadPickDetail({'toloc':{'like':$event.target.value}})">
+              </th>
+              <th rowspan="2">Quantity Case
+                <input type="text" class="form-control search-table form-control-sm my-1" (keyup.enter)="loadPickDetail({'uomqty':{'like':$event.target.value}})">
+              </th>
+             
+              <th rowspan="2">statusorder
+                <input type="text" class="form-control search-table form-control-sm my-1">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of data_pick| paginate: { id: 'id_pick', itemsPerPage: this.itemsPerPage_pick, currentPage: this.currentPage_pick, totalItems: this.total_pick };">
+              <td class="align-middle table-small">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" (change)="onChoosePick($event, data)" [(ngModel)]="data.state">
+                  <span class="custom-control-label"></span>
+                </label>
+              </td>
+              <td class="align-middle">{{data.WHSEID}}</td>
+              <td class="align-middle">{{data.ORDERKEY}}</td>
+              <td class="align-middle">{{data.ORDERLINENUMBER}}</td>
+              <td class="align-middle">{{data.STATUS}}</td>
+              <td class="align-middle">{{data.SKU}}</td>
+              <td class="align-middle">{{data.TOLOC}}</td>
+              <td class="align-middle">{{data.QTYCASE1}}</td>
+              <td>
+                  <span class="text-primary" *ngIf="data.statusOrder == 17">Allocated</span>
+                <span class="text-info" *ngIf="data.statusOrder == 14">Part Allocate</span>
+                <span class="text-orangered" *ngIf="data.statusOrder == 55">Pick Completed</span>
+                <span class="text-warning" *ngIf="data.statusOrder == 52">Part Picking</span>
+                <span class="text-success" *ngIf="data.statusOrder == 95">Ship Completed</span>
+                <span class="text-orchid" *ngIf="data.statusOrder == 92">Part Ship</span>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span>Show &nbsp;</span>
+          <select name="itemsPerPage_pick" [(ngModel)]="this.itemsPerPage_pick" (change)="this.itemsPerPage_pick = $event.target.value; this.loadPickDetail()">
+            <option *ngFor="let data of data_itemsPerPage" [value]="data.short">{{data.short}}</option>
+          </select>
+          <span>&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_pick" (pageChange)="this.currentPage_pick = $event;"></pagination-controls>
+      </div>
+
+      <div class="modal fade" id="modaldeleteOrder" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">Delete Order</h5>
+            </div>
+            <div class="modal-body">
+              <p>Do you want to delete
+                <b> {{this.selected_order !== undefined ? this.selected_order.orderkey : ''}} </b>?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" (click)="deleteOrder()">
+                <i class="fa fa-thumbs-o-up"></i>
+              </button>
+              <button class="btn btn-outline-secondary" data-dismiss="modal">
+                <i class="fa fa-thumbs-o-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="listItem" tabindex="-1">
+      <form #frmAdd="ngForm" (ngSubmit)="this.insertItemData(frmAdd.value)" autocomplete="off">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="text-primary-swm font-weight-bold">New Item</h5>
+            </div>
+            <div class="modal-body" *ngIf="data_item">
+              <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Owner
+                      <span class="form-important">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <select required class="form-control form-control-sm" [(ngModel)]="data_item.storerkey" name="storerkey">
+                        <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.company}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Item Code </label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <input type="text" class="form-control form-control-sm" name="sku" [(ngModel)]="data_item.sku" required/>
+                    </div>
+                  </div>
+
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Item Name
+                      <span class="form-important">*</span>
+                      <span class="form-important">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <input type="text" class="form-control form-control-sm" name="descr" [(ngModel)]="data_item.descr" required/>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Pack Code</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <select [(ngModel)]="data_item.packkey" name="packkey" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_pack" [ngValue]="data.packkey">{{data.packdescr}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Gross Weight</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdgrosswgt" [(ngModel)]="data_item.stdgrosswgt"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Net Weight </label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdnetwgt" [(ngModel)]="data_item.stdnetwgt"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Cube</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdcube" [(ngModel)]="data_item.stdcube"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Allocate</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <select [(ngModel)]="data_item.strategykey" name="strategykey" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_allocate" [ngValue]="data.allocatestrategykey">{{data.allocatestrategykey}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Putaway Zone</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <select [(ngModel)]="data_item.putawayzone" name="putawayzone" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_zone" [ngValue]="data.putawayzone">{{data.putawayzone}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Putaway Key</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <select [(ngModel)]="data_item.putawaystrategykey" name="putawaystrategykey" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_putstrategies" [ngValue]="data.putawaystrategykey">{{data.putawaystrategykey}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Priority UOM</label>
+                    <div class="col-md-8 col-lg-10 col-xl-10">
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="priorityuom" [(ngModel)]="data_item.priorityuom">
+                        <span class="custom-control-label"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">RotateBy</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <select [(ngModel)]="data_item.rotateby" name="rotateby" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm  col-form-label-sm pl-2">Group of Cago
+                      <span class="form-important">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input type="text" class="form-control form-control-sm" name="susr1" [(ngModel)]="data_item.susr1" />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm  pl-2">Location</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9 ">
+                      <select [(ngModel)]="data_item.locationpickcase" name="locationpickcase" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_location" [ngValue]="data.loc">{{data.loc}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">ZonePickCase</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <select [(ngModel)]="data_item.zonepickcase" name="zonepickcase" class="form-control form-control-sm">
+                        <option *ngFor="let data of data_zone" [ngValue]="data.putawayzone">{{data.putawayzone}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Unit of Issue</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input type="text" class="form-control form-control-sm" name="unitofissue" [(ngModel)]="data_item.unitofissue" />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Unit of Measure</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input type="text" class="form-control form-control-sm" name="unitofmeasure" [(ngModel)]="data_item.unitofmeasure" />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Batch Indicator</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="batch_indicator" [(ngModel)]="data_item.batch_indicator"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Numerator</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="numerator" [(ngModel)]="data_item.numerator"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Denomination</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="denominator" [(ngModel)]="data_item.denominator"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Shelf Life</label>
+                    <div class="col-md-8 col-lg-9 col-xl-9">
+                      <input min="0" type="number" step="any" class="form-control form-control-sm" name="shelflife" [(ngModel)]="data_item.shelflife"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" [disabled]="!frmAdd.form.valid">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-secondary" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="modal fade" id="{{id.uom}}" tabindex="-1">
+      <div class="modal-dialog" style="max-width:30% !important">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-danger">Item</h5>
+            <button class="close" data-dismiss="modal">
+              <span>×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control search-table form-control-sm my-1" id='uomedit' hidden>
+            <input type="text" class="form-control search-table form-control-sm my-1" id='indexedit' hidden>
+            <div class="table-responsive fixed-table">
+              <table class="table table-sm table-hover">
+                <thead>
+                  <tr>
+                    <th rowspan="2">UOM </th>
+                    <th rowspan="2">Description </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of data_uom1" class="table-primary-swm">
+                    <td (click)="getUOM(data)">{{data.code}}</td>
+                    <td (click)="getUOM(data)">{{data.description}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-popup-sku #modalSKU (onSelect)="selectsku($event)"></app-popup-sku>
+
+  </div>

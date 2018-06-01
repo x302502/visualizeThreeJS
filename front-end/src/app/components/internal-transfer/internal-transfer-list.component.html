@@ -1,0 +1,453 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">Transfer</label>
+      </li>
+    </ul>
+  </div>
+  <ul class="nav nav-pills  table-primary-swm border" id="pills-tab">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" id="pills-lis-tab" data-toggle="pill" href="#tabTransferList">List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" id="pills-log-tab" data-toggle="pill" href="#tabDetail" (click)="loadTransferDataDetail()"
+        #tabDetail>Detail</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <!-- Tab List -->
+    <div class="tab-pane fade show active" id="tabTransferList">
+      <div class="table-responsive fixed-tableInternalTransfer ">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2">No</th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STORERKEY'; this.loadTransferData({}) ">
+                  STORERKEY
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'receiptdetail.EXTERNRECEIPTKEY'; this.loadTransferData({}) ">
+                  PO
+                  <i *ngIf="this.propertyName_ff == 'receiptdetail.EXTERNRECEIPTKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'receiptdetail.EXTERNRECEIPTKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_po" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.SKU '; this.loadTransferData({}) ">
+                  SKU
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOT '; this.loadTransferData({}) ">
+                  LOT
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lot" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOC'; this.loadTransferData({}) ">
+                  LOC
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTY'; this.loadTransferData({}) ">
+                  QTY
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'pack.PACKUOM3'; this.loadTransferData({}) ">
+                  UNIT
+                  <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_unit" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTYALLOCATED'; this.loadTransferData({}) ">
+                  QTYALLOCATED
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTYALLOCATED' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTYALLOCATED' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qtyAllocated" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTYPICKED'; this.loadTransferData({}) ">
+                  QTYPICKED
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTYPICKED' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTYPICKED' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qtyPicked" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>QTY-AVAILABLE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STATUS'; this.loadTransferData({}) ">
+                  STATUS
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LPNID'; this.loadTransferData({}) ">
+                  LPNID
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_lpnid" (keyup.enter)="loadTransferData({})">
+              </th>
+              <th rowspan="2">PACKUOM2
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_transfer| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+              <td>{{i+1}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.STORERKEY}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.EXTERNRECEIPTKEY}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.SKU}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.LOT}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.LOC}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.QTY}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.PACKUOM3}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.QTYALLOCATED}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.QTYPICKED}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.PENDINGMOVEIN}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.STATUS}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.LPNID}}</td>
+              <td data-toggle="modal" data-target="#modalEdit" (click)="findTransferData(data)">{{data.PACKUOM2}}</td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadTransferData({})">
+            <option>12</option>
+            <option>24</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+          <span>&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadTransferData({})"></pagination-controls>
+      </div>
+      <!-- Modal Edit  -->
+      <div class="modal fade" id="modalEdit" tabindex="-1">
+        <form #frmEdit="ngForm" (ngSubmit)="saveToTranferData(frmEdit.value)">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Internal Transfer</h5>
+              </div>
+              <div class="modal-body" *ngIf="selected_transfer">
+                <!-- <label> From </label> -->
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LPNID</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.LPNID' name='lpnid' readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From WHSEID </span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.WHSEID' name='whseid' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From STORERKEY</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.STORERKEY' name='storerkey' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From SKU</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.SKU' name='sku' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From LOC</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.LOC' name='loc' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From LOT</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.LOT' name='lot' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From PACKKEY</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.PACKKEY' name='packkey' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold "> QTY</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.QTY' name='qty' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">From UOM</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.PACKUOM3' name='uom' readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To WAREHOUSE </span>
+                      <div class="col-8">
+                        <select class="form-control " (change)="loadOwnerFromWarehouse($event.target.value)" name="toWhseid" [(ngModel)]="selected_transfer.toWhseid">
+                          <option *ngFor="let data of data_warehouse" value="{{data.warehousecode}}">{{data.warehousename}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To STORERKEY</span>
+                      <div class="col-8">
+                        <select class="form-control " (change)="loadSkuFromOwner($event.target.value)" name="toStorerKey" [(ngModel)]="selected_transfer.toStorerKey">
+                          <option *ngFor="let data of dataToOwner" value="{{data.storerkey}}">{{data.storerkey}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To SKU</span>
+                      <div class="col-8">
+                        <select class="form-control " (change)="loadPackkeyFromSKU($event.target.value)" name="toSku" [(ngModel)]="selected_transfer.toSku">
+                          <option *ngFor="let data of data_sku" value="{{data.sku}}">{{data.sku}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To LOC</span>
+                      <div class="col-8">
+                        <select class="form-control " name="toLocation" [(ngModel)]="selected_transfer.toLocation">
+                          <option *ngFor="let data of data_location" value="{{data.loc}}">{{data.loc}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To LOT</span>
+                      <div class="col-8">
+                        <input class="form-control " type="text" [(ngModel)]='selected_transfer.LOT' name='lot' readonly>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To PACKKEY</span>
+                      <div class="col-8">
+                        <select class="form-control">
+                          <option *ngFor="let data of data_packkey" value="{{data.packkey}}">{{data.packkey}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">QTY Transfer</span>
+                      <div class="col-8">
+                        <input type="number" class="form-control" name="toQty" [(ngModel)]="selected_transfer.toQty" />
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">To UOM</span>
+                      <div class="col-8">
+                        <!-- <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_transfer.PACKUOM3' name='uom' readonly> -->
+                        <select class="form-control form-control-sm" name="toUom" [(ngModel)]="selected_transfer.toUom">
+                          <option *ngFor="let data of data_uom" value="{{data.packuom3}}">{{data.packuom3}}</option>
+                          <option *ngFor="let data of data_uom" value="{{data.packuom2}}">{{data.packuom2}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">Date Transfer</span>
+                      <div class="col-8">
+                        <input class=" w-100 pl-3 custom-datetime" [(ngModel)]="selected_transfer.transferDate" value="abc" name="transferDate" ngui-datetime-picker
+                          date-only="true" />
+                        <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+                <button class="btn btn-secondary" data-dismiss="modal">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- tab Detail -->
+    <div class="tab-pane fade " id="tabDetail">
+      <div class="d-flex justify-content-end my-3">
+        <button type="button" class="btn-white-swm mr-3 " (click)="delete()">Delete</button>
+      </div>
+      <div class="table-responsive fixed-tableTransferDetail">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>FROMWHSEID
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>STORERKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TRANSFERKEY
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadTransferDataDetail({'transferkey':{'like': $event.target.value}})">
+              </th>
+              <th>FROMSKU
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>LOT
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>LOC
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>UOM
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>STATUS
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>FROMLPNID
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>QTY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOWHSEID
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOSTORERKEY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOSKU
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOLOCATION
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOQTY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>TOUOM
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th class="align-top">ACTION</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_transferDetail| paginate: { id: 'id_detail', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;"
+              [ngClass]="{'badge-success': data.status == 9,'badge-default': data.status == 0}">
+              <td>
+                <input type="checkbox" class="align-bottom table-small" (change)="onChoose($event, data)">
+              </td>
+              <td>
+                {{data.whseid}}
+              </td>
+              <td>
+                {{data.fromstorerkey}}
+              </td>
+              <td>
+                {{data.transferkey}}
+              </td>
+              <td>
+                {{data.fromsku}}
+              </td>
+              <td>
+                {{data.fromlot}}
+              </td>
+              <td>
+                {{data.fromloc}}
+              </td>
+              <td>
+                {{data.fromuom}}
+              </td>
+              <td>
+                {{data.status}}
+              </td>
+              <td>
+                {{data.fromid}}
+              </td>
+              <td>
+                {{data.fromqty}}
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.towhseid' name='towhseid[{{i}}]'>
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.tostorerkey' name='tostorerkey[{{i}}]'>
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.tosku' name='tosku[{{i}}]'>
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.toloc' name='toloc[{{i}}]'>
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.toqty' name='toqty[{{i}}]'>
+              </td>
+              <td>
+                <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.touom' name='touom[{{i}}]'>
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="ConfirmTransferData(data)">
+                  <i class="fa fa-save"></i>
+                </button>
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadTransferDataDetail()">
+            <option>12</option>
+            <option>24</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_detail" (pageChange)="this.currentPage = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

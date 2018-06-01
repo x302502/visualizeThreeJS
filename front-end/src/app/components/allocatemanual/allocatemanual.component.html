@@ -1,0 +1,201 @@
+<section>
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" (click)="save()">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frmmanual="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Order key
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.orderkey' name='orderkey' />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Item
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.sku' name='sku' readonly/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Line No
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select [(ngModel)]="entity.orderlinenumber" name="orderlinenumber" (change)="changeLine(entity.orderlinenumber)" class="form-control  form-control-sm">
+            <option *ngFor="let line of listReceiptDetail" [ngValue]="line.orderlinenumber">{{line.orderlinenumber}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12  col-md-4  col-lg-4 col-xl-4 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Shipped Quantity
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.shippedqty' name='shippedqty' readonly/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Picked Quantity
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.qtypicked' name='qtypicked' readonly/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Ordered Quantity
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.openqty' name='openqty' readonly/>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Allocated Quantity
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.qtyallocated' name='qtyallocated' readonly/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Un-Allocated Quantity
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.unallocate' name='unallocate' readonly/>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div id="wrapTableAndAction">
+    <div class="table-responsive fixed-manual">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th rowspan="2"></th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Item Code </span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Item Name</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">LPN</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Bin</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">kgs</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Quantity(Case)</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Quantity</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Avail.Qty(Case)</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Avail.Qty</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Give Qty</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable01</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable02</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable03</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable04</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable05</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable06</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable07</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable08</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable09</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable10</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable11</span>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer">Lottable12</span>
+            </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listmanual| paginate: { id: 'id_manual', itemsPerPage: this.itemsPerPage_gridmanual, currentPage: this.currentPage_gridmanual, totalItems: this.total_gridmanual }; let i = index;">
+            <td class="align-middle table-small">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+                <span class="custom-control-label"></span>
+              </label>
+            </td>
+            <td class="align-middle">{{data.sku}}</td>
+            <td class="align-middle">{{data.descr}}</td>
+            <td class="align-middle">{{data.lpnid}}</td>
+            <td class="align-middle">{{data.loc}}</td>
+            <td class="align-middle">{{data.lottable02}}</td>
+            <td class="align-middle">{{data.qty_case}}</td>
+            <td class="align-middle">{{data.qty}}</td>
+            <td class="align-middle">{{data.qtyavliable_case}}</td>
+            <td class="align-middle">{{data.qtyavliable}}</td>
+            <td class="align-middle">{{data.giveqty}}</td>
+            <td class="align-middle">{{data.Lottable01}}</td>
+            <td class="align-middle">{{data.Lottable02}}</td>
+            <td class="align-middle">{{data.Lottable03}}</td>
+            <td class="align-middle">{{data.Lottable04|date:'dd/MM/yyyy'}}</td>
+            <td class="align-middle">{{data.Lottable05|date:'dd/MM/yyyy'}}</td>
+            <td class="align-middle">{{data.Lottable06}}</td>
+            <td class="align-middle">{{data.Lottable07}}</td>
+            <td class="align-middle">{{data.Lottable08}}</td>
+            <td class="align-middle">{{data.Lottable09}}</td>
+            <td class="align-middle">{{data.Lottable10}}</td>
+            <td class="align-middle">{{data.Lottable11|date:'dd/MM/yyyy'}}</td>
+            <td class="align-middle">{{data.Lottable12|date:'dd/MM/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+    <div class="show-entries">
+      <span class="show">Show &nbsp;</span>
+      <select class="custom-select custom-select-sm" name="itemsPerPage_gridmanual" [(ngModel)]="this.itemsPerPage_gridmanual"
+        (change)="this.itemsPerPage_gridmanual = $event.target.value; this.loadAllocatemanual()">
+        <option>12</option>
+        <option>24</option>
+        <option>50</option>
+        <option>100</option>
+      </select>
+      <span class="entry">&nbsp;entries</span>
+    </div>
+    <pagination-controls id="id_manual" (pageChange)="this.currentPage_gridmanual = $event; this.loadAllocatemanual()"></pagination-controls>
+  </div>
+</section>

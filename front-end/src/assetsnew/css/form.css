@@ -1,0 +1,27 @@
+.form-important {
+	color: red;
+}
+
+
+.form-date {
+   padding: 0.20rem .5rem;
+    border-radius: 50rem !important;
+	border: 1px solid #ced4da;
+	outline: 0;
+  }
+  .form-date:hover {
+    transform:scale(1.0) ;
+    background-size: 10px;
+    box-shadow: 1px 10px 20px #dedede;
+    -webkit-transition:  all .5s; /* Safari */
+    transition: all .5s;
+    border-radius: 50rem !important;
+  border-color: #0071BC;
+  }
+  .form-date:focus {
+    transform:scale(1) ;
+    background-size: 10px;
+    box-shadow: 1px 10px 20px #dedede;
+    border-radius: 50rem !important;
+    border-color: #0071BC;
+  }

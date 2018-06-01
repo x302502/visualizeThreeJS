@@ -1,0 +1,229 @@
+<section *ngIf="entity">
+    <div class="navbar">
+      <div></div>
+      <ul class="nav justify-content-end my-1">
+        <li class="nav-item" >
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frm.form.valid" (click)="saveputawayData(entity)">Save</button>
+        </li>
+      </ul>
+    </div>
+    <form #frm="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+        <div class="form-group row ">
+          <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code <span class="form-important">*</span></label>
+          <div class="col-md-8 col-lg-10 col-xl-10">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.putawaystrategykey' name='putawaystrategykey' required [readonly]="this.entity.id !== undefined"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+        <div class="form-group row ">
+          <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Description <span class="form-important">*</span></label>
+          <div class="col-md-8 col-lg-9 col-xl-9">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.descr' name='descr' />
+          </div>
+        </div>
+      </div>
+    </form>
+    <div id="wrapTableAndAction" *ngIf="entity.id">
+      <div class="table-responsive fixed-tabledetail" id="tbldetail">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2" class="align-bottom table-small">
+
+                <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" (click)="this.addNewRow()">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </th>
+              <th rowspan="2" >
+                <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'putawaystrategylinenumber'; this.loadPutawayDetailData({}) ">
+                  Putaway Linenumber
+                  <i *ngIf="this.propertyName_detail == 'putawaystrategylinenumber' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_detail == 'putawaystrategylinenumber' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_putawaystrategylinenumber" (keyup.enter)="this.loadPutawayDetailData({})"></th>
+                <th rowspan="2">
+                  <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'fromloc'; this.loadPutawayDetailData({}) ">
+                    From Loc
+                    <i *ngIf="this.propertyName_detail == 'fromloc' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                    <i *ngIf="this.propertyName_detail == 'fromloc' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                  </span>
+                  <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_fromloc" (keyup.enter)="this.loadPutawayDetailData({})"></th>
+                  <th rowspan="2">
+                    <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'toloc'; this.loadPutawayDetailData({}) ">
+                      To Loc
+                      <i *ngIf="this.propertyName_detail == 'toloc' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_detail == 'toloc' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table form-control-sm my-1 " [(ngModel)]="fd_toloc" (keyup.enter)="this.loadPutawayDetailData({})"></th>
+                    <th rowspan="2">
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'areakey'; this.loadPutawayDetailData({}) ">
+                        Area Key
+                        <i *ngIf="this.propertyName_detail == 'areakey' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'areakey' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_areakey" (keyup.enter)="this.loadPutawayDetailData({})"></th>
+                      <th rowspan="2">
+                        <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'zone'; this.loadPutawayDetailData({}) ">
+                          Zone
+                          <i *ngIf="this.propertyName_detail == 'zone' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_detail == 'zone' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_zone" (keyup.enter)="this.loadPutawayDetailData({})">
+                      </th>
+                        <th rowspan="2">
+                          <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'stepnumber'; this.loadPutawayDetailData({}) ">
+                            Step Number
+                            <i *ngIf="this.propertyName_detail == 'stepnumber' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                            <i *ngIf="this.propertyName_detail == 'stepnumber' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                          </span>
+                          <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_stepnumber" (keyup.enter)="this.loadPutawayDetailData({})"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngIf="data_temp">
+                          <td>
+                            <button type="button" class="trash ml-2 d-inline-block btn-trash py-0 cursor-pointer" (click)="this.saveRow(data_temp)">
+                              <i class="fa fa-save text-success" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-link" (click)="this.data_temp = null;">
+                            <i class="fa fa-times"></i>
+                          </button>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" name="putawaystrategylinenumber" [(ngModel)]="data_temp.putawaystrategylinenumber" readonly />
+                        </td>
+                        <td>
+                          <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control " name="fromloc" [(ngModel)]="data_temp.fromloc"
+                                (keyup.enter)="this.openModalLocation(-1)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalLocation(-1)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control " name="toloc" [(ngModel)]="data_temp.toloc"
+                                (keyup.enter)="this.openModalLocation(-2)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalLocation(-2)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" name="areakey" [(ngModel)]="data_temp.areakey" />
+                        </td>
+                        <td>
+                          <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control" name="zone" [(ngModel)]="data_temp.zone"
+                                (keyup.enter)="this.openModalZone(-1)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalZone(-1)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="number" class="form-control" name="stepnumber" [(ngModel)]="data_temp.stepnumber" min="0" />
+                        </td>
+                      </tr>
+
+                      <tr *ngFor="let data of data_putawaydetail | paginate: { id: 'id_putawaydetail', itemsPerPage: this.itemsPerPage_putawaydetail, currentPage: this.currentPage_putawaydetail, totalItems: this.total_putawaydetail }; let i = index;" >
+                        <td class="align-bottom table-small">
+                          <a *ngIf="!data.isEdit" data-toggle="modal" href="#{{id.modalDelete}}" #modalDelete (click)="this.selected_putawaydetail = data;">
+                            <i class="fa fa-trash text-danger"></i>
+                          </a>
+                          <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" *ngIf="data.isEdit" (click)="this.saveRow(data)">
+                            <i class="fa fa-save text-success" aria-hidden="true"></i>
+                          </button>
+                          <button type="button" class="d-inline-block btn btn-xs btn-link" (click)="data.isEdit = !data.isEdit">
+                            <i *ngIf="!data.isEdit" class="fa fa-pencil"></i>
+                            <i *ngIf="data.isEdit" class="fa fa-times"></i>
+                          </button>
+                        </td>
+                        <td>
+                          {{data.putawaystrategylinenumber}}
+                        </td>
+                        <td>
+                          {{!data.isEdit?data.fromloc:null}}
+                          <div *ngIf="data.isEdit" class="input-group stylish-input-group">
+                              <input type="text" class="form-control " name="fromloc[{{i}}]" [(ngModel)]="data.fromloc"
+                                (keyup.enter)="this.openModalLocation(1, i)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalLocation(1, i)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          {{!data.isEdit?data.toloc:null}}
+                          <div *ngIf="data.isEdit" class="input-group stylish-input-group">
+                              <input type="text" class="form-control " name="toloc[{{i}}]" [(ngModel)]="data.toloc"
+                                (keyup.enter)="this.openModalLocation(2, i)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalLocation(2, i)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          {{!data.isEdit?data.areakey:null}}
+                          <input  *ngIf="data.isEdit" type="text" class="form-control" name="areakey[{{i}}]" [(ngModel)]="data.areakey"/>
+                        </td>
+                        <td>
+                          {{!data.isEdit?data.zone:null}}
+                          <div *ngIf="data.isEdit" class="input-group stylish-input-group">
+                              <input type="text" class="form-control " name="zone[{{i}}]" [(ngModel)]="data.zone"
+                                (keyup.enter)="this.openModalZone(1, i)">
+                              <span class="input-group-addon icon-search" (click)="this.openModalZone(1, i)"></span>
+                          </div>
+                        </td>
+                        <td>
+                          {{!data.isEdit?data.stepnumber:null}}
+                          <input  *ngIf="data.isEdit" type="number" class="form-control" name="stepnumber[{{i}}]" [(ngModel)]="data.stepnumber"/>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+                  <div class="show-entries">
+                    <span class="show">Show &nbsp;</span>
+                    <select class="custom-select custom-select-sm" name="itemsPerPage_putawaydetail" [(ngModel)]="this.itemsPerPage_putawaydetail" (change)="this.itemsPerPage_putawaydetail = $event.target.value; this.loadPutawayDetailData({})">
+                      <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+                    </select>
+                    <span class="entry" >&nbsp;entries</span>
+                  </div>
+                  <pagination-controls id="id_putawaydetail" (pageChange)="this.currentPage_putawaydetail = $event; this.loadPutawayDetailData({})"></pagination-controls>
+                </div>
+              </div>
+
+              
+              <!-- <div class="modal fade" id="modalDelete" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-danger">Delete Putaway Detail</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Do you want to delete these Putaway Detail?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-danger" (click)="deletePutawayDetail()"><i class="fa fa-thumbs-o-up"></i></button>
+                      <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal"><i class="fa fa-thumbs-o-down"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="modal fade" id="{{id.modalDelete}}" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-danger">Delete Putaway Detail</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Do you want to delete this Putaway Detail?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-danger" (click)="deleteRow()"><i class="fa fa-thumbs-o-up"></i></button>
+                      <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal"><i class="fa fa-thumbs-o-down"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <app-popup-location #modalLocation (onSelect)="selectLocation($event)"></app-popup-location>
+
+              <app-popup-zone #modalZone (onSelect)="selectZone($event)"></app-popup-zone>
+
+            </section>

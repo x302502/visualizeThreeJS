@@ -1,0 +1,26 @@
+<div *ngIf="externalEvents.length" class="external-events" id="aa">
+  <div *ngFor="let event of externalEvents" class="fc-event"> {{event.title}}</div>
+</div>
+<!-- Calendar -->
+<div class="calendar" [ngClass]="{'no-external-events': !externalEvents.length}" #control></div>
+
+<!-- Tooltip -->
+<div class="schedule-tooltip-default" #tooltip>
+  <div class="header">
+    {{tooltipInfo.title}}
+    <div class="pull-right">
+      <i class="fa fa-clock-o text-warning"></i>
+      Start: {{tooltipInfo.start}}
+      <i class="fa fa-clock-o text-success"></i>
+      End: {{tooltipInfo.end}}
+    </div>
+  </div>
+  <div class="body">
+    <div *ngFor="let item of tooltipInfo.items" class="col-sm-12">
+      <span class="title">
+        <i class="fa fa-star text-primary"></i> {{item.title}}
+      </span>
+      <span class="detail">: {{item.value}}</span>
+    </div>
+  </div>
+</div>

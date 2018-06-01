@@ -1,0 +1,1 @@
+ng serve --prod --aot=false --watch=false --disable-host-check --port 4300

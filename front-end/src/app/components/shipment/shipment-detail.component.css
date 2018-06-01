@@ -1,0 +1,62 @@
+/*customer*/
+.btn.btn-outline.blue.active, .btn.btn-outline.blue:active, .btn.btn-outline.blue:active:focus, .btn.btn-outline.blue:active:hover, .btn.btn-outline.blue:focus, .btn.btn-outline.blue:hover {
+    border-color: #32c5d2;
+    color: #fff;
+    background-color: #32c5d2;
+}
+
+.btn.btn-outline.red {
+    border-color: #e7505a;
+    color: #e7505a;
+    background: 0 0;
+}
+
+.btn.btn-outline.blue {
+    border-color: #32c5d2;
+    color: #32c5d2;
+    background: 0 0;
+}
+
+.btn.btn-outline.red.active, .btn.btn-outline.red:active, .btn.btn-outline.red:active:focus, .btn.btn-outline.red:active:hover, .btn.btn-outline.red:focus, .btn.btn-outline.red:hover {
+    border-color: #e7505a;
+    color: #fff;
+    background-color: #e7505a;
+}
+
+.btn-circle {
+    border-radius: 25px!important;
+    overflow: hidden;
+}
+
+
+.btn.default:not(.btn-outline) {
+    color: #666;
+    background-color: #e1e5ec;
+    border-color: #e1e5ec;
+}
+
+.btn.btn-outline.green {
+    border-color: #50e76e;
+    color: #50e76e;
+    background: 0 0;
+}
+
+.btn.btn-outline.green.active, .btn.btn-outline.green:active, .btn.btn-outline.green:active:focus, .btn.btn-outline.green:active:hover, .btn.btn-outline.green:focus, .btn.btn-outline.green:hover {
+    border-color: #50e76e;
+    color: #fff;
+    background-color: #50e76e;
+}
+
+.btn.btn-outline.yellow.active, .btn.btn-outline.yellow:active, .btn.btn-outline.yellow:active:focus, .btn.btn-outline.yellow:active:hover, .btn.btn-outline.yellow:focus, .btn.btn-outline.yellow:hover {
+    border-color: #EC971F;
+    color: #fff;
+    background-color: #EC971F;
+}
+
+.btn.btn-outline.yellow {
+    border-color: #EC971F;
+    color: #EC971F;
+    background: 0 0;
+}
+
+

@@ -1,0 +1,37 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frm.form.valid" (click)="save()">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frm="ngForm" class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row">
+        <label class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Name
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required minlength="3" [(ngModel)]="entity.name">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row">
+        <label class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Title
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Title" required minlength="3" [(ngModel)]="entity.title">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 px-4">
+      <div class="form-group">
+        <textarea id="{{id.ckEditor}}" class="editor" name="{{id.ckEditor}}" form="frm" rows="10" cols="80">
+        </textarea>
+      </div>
+    </div>
+  </form>
+</section>

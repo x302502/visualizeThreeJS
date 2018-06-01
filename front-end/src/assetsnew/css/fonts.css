@@ -1,0 +1,64 @@
+/*OpenSans-Bold*/
+@font-face {
+	font-family: OpenSans-Bold;
+	src:url ('./fonts/OpenSans-Bold.ttf')
+}
+
+
+/*OpenSans-BoldItalic*/
+@font-face {
+	font-family: OpenSans-BoldItalic;
+	src:url ('./fonts/OpenSans-BoldItalic.ttf')
+}
+
+
+/*OpenSans-ExtraBold*/
+@font-face {
+	font-family: OpenSans-ExtraBold;
+	src:url ('./fonts/OpenSans-ExtraBold.ttf')
+}
+
+/*OpenSans-Italic*/
+@font-face {
+	font-family:OpenSans-Italic;
+	src:url ('./fonts/OpenSans-Italic.ttf')
+}
+
+/*OpenSans-Light*/
+@font-face {
+	font-family:OpenSans-Light;
+	src:url ('./fonts/OpenSans-Light.ttf')
+}
+
+
+/*OpenSans-LightItalic*/
+@font-face {
+	font-family:OpenSans-LightItalic;
+	src:url ('./fonts/OpenSans-LightItalic.ttf')
+}
+
+
+/*OpenSans-Regular*/
+@font-face {
+	font-family:OpenSans-Regular;
+	src:url ('./fonts/OpenSans-Regular.ttf')
+}
+
+/*OpenSans-Regular*/
+@font-face {
+	font-family:OpenSans-Semibold;
+	src:url ('./fonts/OpenSans-Semibold.ttf')
+}
+
+/*OpenSans-SemiboldItalic*/
+@font-face {
+	font-family:OpenSans-SemiboldItalic;
+	src:url ('./fonts/OpenSans-SemiboldItalic.ttf')
+}
+
+
+
+@font-face {
+	font-family: 'FontAwesome';
+	src:url ('../vendor/font-awesome/fontawesome-webfont.ttf')
+}

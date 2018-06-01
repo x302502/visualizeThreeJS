@@ -1,0 +1,98 @@
+
+
+ table tr:nth-child(even) {
+ background: #F7F9FB;
+}
+.daterangepicker table {
+	width: inherit !important;
+	margin: 0;
+}
+
+
+table thead {
+    color: #16759B;
+	background: #fff;
+}
+
+table thead th {
+	z-index: 11;
+	position: sticky;
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	top: 0;
+	background: #fff;
+	border-top: 1px solid #e9ecef !important;
+}
+
+th {
+	border: none !important;
+}
+
+td, th {
+    padding: 8px 10px !important;
+    min-width: 150px;
+    max-width: 250px;
+
+}
+.table-responsive {
+	max-height: 100vh !important;
+}
+.fixed-table {
+	height: calc(100vh - 276px);
+}
+
+/* Edit by Tinh Nguyen */
+
+.daterangepicker table {
+	width: inherit !important;
+	margin: 0;
+}
+
+.fixed-tableshipment {
+	height: calc(100vh - 259px);
+}
+.fixed-tabletab {
+	height: calc(100vh - 317px);
+}
+.fixed-tablenotab {
+	height: calc(100vh - 178px);
+}
+.fixed-tabledetail {
+	height: calc(100vh - 355px);
+}
+.fixed-tabledetailasn {
+	height: calc(100vh - 400px);
+}
+.fixed-tablereport {
+	height: calc(100vh - 307px);
+}
+.fixed-manual{
+	height: calc(100vh - 409px);
+}
+.fixed-tablenotab1 {
+	height: calc(100vh - 260px);
+}
+
+.fixed-tablepopup {
+	height: calc(100vh - 215px);
+}
+.table-small {
+	 min-width: 100px;
+   max-width: 120px;
+}
+.table-customer {
+	 min-width: 26px;
+  max-width: 26px;
+}
+.show-entries {
+	display: inline-flex;
+}
+/* khang  */
+.cke_dialog.cke_browser_webkit.cke_ltr.cke_single_page th,
+.cke_dialog.cke_browser_webkit.cke_ltr.cke_single_page td {
+min-width: 150px!important;
+max-height: 500px!important;
+max-width: none;
+}
+
+/* End */

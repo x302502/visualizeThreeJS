@@ -1,0 +1,21 @@
+<strong class="text-primary">User List</strong>
+<button class="btn btn-primary" (click)="newUser()"><i class="fa fa-plus"></i> Create user</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <th><button class="btn btn-primary" (click)="editUser(user)"><i class="fa fa-pencil"></i> Edit user</button></th>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary" (click)="newUser()"><i class="fa fa-plus"></i> Create user</button>

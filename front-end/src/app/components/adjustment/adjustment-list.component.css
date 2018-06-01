@@ -1,0 +1,47 @@
+/* .table-fixed thead {
+    width: 100%;
+  }
+  .table-fixed tbody {
+    height: 300px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+  }
+  .table-fixed tbody td, .table-fixed thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+  }
+tbody {
+    display:block;
+    height: 300px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc( 100% - 1em )
+}
+@media screen and (min-width: 480px){
+    tbody {
+        display:block;
+        height: 200px;
+        overflow:auto;
+    }
+    thead, tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;
+    }
+    thead {
+        width: calc( 100% - 1em )
+}
+}  */
+
+.fixed-tableAdjustment {
+    height: calc(100vh - 172px);
+} 

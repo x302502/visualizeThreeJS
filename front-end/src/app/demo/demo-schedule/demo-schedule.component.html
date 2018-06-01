@@ -1,0 +1,7 @@
+<div class="col-md-12">
+    <button class="btn btn-primary" (click)="addExternalEvent()">Add External Event</button>
+    <button class="btn btn-primary" (click)="addExternalEvents()">Add External Events</button>
+</div>
+<div class="col-md-12">
+    <schedule-control #scheduleControl (onDrop)="drop($event)" (onClick)="click($event)" (onClickEvent)="clickEvent($event)" (onUpdateEvent)="updateEvent($event)"></schedule-control>
+</div>

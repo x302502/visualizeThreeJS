@@ -1,0 +1,10 @@
+<div class="input-group input-group-sm">
+    <input class="form-control" [ngClass]="{'datetime':type==='datetime'}" [ngModel]="date" (ngModelChange)="changeDate($event)" ngbDatepicker #d="ngbDatepicker">
+    <input *ngIf="type === 'datetime'" [ngModel]="hour" (ngModelChange)="changeHour($event)" class="form-control" type="number" min="0" max="24" placeholder="HH" style="width:50px;">
+    <input *ngIf="type === 'datetime'" [ngModel]="minute" (ngModelChange)="changeMinute($event)" class="form-control" type="number" min="0" max="60" placeholder="mm" style="width:50px;">
+    <div class="input-group-append">    
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar"></i>
+        </button>
+    </div>
+</div>

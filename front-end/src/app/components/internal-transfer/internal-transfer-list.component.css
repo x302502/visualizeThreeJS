@@ -1,0 +1,16 @@
+.custom-datetime {
+    padding: 7px;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+}
+.add-on-1{
+    position: absolute;
+    top: 7px;
+    right: 22px;
+}
+.fixed-tableInternalTransfer {
+    height: calc(100vh - 214px);
+}
+.fixed-tableTransferDetail {
+    height: calc(100vh - 272px);
+}

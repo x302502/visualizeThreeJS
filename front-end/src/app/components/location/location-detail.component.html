@@ -1,0 +1,68 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0" [disabled]="!frrmLocation.form.valid" (click)="this.save(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frrmLocation="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input required maxlength="30" type="text" class="form-control form-control-sm" name="loc" [(ngModel)]="entity.loc"/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Stacklimit</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input min="0" type="number" class="form-control form-control-sm" name="stacklimit" [(ngModel)]="entity.stacklimit"
+          />
+        </div>
+      </div>
+      <div class="row pt-2">
+        <label for="colFormLabelSm" class="col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Commingle Item</label>
+        <div class="col-8">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="comminglesku" [(ngModel)]="entity.comminglesku">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <label for="colFormLabelSm" class="col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Commingle Lot</label>
+        <div class="col-8">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="comminglelot" [(ngModel)]="entity.comminglelot">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Status
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <select [(ngModel)]="entity.status" name="status" class="form-control form-control-sm" required>
+            <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.code}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm  col-form-label-sm pl-2">Putawayzone </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <select [(ngModel)]="entity.putawayzone" name="putawayzone" class="form-control form-control-sm">
+            <option *ngFor="let data of data_zone" [ngValue]="data.putawayzone">{{data.descr}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

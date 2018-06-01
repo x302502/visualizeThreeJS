@@ -1,0 +1,220 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frm.form.valid" (click)="saveItemData(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frm="ngForm" class="row" autocomplete="off">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Owner
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <select required class="form-control form-control-sm" [(ngModel)]="entity.storerkey" name="storerkey">
+            <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.company}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm  col-form-label-sm ">Item Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" name="sku" [(ngModel)]="entity.sku" required/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Item Name
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" name="descr" [(ngModel)]="entity.descr" required/>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Pack Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control" name="packkey" [(ngModel)]="entity.packkey" (keyup.enter)="this.openModalPack('','')" required>
+            <span class="input-group-addon icon-search" (click)="this.openModalPack('','')"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Gross Weight</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdgrosswgt" [(ngModel)]="entity.stdgrosswgt"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Net Weight </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdnetwgt" [(ngModel)]="entity.stdnetwgt"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Cube</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="stdcube" [(ngModel)]="entity.stdcube"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Allocate
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control" name="strategykey" [(ngModel)]="entity.strategykey" (keyup.enter)="this.openmodalAllocateStrategy('','')" required>
+            <span class="input-group-addon icon-search" (click)="this.openmodalAllocateStrategy('','')"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Putaway Zone
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control" name="putawayzone" [(ngModel)]="entity.putawayzone" (keyup.enter)="this.openModalZone('','')" required>
+            <span class="input-group-addon icon-search" (click)="this.openModalZone('','')"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Putaway Key</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control" name="putawaystrategykey" [(ngModel)]="entity.putawaystrategykey" (keyup.enter)="openModalPutawayStrategy()">
+            <span class="input-group-addon icon-search" (click)="openModalPutawayStrategy()"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Group of Cago</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control form-control-sm" name="susr1" [(ngModel)]="entity.susr1">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">ZonePickCase</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control form-control-sm" name="zonepickcase" [(ngModel)]="entity.zonepickcase">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Priority UOM</label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="priorityuom" [(ngModel)]="entity.priorityuom">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6  col-md-6  col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">RotateField
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <select [(ngModel)]="entity.rotatefield" name="rotatefield" class="form-control form-control-sm" required>
+            <option *ngFor="let data of data_rotatefield" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">RotateBy
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <select [(ngModel)]="entity.rotateby" name="rotateby" class="form-control form-control-sm" required>
+            <option *ngFor="let data of data_rotateby" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Provision Day</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" name="provisiondays" [(ngModel)]="entity.provisiondays" />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Provision field</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <select [(ngModel)]="entity.provisionfield" name="provisionfield" class="form-control form-control-sm">
+            <option *ngFor="let data of data_rotatefield" [ngValue]="data.code">{{data.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Provision Active</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="provisionactive" [(ngModel)]="entity.provisionactive">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+     
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Unit of Issue</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" name="unitofissue" [(ngModel)]="entity.unitofissue" />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Unit of Measure</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" name="unitofmeasure" [(ngModel)]="entity.unitofmeasure" />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Batch Indicator</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="batch_indicator" [(ngModel)]="entity.batch_indicator"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Numerator</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="numerator" [(ngModel)]="entity.numerator"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Denomination</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="denominator" [(ngModel)]="entity.denominator"
+          />
+        </div>
+      </div>
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Shelf Life</label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input min="0" type="number" step="any" class="form-control form-control-sm" name="shelflife" [(ngModel)]="entity.shelflife"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+<app-popup-zone #modalZone (onSelect)="selectZone($event)"></app-popup-zone>
+<app-popup-location #modalLocation (onSelect)="selectLocation($event)"></app-popup-location>
+<app-popup-allocate-strategy #modalAllocateStrategy (onSelect)="selectAllocateStrategy($event)"></app-popup-allocate-strategy>
+<app-popup-pack #modalPack (onSelect)="selectPack($event)"></app-popup-pack>
+<app-popup-putaway-strategy #modalPutawayStrategy (onSelect)="selectPutawayStrategy($event)"></app-popup-putaway-strategy>

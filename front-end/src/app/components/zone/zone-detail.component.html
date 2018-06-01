@@ -1,0 +1,44 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frm.form.valid" (click)="save(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frm="ngForm" class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row">
+        <label class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" name="putawayzone" [readonly]="entity.addwho" [(ngModel)]="entity.putawayzone" required />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row">
+        <label class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Description
+          <span class="form-important">*</span>
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" name="descr" [(ngModel)]="entity.descr" required />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row">
+        <label class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Set Default
+        </label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="setdefault" [(ngModel)]="entity.setdefault">
+            <span class="custom-control-label"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

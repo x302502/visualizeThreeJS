@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+.main-sidebar{
+  background-color: #0c6f96 !important;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a{
+  background-color: #0c6f96 !important;
+}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{
+  /* background-color: #0c6f96 !important; */
+}
+.skin-blue .sidebar-menu>li>.treeview-menu{
+  background-color: #0c6f96 !important;
+}
+.skin-blue .sidebar-menu .treeview-menu>li>a{
+  background-color: #0c6f96 !important;
+}
+.skin-blue .main-header .navbar{
+  background-color: #fff !important;
+}
+.skin-blue .main-header .navbar .sidebar-toggle{
+  background-color: grey !important;
+}
+.table-responsive {
+  max-height: 50vh;
+  overflow: auto;
+}
+.content-header {
+  background-color: #ecf0f5 !important;
+  padding: 10px;
+}
+.main-header .sidebar-toggle{
+  padding: 5px 10px !important;
+}
+.modal-dialog {
+  max-width: 75% !important;
+}
+
+   /* MODAL STYLES
+-------------------------------*/
+custom-modal {
+  /* modals are hidden by default */
+  display: none;
+  }
+  custom-modal .custom-modal{
+    /* modal container fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* z-index must be higher than .modal-background */
+    z-index: 1000;
+     
+    /* enables scrolling for tall modals */
+    overflow: auto;
+}
+
+custom-modal .custom-modal .custom-modal-body {
+  padding: 20px;
+  background: #fff;
+  /* margin exposes part of the modal background */
+  margin: 40px;
+}
+custom-modal .custom-modal-background {
+      /* modal background fixed across whole screen */
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      /* semi-transparent black  */
+      background-color: #000;
+      opacity: 0.75;
+       
+      /* z-index must be below .modal and above everything else  */
+      z-index: 900;
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
+
+/* Notify Service CSS */
+.notify-info, .notify-success, .notify-warning, .notify-error {
+    border-radius: 5px;
+    margin: 0;
+    padding:12px;
+    z-index: 99999;
+    top:5px;
+    right: 5px;
+    display: none;
+    position: fixed;
+  }
+  .notify-info {
+      color: #00529B;
+      background-color: #BDE5F8;
+  }
+  .notify-success {
+      color: #4F8A10;
+      background-color: #DFF2BF;
+  }
+  .notify-warning {
+      color: #9F6000;
+      background-color: #FEEFB3;
+  }
+  .notify-error {
+      color: #D8000C;
+      background-color: #FFD2D2;
+  }
+  .notify-info i, .notify-success i, .notify-warning i, .notify-error i {
+      font-size:2em;
+      vertical-align:middle;
+  }
+
+  /* End Notify Service CSS */

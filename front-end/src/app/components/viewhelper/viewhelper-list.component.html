@@ -1,0 +1,101 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <a class="text-primary-swm font-weight-bold" href="">{{content_display ? selected_helper.title : "Introduction Management"}}</a>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item mr-2" *ngIf="content_display">
+        <button class=" text-white btn-primary-swm border-0 px-4 btnnew-customer" (click)="goBack()">Back</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- <section class="content"> -->
+  <div class="tab-content">
+    <!-- <div id="tblHelper" *ngIf="!content_display"> -->
+    <!-- <div class="mt-3"> -->
+    <div class="table-responsive fixed-tablenotab">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'title'; this.loadData() ">
+                Title
+                <i *ngIf="this.propertyName == 'title' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName == 'title' && this.order=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of data_helper  | paginate: { id: 'id_helper', itemsPerPage: this.itemsPerPage_helper, currentPage: this.currentPage_helper, totalItems: this.total_helper };">
+            <td width="10%">
+              <button type="button" class="btn btn-xs btn-success py-0" data-toggle="modal" data-target="#modalDetail" (click)="this.selectHelper(data);">
+              Detail
+                <i class="fa fa-angle-double-right"></i>
+              </button>
+            </td>
+            <td width="90%">
+              <span class="mt-3">{{data.title}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage_helper" [(ngModel)]="this.itemsPerPage_helper" (change)="this.itemsPerPage_helper = $event.target.value; this.loadData()">
+          <optgroup>12</optgroup>
+          <optgroup>24</optgroup>
+          <optgroup>50</optgroup>
+          <optgroup>100</optgroup>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_helper" (pageChange)="this.currentPage_helper = $event; this.loadData()"></pagination-controls>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- <div tabindex="-1" *ngIf="content_display">
+      <div>
+        <div class="content">
+          <div class="body">
+            <p [innerHTML]="this.selected_helper.description"></p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade" id="modalDetail" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Introduction Detail</h5>
+          </div>
+          <div class="modal-body" *ngIf="this.selected_helper">
+            <div class="box box-primary">
+              <div class="row box-body">
+                <div class="col-md-12">
+                  <div class="content">
+                    <div class="body">
+                      <p [innerHTML]="this.selected_helper.description"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </section> -->
+</div>

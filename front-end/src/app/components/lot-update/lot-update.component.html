@@ -1,0 +1,521 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">Lot Update</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <!-- <div class="nav justify-content-end my-1 shipment-btn">
+      <div class=" mr-2">
+        <a class="  btn-white-swm mr-2" href="#">Export Emty</a>
+        <a class=" btn-white-swm px-4" (click)="this.authService.checkToken(); doExportInventoryList(this.InitInventoryEmptyLocationListToExport(this.data_inventory), this.router.url.split('/')[1])">Export</a>
+      </div>
+    </div> -->
+  </div>
+  <!-- <section class="row">
+    <div class="col-auto col-sm-auto  col-md-12 col-lg-12 col-xl-6">
+      <ul class="nav nav-pills  mt-1 " id="pills-tab" role="tablist">
+        <li class="nav-item mx-0">
+          <a class="nav-link tms-link tab-border-0 border-radius-left active py-0 py-2 px-4 border border-primary  " id="pills-asn-tab"
+            data-toggle="pill" href="#tabLotUpdateList"> Lot Update List</a>
+        </li>
+        <li class="nav-item tms-link mx-0">
+          <a class="nav-link tab-border-0 border-radius-right py-0  py-2  border border-primary" id="pills-asnDetails-tab" data-toggle="pill"
+            href="#tabDetail" #tabDetail>Detail</a>
+        </li>
+      </ul>
+    </div>
+  </section> -->
+  <ul class="nav nav-pills  table-primary-swm border " id="pills-tab">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" data-toggle="tab" href="#tabLotUpdateList">List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-toggle="tab" href="#tabDetail" #tabDetail>Detail</a>
+    </li>
+  </ul>
+  <!-- Tab Lot Update List -->
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tabLotUpdateList">
+      <div class="table-responsive fixed-tablenotab ">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <!-- <th>
+                <input class="align-bottom table-small" type="checkbox" [checked]="isAllChecked_LotUpdate()" (change)="checkAll_LotUpdate($event)">
+              </th> -->
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STORERKEY'; this.loadLotUpdateData({}) ">
+                  STORERKEY
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup)="loadLotUpdateData({})"  (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'receipt.EXTERNRECEIPTKEY'; this.loadLotUpdateData({}) ">
+                  PO
+                  <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_po" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LPNID'; this.loadLotUpdateData({}) ">
+                  LPNID
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_lpnid" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.CARTONID'; this.loadLotUpdateData({}) ">
+                  CARTONID
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.CARTONID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.CARTONID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_cartonid" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.PALLETID'; this.loadLotUpdateData({}) ">
+                  PALLETID
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.PALLETID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.PALLETID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_palletid" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.SKU '; this.loadLotUpdateData({}) ">
+                  SKU
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOT '; this.loadLotUpdateData({}) ">
+                  LOT
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lot" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STATUS'; this.loadLotUpdateData({}) ">
+                  STATUS
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOC'; this.loadLotUpdateData({}) ">
+                  LOC
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTY'; this.loadLotUpdateData({}) ">
+                  QTY
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadLotUpdateData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'pack.PACKUOM3'; this.loadLotUpdateData({}) ">
+                  UNIT
+                  <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_unit" (keyup)="loadLotUpdateData({})" (keyup.back)="loadLotUpdateData({})">
+              </th>
+              <th class="align-top">LOTTABLE01
+              </th>
+              <th class="align-top">LOTTABLE02
+              </th>
+              <th class="align-top">LOTTABLE03
+              </th>
+              <th class="align-top">LOTTABLE04
+              </th>
+              <th class="align-top">LOTTABLE05
+              </th>
+              <th class="align-top">LOTTABLE06
+              </th>
+              <th class="align-top">LOTTABLE07
+              </th>
+              <th class="align-top">LOTTABLE08
+              </th>
+              <th class="align-top">LOTTABLE09
+              </th>
+              <th class="align-top">LOTTABLE10
+              </th>
+              <th class="align-top">LOTTABLE11
+              </th>
+              <th class="align-top">LOTTABLE12
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_lotUpdate| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+              <!-- <td>
+                <input class="align-bottom table-small" type="checkbox" (change)="onChoose($event,data)" [(ngModel)]="data.state">
+              </td> -->
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.STORERKEY}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.EXTERNRECEIPTKEY}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LPNID}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.CARTONID}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.PALLETID}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.SKU}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOT}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.STATUS}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOC}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.QTY - data.QTYALLOCATED}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.PACKUOM3}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)"> {{data.LOTTABLE01}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE02}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE03}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE04' name='LOTTABLE04[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE05' name='LOTTABLE05[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE06}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE07}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE08}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE09}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">{{data.LOTTABLE10}}</td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE11' name='LOTTABLE11[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle" data-toggle="modal" data-target="#modalEdit" (click)="findLotUpdateData(data)">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE12' name='LOTTABLE12[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal Edit -->
+      <div class="modal fade" id="modalEdit" tabindex="-1">
+        <form #frmEdit="ngForm" (ngSubmit)="CloneToLotUpdateData(frmEdit.value)">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Lot Update </h5>
+              </div>
+              <div class="modal-body" *ngIf="selected_lotUpdate">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LPNID</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LPNID' name='lpnid' readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE01</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE01' name='lottable01'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE02</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE02' name='lottable02'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE03</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE03' name='lottable03'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE04</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" [(ngModel)]="selected_lotUpdate.LOTTABLE04" value="{{selected_lotUpdate.LOTTABLE04}}" name="lottable04"
+                          ngui-datetime-picker  date-only="true" />
+                        <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE05</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" [(ngModel)]="selected_lotUpdate.LOTTABLE05" value="{{selected_lotUpdate.LOTTABLE05 }}" name="lottable05"
+                          ngui-datetime-picker date-only="true" />
+                        <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE06</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE06' name='lottable06'>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE07</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE07' name='lottable07'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE08</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE08' name='lottable08'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE09</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE09' name='lottable09'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE10</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]='selected_lotUpdate.LOTTABLE10' name='lottable10'>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE11</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" [(ngModel)]="selected_lotUpdate.LOTTABLE11" value="{{selected_lotUpdate.LOTTABLE11}}" name="lottable11"
+                          ngui-datetime-picker date-only="true" />
+                        <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="form-group row mt-1">
+                      <span class="col-4 font-weight-bold ">LOTTABLE12</span>
+                      <div class="col-8">
+                        <input class="form-control form-control-sm" [(ngModel)]="selected_lotUpdate.LOTTABLE12" value="{{selected_lotUpdate.LOTTABLE12}}" name="lottable12"
+                          ngui-datetime-picker date-only="true" />
+                        <i class="fa fa-calendar add-on-1" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary custom-close" >
+                  <i class="fa fa-save"></i>
+                </button>
+                <button class="btn btn-secondary" data-dismiss="modal">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.loadLotUpdateData({})">
+            <option>12</option>
+            <option>24</option>
+            <option>50</option>
+            <option>100</option>
+            <option>200</option>
+            <!-- <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option> -->
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadLotUpdateData({})"></pagination-controls>
+      </div>
+    </div>
+    <!-- Tab Detail -->
+    <div class="tab-pane fade " id="tabDetail">
+      <!-- Modal Delete -->
+      <div class="d-flex d-flex justify-content-end my-3">
+        <!-- <button type="button" class="btn btn-outline-info btn mr-2 export " (click)="ConfirmLotUpdateData()">Confirm</button> -->
+        <button type="button" class="btn-white-swm "  (click)="ConfirmLotUpdateData()" >Confirm Lot Update</button>
+      </div>
+      <div class="table-responsive fixed-tableTabDetail">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>
+               No
+              </th>
+              <th>
+                <input class="align-bottom table-small" type="checkbox" [checked]="isAllChecked_LotUpdate()" (change)="checkAll_LotUpdate($event)">
+              </th>
+              <th>STORERKEY
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.STORERKEY like':$event.target.value})">
+              </th>
+              <th>PO
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.STORERKEY like':$event.target.value})">
+              </th>
+              <th>SKU
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.SKU like':$event.target.value})">
+              </th>
+              <th>LOT
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOT like':$event.target.value})">
+              </th>
+              <th>LOC
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOC like':$event.target.value})">
+              </th>
+              <th>UNIT
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>QTYAVAILABLE
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>STATUS
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>LPNID
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)=" loadLotUpdateData({'lotxlocxid.LPNID like':$event.target.value})">
+              </th>
+              <th>LOTTABLE01
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE01 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE02
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE02 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE03
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE03 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE04
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE04 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE05
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE05 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE06
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE06 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE07
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE07 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE08
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE08 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE09
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE09 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE10
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE10 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE11
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE11 like':$event.target.value})">
+              </th>
+              <th>LOTTABLE12
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadLotUpdateData({'lotxlocxid.LOTTABLE12 like':$event.target.value})">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_lotUpdateDetail;let i = index;">
+              <td>
+                {{i+1}}
+              </td>
+              <td>
+                <input class="align-bottom table-small" type="checkbox" (change)="onChoose($event,data)" [(ngModel)]="data.state">
+              </td>
+              <td class="align-middle">
+                {{data.STORERKEY}}
+              </td>
+              <td class="align-middle">{{data.EXTERNRECEIPTKEY}}</td>
+              <td class="align-middle">{{data.SKU}}</td>
+              <td class="align-middle">{{data.LOT}}</td>
+              <td class="align-middle">{{data.LOC}}</td>
+              <td class="align-middle">{{data.PACKUOM3}}</td>
+              <td class="align-middle">{{data.QTY - data.QTYALLOCATED}}</td>
+              <td class="align-middle">{{data.STATUS}}</td>
+              <td class="align-middle">{{data.LPNID}}</td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE01' name='LOTTABLE01[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE02' name='LOTTABLE02[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE03' name='LOTTABLE03[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <div class="datetime-group">
+                  <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE04' name='LOTTABLE04[{{i}}]' ngui-datetime-picker
+                    date-only="true" />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE05' name='LOTTABLE05[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE06' name='LOTTABLE06[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE07' name='LOTTABLE07[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE08' name='LOTTABLE08[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE09' name='LOTTABLE09[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <input type="text" class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE10' name='LOTTABLE10[{{i}}]'>
+              </td>
+              <td class="align-middle">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE11' name='LOTTABLE11[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+              <td class="align-middle">
+                <div class="datetime-group">
+                  <input class="date-custom  pl-3" [(ngModel)]='data.LOTTABLE12' name='LOTTABLE12[{{i}}]' ngui-datetime-picker date-only="true"
+                  />
+                  <i class="fa fa-calendar add-on" aria-hidden="true"></i>
+                </div>
+              </td>
+            </tr>
+            <tr id="pagination"></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage_Detail" (change)="this.itemsPerPage_Detail = $event.target.value;">
+            <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+          </select>
+          <span class="entry">&nbsp;entries</span>
+        </div>
+        <pagination-controls id="id_lotUpdate_detail" (pageChange)="this.currentPage_Detail = $event"></pagination-controls>
+      </div> -->
+    </div>
+  </div>
+</div>

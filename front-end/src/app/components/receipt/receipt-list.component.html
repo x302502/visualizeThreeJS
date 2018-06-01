@@ -1,0 +1,771 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">ASN/Receipt</label>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item mr-2">
+        <button class="text-white btn-primary-swm border-0" (click)="new()">New ASN</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-white-swm mr-2" data-toggle="modal" data-target="#modalImportASN" (click)="initExcel()">Import</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-white-swm px-4" (click)="export()">Export</button>
+      </li>
+      <li class="nav-item">
+        <a class="px-3" href="/assets/Template/TemplateASN.xlsx" download>Template</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn-white-swm px-4" (click)="printCartonId()">Print Carton</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal fade" tabindex="-1" id="modalImportASN">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Select File</h5>
+          <label class="float-right text-success" id="exASNderMessage"></label>
+        </div>
+        <div class="modal-body">
+          <input type="file" (change)="onFileChange($event)" />
+          <div class="table-responsive mt-3">
+            <div class="col-md-12">
+              <table class="table table-striped" *ngIf="data_row_excel">
+                <thead>
+                  <th *ngFor="let data of data_headers">{{data}}</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of data_row_excel;let i = index;">
+                    <td>{{data.OWNER}}</td>
+                    <td>{{data.TYPE}}</td>
+                    <td>{{data.PACKINGLIST}}</td>
+                    <td>{{data.CONTAINER}}</td>
+                    <td>{{data.SUPPLIERCODE}}</td>
+                    <td>{{data.REMARK}}</td>
+                    <td>{{data.ITEMCODE}}</td>
+                    <td>{{data.UOM}}</td>
+                    <td>{{data.EXQUANTITY}}</td>
+                    <td>{{data.REMARKDETAIL}}</td>
+                    <td>{{data.LOCATION}}</td>
+                    <td>{{data.LOTTABLE01}}</td>
+                    <td>{{data.LOTTABLE02}}</td>
+                    <td>{{data.LOTTABLE03}}</td>
+                    <td>{{data.LOTTABLE04|date}}</td>
+                    <td>{{data.LOTTABLE05|date}}</td>
+                    <td>{{data.SHELFLIFE}}</td>
+                    <td>{{data.LOTTABLE06}}</td>
+                    <td>{{data.LOTTABLE07}}</td>
+                    <td>{{data.LOTTABLE08}}</td>
+                    <td>{{data.LOTTABLE09}}</td>
+                    <td>{{data.LOTTABLE010}}</td>
+                    <td>{{data.LOTTABLE011}}</td>
+                    <td>{{data.LOTTABLE012}}</td>
+                    <td>{{data.UNITID}}</td>
+                    <td>{{data.CARTONID}}</td>
+                    <td>{{data.PALLETID}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="saveDataExcelCheck()">
+            <i class="fa fa-save"></i>
+          </button>
+          <button class="btn btn-danger" data-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-pills table-primary-swm border" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" (click)="loadReceiptData()" data-toggle="tab" href="#tabListASN">List ASN</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-toggle="tab" href="#{{id.tabDetail}}" #tabDetail>Detail</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tabListASN">
+      <div class="table-responsive fixed-table">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2" class="align-bottom table-small"> </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'receiptkey'; this.loadReceiptData({}) ">
+                  ReceiptKey
+                  <i *ngIf="this.propertyName == 'receiptkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'receiptkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_receiptkey" (keyup.enter)="this.loadReceiptData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'status'; this.loadReceiptData({}) ">
+                  Status
+                  <i *ngIf="this.propertyName == 'status' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'status' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <select class="form-control search-table my-2" [(ngModel)]="f_status" (change)="this.f_status = $event.target.value; this.loadReceiptData({})">
+                  <option value="">All</option>
+                  <option value="0"> New</option>
+                  <option value="9"> Received</option>
+                  <option value="5"> In Receiving</option>
+                </select>
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'storerkey'; this.loadReceiptData({}) ">
+                  Owner
+                  <i *ngIf="this.propertyName == 'storerkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'storerkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_storerkey" (keyup.enter)="this.loadReceiptData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'externreceiptkey'; this.loadReceiptData({}) ">
+                  PO
+                  <i *ngIf="this.propertyName == 'externreceiptkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'externreceiptkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_externreceiptkey" (keyup.enter)="this.loadReceiptData({})">
+              </th>
+              <th rowspan="2">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'containerkey'; this.loadReceiptData({}) ">
+                  Containerkey
+                  <i *ngIf="this.propertyName == 'containerkey' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'containerkey' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="f_containerkey" (keyup.enter)="this.loadReceiptData({})">
+              </th>
+              <th hidden="true">Type</th>
+              <th class="align-top">
+                <span class="cursor-pointer" (click)="this.order = this.order=='ASC' ? 'DESC' : 'ASC'; this.propertyName = 'editdate'; this.loadReceiptData({}) ">
+                  Create Date
+                  <i *ngIf="this.propertyName == 'editdate' && this.order=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName == 'editdate' && this.order=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="date" class="form-control search-table form-control-sm my-1" [(ngModel)]="f_editdate" (keyup.enter)="this.loadReceiptData({})"
+                  hidden>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of data_receipt| paginate: { id: 'id_receipt', itemsPerPage: this.itemsPerPage_receipt, currentPage: this.currentPage_receipt, totalItems: this.total_receipt };"
+              class="table-primary-swm">
+              <td class="align-middle table-small">
+                <button type="button" class="trash ml-2 d-inline-block btn-trash" data-toggle="modal" data-target="#modaldeleteReceipt" (click)="this.selected_receipt = data">
+                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="trash ml-2 d-inline-block btn-trash" (click)="findReceiptData(data)">
+                  <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td *ngIf="true">{{data.receiptkey}}</td>
+              <td *ngIf="true">
+                <span class="text-dark" *ngIf="data.status == 0">New</span>
+                <span class="text-success" *ngIf="data.status == 9">Received</span>
+                <span class="text-warning" *ngIf="data.status == 5">In Receiving</span>
+              </td>
+              <td *ngIf="true">{{data.storerkey}}</td>
+              <td *ngIf="true">{{data.externreceiptkey}}</td>
+              <td *ngIf="true">{{data.containerkey}}</td>
+              <td *ngIf="true" hidden="true">{{data.type}}</td>
+              <td *ngIf="true">{{data.adddate|date:'dd/MM/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select name="itemsPerPage_receipt" [(ngModel)]="this.itemsPerPage_receipt" (change)="this.itemsPerPage_receipt = $event.target.value; loadReceiptData()"
+            class="custom-select custom-select-sm">
+            <option>12</option>
+            <option>24</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+          <span class="entry">&nbsp; entries</span>
+        </div>
+        <pagination-controls id="id_receipt" (pageChange)="this.currentPage_receipt = $event; loadReceiptData()"></pagination-controls>
+      </div>
+
+      <div class="modal fade" id="modaldeleteReceipt" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">Delete Receipt</h5>
+            </div>
+            <div class="modal-body">
+              <p>Do you want to delete
+                <b> {{this.selected_receipt !== undefined ? this.selected_receipt.receiptkey : ''}} </b>?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" (click)="deleteReceipt()">
+                <i class="fa fa-thumbs-o-up"></i>
+              </button>
+              <button class="btn btn-outline-secondary" data-dismiss="modal">
+                <i class="fa fa-thumbs-o-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabtaskdetail">
+      <div class="table-responsive fixed-table">
+        <table class="table table-sm table-hover" id="tabletaskdetail">
+          <thead>
+            <tr>
+              <th rowspan="2" class="align-bottom table-small"></th>
+              <th rowspan="2">Task Detail Key
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Task Type
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Owner
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Item Code
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Quantity
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">From Location
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">From LPNID
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">To Location
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">To LPNID
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Status
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Source Key
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Start Time
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">End Time
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Add Date
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Add Who
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Edit Date
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+              <th rowspan="2">Edit Who
+                <input type="text" class="form-control search-table form-control-sm my-1" />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm">
+              <td class="align-bottom table-small"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+        <div class="show-entries">
+          <span class="show">Show &nbsp;</span>
+          <select name="itemsPerPage_receipt" [(ngModel)]="this.itemsPerPage_receipt" (change)="this.authService.checkToken(); this.itemsPerPage_receipt = $event.target.value; this.loadReceiptData()"
+            class="custom-select custom-select-sm">
+            <option *ngFor="let data of data_itemsPerPage" [value]="data.short">{{data.short}}</option>
+          </select>
+          <span class="entry">&nbsp; entries</span>
+        </div>
+        <pagination-controls id="id_receipt" (pageChange)="this.currentPage_receipt = $event; this.loadReceiptData()"></pagination-controls>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="{{id.tabDetail}}">
+      <div class="container-fluid w-30 h-100 collapse show float-left" id="collapseNew">
+        <h6 class="receipt-form my-3">Receipt Form</h6>
+        <hr class="my-0">
+        <form #frrmReceipt="ngForm">
+          <input type="hidden" name="id" [(ngModel)]='record_receipt.id'>
+          <div class="row mt-2">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-4  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="asnNumber">ASN Number</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]='record_receipt.receiptkey' name='receiptkey' readonly>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-4  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label>Received:</label>
+              <label class="pl-2 text-warning" *ngIf="record_receipt.status == 5">{{record_receipt.totalreceived}} /</label>
+              <label class="pl-2 text-success" *ngIf="record_receipt.status == 5">{{record_receipt.totalexpected}} CS</label>
+              <label class="pl-2 text-success" *ngIf="record_receipt.status == 9">{{record_receipt.totalreceived}} /</label>
+              <label class="pl-2 text-success" *ngIf="record_receipt.status == 9">{{record_receipt.totalexpected}} CS</label>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-4  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="status">Status</label>
+              <span class="pl-2 text-dark" *ngIf="record_receipt.status == 0">New</span>
+              <span class="pl-2 text-success" *ngIf="record_receipt.status == 9">Received</span>
+              <span class="pl-2 text-warning" *ngIf="record_receipt.status == 5">In Receiving</span>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]='record_receipt.status' name='status' hidden>
+            </div>
+
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="type" class="my-0 align-middle">Owner
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select required class="form-control form-control-sm" [(ngModel)]="record_receipt.storerkey" name="storerkey" (change)='changeOwner(record_receipt)'>
+                <option value="" hidden>Select Owner</option>
+                <option *ngFor="let data of authService.user.owners" [ngValue]="data.storerkey">{{data.company}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="packingList" class="my-0 align-middle">Type
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select required class="form-control form-control-sm" [(ngModel)]="record_receipt.type" name="type">
+                <option value="" hidden>Select Type</option>
+                <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="owner" class="my-0 align-middle">Packing List
+                <span class="form-important">*</span>
+              </label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <input type="text" class="form-control form-control-sm" placeholder="" required pattern="[A-Za-z0-9 ]{0,32}" [(ngModel)]='record_receipt.externreceiptkey'
+                name='externreceiptkey'>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Container/Truck</label>
+            </div>
+            <div class="input-group stylish-input-group col-md-8 col-sm-12 text-center text-primary-swm font-weight-bold dis" style="font-size: 13px;">
+              <input type="text" pattern="[A-Z0-9-]{0,18}" class="form-control form-control-sm" id="containerkey" name="containerkey" [(ngModel)]="record_receipt.containerkey"
+                (keyup.enter)="this.openModalCheckin()">
+              <span class="input-group-addon icon-search" (click)="this.openModalCheckin()"></span>
+
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Supplier/Vendor</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <select class="form-control form-control-sm" [(ngModel)]="record_receipt.suppliercode" name="suppliercode">
+                <option value="" hidden>Select Supplier/Vendor</option>
+                <option *ngFor="let data of data_supplier" [ngValue]="data.storerkey">{{data.company}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">Begin Time</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm font-weight-bold dis" style="font-size: 13px;">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]='record_receipt.begintime' name='begintime' ngui-datetime-picker
+                date-format="DD/MM/YYYY HH:mm" [close-on-select]="false" />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle">End Time</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm font-weight-bold dis" style="font-size: 13px;">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]='record_receipt.endtime' name='endtime' ngui-datetime-picker
+                date-format="DD/MM/YYYY HH:mm" />
+            </div>
+          </div>
+
+          <div class="row mt-2 mb-2 ">
+            <div class="col-md-4 col-sm-12  text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <label for="containerTruck" class="my-0 align-middle ">Remark</label>
+            </div>
+            <div class="col-md-8 col-sm-12 text-center text-primary-swm  font-weight-bold dis" style="font-size: 13px;">
+              <textarea class="form-control" rows="4" [(ngModel)]='record_receipt.notes' name='notes'></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container-fluid px-0 ">
+        <div class="navbar navbar-light border">
+          <a class="btn btn-primary-swm my-2 px-2" data-toggle="collapse" href="#collapseNew" role="button" aria-expanded="false" aria-controls="collapseExample"
+            title="Collapse Receive">
+            <i class="fa fa-outdent " aria-hidden="true"></i>
+          </a>
+          <div class="btn-action-asn">
+            <button class=" btn-white-swm" (click)="receiveAllData()">Receive</button>
+            <button class=" btn-white-swm" (click)="unReceiptbylpnid()">Un Receipt</button>
+            <button class=" btn-white-swm" (click)="putawayAllData()">Putaway</button>
+            <button class=" btn-white-swm" (click)="loadTaskdetail()">Task Detail</button>
+            <div class="dropdown d-inline-block">
+              <button aria-expanded="false" aria-haspopup="true" class="nav-link  btn-white-swm dropdown-toggle" href="#" role="button"
+                id="extend" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Extend </button>
+              <div aria-labelledby="extend" class="dropdown-menu">
+                <a class="dropdown-item">Get Empty</a>
+                <a class="dropdown-item">View Empty</a>
+                <a class="dropdown-item" (click)="confirmPutaway()">Confirm Putaway</a>
+              </div>
+            </div>
+            <div class="dropdown d-inline-block">
+              <button aria-expanded="false" aria-haspopup="true" class="nav-link  btn-white-swm dropdown-toggle" href="#" role="button"
+                id="print" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Print </button>
+              <div aria-labelledby="print" class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" (click)="doPrintWarehouseReceipt()">Warehouse Receipt</a>
+                <a class="dropdown-item" (click)="doPrintPutawayList()">Putaway List</a>
+                <a class="dropdown-item" (click)="doPrintPalletLabelDetail()">Pallet Label Detail</a>
+              </div>
+            </div>
+
+
+            <button type="button" class="text-white btn-primary-swm ml-2 px-5" [disabled]="!frrmReceipt.form.valid" (click)="saveReceiptData(frrmReceipt.value)">Save</button>
+            <button class="btn-white-swm" (click)="frrmReceipt.reset(); this.data_receiptdetail = []; this.loadReceiptData()">Cancel</button>
+          </div>
+        </div>
+
+        <div class="navbar bg-light clear-fix py-3 my-0" *ngIf="new_receiptdetail">
+          <div class="btn-action-asn">
+            <button class=" btn-white-swm" (click)="palletization()">Palletization</button>
+            <button class=" btn-white-swm " [disabled]="data_rowdetail.length === 0" (click)="explodeRowDetail()">Explode</button>
+          </div>
+
+          <div class="btn-action-asn ">
+            <button class=" btn-white-swm" (click)="addRow(new_receiptdetail)">New line</button>
+            <button class=" btn-white-swm " [disabled]="data_rowdetail.length === 0" data-toggle="modal" data-target="#modalDeleteDetail">Delete</button>
+          </div>
+
+          <div class="modal fade" id="modalDeleteDetail" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger">Delete Receipt Detail</h5>
+                  <button class="close" data-dismiss="modal">
+                    <span>×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Do you want to delete these records?</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" data-dismiss="modal" (click)="deleteRowDetail()">
+                    <i class="fa fa-thumbs-o-up"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary" data-dismiss="modal">
+                    <i class="fa fa-thumbs-o-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="navbar bg-light px-0 py-0 " style="z-index:0">
+          <div class="table-responsive fixed-tabledetailasn">
+            <table class="table table-sm table-hover" id="itemtable" *ngIf="new_receiptdetail">
+              <thead class="border">
+                <tr *ngIf="data_lot">
+                  <th class="align-middle table-small">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [checked]="isAllChecked_Receipt()" (change)="checkAll_Receipt($event)">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </th>
+                  <th rowspan="2">Number Line</th>
+                  <th rowspan="2">Item Code</th>
+                  <th rowspan="2">UOM </th>
+                  <th rowspan="2">ExQuantity</th>
+                  <th rowspan="2">ReQuantity</th>
+                  <th rowspan="2">Remark</th>
+                  <th rowspan="2">Status</th>
+                  <th rowspan="2">Location</th>
+                  <th rowspan="2">GrossWGT</th>
+                  <th rowspan="2">NetWGT</th>
+                  <th rowspan="2" *ngFor="let lottable of data_lot | jsontodic">
+                    {{data_lot[lottable].label === '' ? lottable : data_lot[lottable].label }}
+                  </th>
+                  <th rowspan="2">Shelf life</th>
+                  <th rowspan="2">CBM</th>
+                  <th rowspan="2">UnitId</th>
+                  <th rowspan="2">CartonId</th>
+                  <th rowspan="2">PalletId</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="data_lot">
+                <tr class="bg-secondary" *ngIf="new_receiptdetail">
+                  <td class="align-bottom table-small"></td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="receiptlinenumber" readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select item" id="sku" name="sku" [(ngModel)]="new_receiptdetail.sku"
+                        (keyup.enter)="this.openModalSKU()">
+                      <span class="input-group-addon icon-search" (click)="this.openModalSKU()"></span>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select uom" id="uom" name="uom" [(ngModel)]="new_receiptdetail.uom"
+                        (keyup.enter)="this.loadModalUOM(new_receiptdetail.sku)">
+                      <span class="input-group-addon icon-search" (click)="this.loadModalUOM(new_receiptdetail.sku)"></span>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="qtyexpected" [(ngModel)]="new_receiptdetail.qtyexpected"
+                      [options]="{ allowNegative: false }" />
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="qtyreceived" [(ngModel)]="new_receiptdetail.qtyreceived"
+                      [options]="{ allowNegative: false }" readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="notes" [(ngModel)]="new_receiptdetail.notes" />
+                  </td>
+                  <td class="align-middle">
+                    <select type="text" class="form-control form-control-sm" name="conditioncode" [(ngModel)]="new_receiptdetail.conditioncode">
+                      <option *ngFor="let data of status_receiptdetail" [ngValue]="data.code">{{data.description}}</option>
+                    </select>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" maxlength="30" class="form-control form-control-sm" placeholder="STAGE" id="location" name="toloc" [(ngModel)]="new_receiptdetail.toloc"
+                        (keyup.enter)="this.openModalLocation()">
+                      <span class="input-group-addon icon-search" (click)="this.openModalLocation()"></span>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="grosswgt" [(ngModel)]="new_receiptdetail.grosswgt" readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="netwgt" [(ngModel)]="new_receiptdetail.netwgt" readonly/>
+                  </td>
+                  <td class="align-middle " *ngFor="let lottable of data_lot | jsontodic; let i = index">
+                    <input type="text" class="form-control form-control-sm" *ngIf="(data_lot[lottable].key !== 'lottable04' && data_lot[lottable].key !== 'lottable05' && data_lot[lottable].key !== 'lottable11' && data_lot[lottable].key !== 'lottable12')"
+                      name="{{data_lot[lottable].key}}" [(ngModel)]="new_receiptdetail[data_lot[lottable].key]" />
+                    <div class="icon-datecalendar" *ngIf=" (data_lot[lottable].key == 'lottable04' || data_lot[lottable].key == 'lottable05' || data_lot[lottable].key == 'lottable11' || data_lot[lottable].key == 'lottable12')">
+                      <input class="date-custom form-control form-control-sm " [(ngModel)]='new_receiptdetail[data_lot[lottable].key]' name='{{data_lot[lottable].key}}'
+                        ngui-datetime-picker date-only="true" />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="shelflife" [(ngModel)]="new_receiptdetail.shelflife" />
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="cube" [(ngModel)]="new_receiptdetail.cube"
+                      readonly [options]="{ allowNegative: false }" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="unitid" [(ngModel)]="new_receiptdetail.unitid" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="cartonid" [(ngModel)]="new_receiptdetail.cartonid" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="palletid" [(ngModel)]="new_receiptdetail.palletid" />
+                  </td>
+                </tr>
+
+                <tr *ngFor="let data of data_receiptdetail | paginate: { id: 'id_receiptDetail', itemsPerPage: this.itemsPerPage_receiptDetail, currentPage: this.currentPage_receiptDetail, totalItems: this.total_receiptDetail }; let i = index; ">
+                  <td class="align-bottom table-small">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="receiptlinenumber[{{i}}]" [(ngModel)]="data.receiptlinenumber"
+                      readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="STAGE" id="{{data.sku}}" name="sku[{{i}}]" [(ngModel)]="data.sku"
+                        (keyup.enter)="this.openModalSKU(data)" [readonly]="data.status == 9|| data.status ==5">
+                      <button class="input-group-addon icon-search" type="button" (click)="this.openModalSKU(data)" [disabled]="data.status == 9|| data.status ==5"></button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Select uom" id="{{data.receiptlinenumber}}{{data.sku}}"
+                        name="uom[{{i}}]" [(ngModel)]="data.uom" (keyup.enter)="this.loadModalUOMRemove(i,data.receiptlinenumber+data.sku, data.sku)"
+                        [readonly]="data.status == 9|| data.status ==5">
+                      <button class="input-group-addon icon-search" type="button" (click)="this.loadModalUOMRemove(i,data.receiptlinenumber+data.sku, data.sku)"
+                        [disabled]="data.status == 9|| data.status ==5"></button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="qtyexpected[{{i}}]" [(ngModel)]="data.qtyexpected"
+                      [readonly]="data.status == 9|| data.status ==5" [options]="{ allowNegative: false }" />
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="qtyreceived[{{i}}]" [(ngModel)]="data.qtyreceived"
+                      readonly [options]="{ allowNegative: false }" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="notes[{{i}}]" [(ngModel)]="data.notes" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <select type="text" class="form-control form-control-sm" name="conditioncode[{{i}}]" [(ngModel)]="data.conditioncode" [disabled]="data.status == 9|| data.status ==5">
+                      <option *ngFor="let status of status_receiptdetail" [ngValue]="status.code">{{status.description}}</option>
+                    </select>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group stylish-input-group">
+                      <input type="text" maxlength="30" class="form-control form-control-sm" placeholder="STAGE" id="{{data.toloc}}{{data.sku}}"
+                        name="toloc[{{i}}]" [(ngModel)]="data.toloc" (keyup.enter)="this.openModalLocation(data)"
+                        [readonly]="data.status == 9">
+                      <button class="input-group-addon icon-search" type="button" (click)="this.openModalLocation(data)" [disabled]="data.status == 9|| data.status ==5"></button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="grosswgt[{{i}}]" [(ngModel)]="data.grosswgt" readonly/>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="netwgt[{{i}}]" [(ngModel)]="data.netwgt" readonly/>
+                  </td>
+
+                  <td class="align-middle" *ngFor="let lottable of data_lot   | jsontodic; let j = index">
+                    <input type="text" class="form-control form-control-sm" *ngIf="(data_lot[lottable].key !== 'lottable04' && data_lot[lottable].key !== 'lottable05' && data_lot[lottable].key !== 'lottable11' && data_lot[lottable].key !== 'lottable12')"
+                      name="{{lottable.key}}[{{i}}]" [(ngModel)]="data[data_lot[lottable].key]" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                    <div class="icon-datecalendar" *ngIf="(data_lot[lottable].key == 'lottable04' || data_lot[lottable].key == 'lottable05' || data_lot[lottable].key == 'lottable11' || data_lot[lottable].key == 'lottable12')">
+                      <input class="date-custom form-control form-control-sm" [(ngModel)]='data[data_lot[lottable].key]' id="{{data_lot[lottable].key}}"
+                        name='{{data_lot[lottable].key}}[{{i}}]' ngui-datetime-picker date-only="true" (click)="this.getdate(id)"
+                        [disabled]="data.status == 9|| data.status ==5" />
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="shelflife[{{i}}]" [(ngModel)]="data.shelflife" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input min="0" currencyMask type="text" class="form-control form-control-sm" name="cube[{{i}}]" [(ngModel)]="data.cube" readonly
+                      [options]="{ allowNegative: false }" [disabled]="data.status == 9|| data.status ==5" />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="unitid[{{i}}]" [(ngModel)]="data.unitid" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="cartonid[{{i}}]" [(ngModel)]="data.cartonid" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                  </td>
+                  <td class="align-middle">
+                    <input type="text" class="form-control form-control-sm" name="palletid[{{i}}]" [(ngModel)]="data.palletid" [readonly]="data.status == 9|| data.status ==5"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="navbar navbar-light bg-light px-0 px-2" id="footer" *ngIf="new_receiptdetail">
+          <div class="show-entries">
+            <span class="show">Show &nbsp;</span>
+            <select class="custom-select custom-select-sm" name="itemsPerPage_receiptDetail" [(ngModel)]="this.itemsPerPage_receiptDetail"
+              (change)="this.itemsPerPage_receiptDetail = $event.target.value; this.loadReceiptDetailData(record_receipt)">
+              <option>12</option>
+              <option>25</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+            <span class="entry">&nbsp;entries</span>
+          </div>
+          <pagination-controls id="id_receiptDetail" (pageChange)="this.currentPage_receiptDetail = $event; this.loadReceiptDetailData(record_receipt)"></pagination-controls>
+        </div>
+
+        <div class="modal fade" id="{{id.uom}}" tabindex="-1">
+          <div class="modal-dialog" style="max-width:30% !important">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger">Item</h5>
+                <button class="close" data-dismiss="modal">
+                  <span>×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input type="text" class="form-control search-table form-control-sm my-1" id='uomedit' hidden>
+                <input type="text" class="form-control search-table form-control-sm my-1" id='indexedit' hidden>
+                <div class="table-responsive fixed-table">
+                  <table class="table table-sm table-hover">
+                    <thead>
+                      <tr>
+                        <th rowspan="2">UOM </th>
+                        <th rowspan="2">Description </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of uom_data1" class="table-primary-swm">
+                        <td (click)="getUOM(data)">{{data.code}}</td>
+                        <td (click)="getUOM(data)">{{data.description}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-popup-location #modalLocation (onSelect)="selectlocation($event)"></app-popup-location>
+        <app-popup-sku #modalSKU (onSelect)="selectsku($event)"></app-popup-sku>
+        <app-popup-checkin #modalCheckin (onSelect)="selectcheckin($event)"></app-popup-checkin>
+      </div>
+    </div>
+  </div>
+</div>

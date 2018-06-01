@@ -1,0 +1,54 @@
+.nav-pills .nav-link.text-dark.active, .nav-pills .show>.nav-link {
+	border-bottom: 4px solid #8BC53F;
+	border-radius: 0;	
+	background: none;
+	color: #16759b !important;
+	font-weight: 600;
+}
+
+/*TABLE*/
+.v-scroll.table-details-inbound {
+		height: calc(100vh - 365px);
+
+	}
+
+
+
+	
+/*RESPONSIVE*/
+@media screen and (max-width: 768px) {
+	
+	.v-scroll.table-details-inbound {
+		height: calc(100vh - 361px);
+
+	}
+	/*/RESPONSIVE NEWASN*/
+}
+
+@media screen and (max-width: 504px) {
+	.v-scroll.table-details-inbound {
+		height: calc(100vh - 380px);
+
+	}
+	.etd, .eta {
+		display: none;
+	}
+	
+	.form-date {
+		margin: .5rem 0;
+	}
+	.btn-white-swm.d-inline-block {
+		margin-right: .5rem;
+		margin-top: .2rem;
+	}
+	
+	#details .nav.justify-content-end.my-1 .form-date {
+		width: 30%;
+		margin-left: .5rem;
+	}
+	
+	 .form-date {
+		width: 30%;
+		margin-left: .5rem;
+	}
+}

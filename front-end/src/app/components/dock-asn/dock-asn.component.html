@@ -1,0 +1,15 @@
+
+ <div id="wrapper">
+    <!-- <div class="col-md-12 mt-2">
+       
+    </div> -->
+    <div class="d-flex">
+        <button type="button" class="btn-white-swm px-4 ml-3 p-2 my-2 " (click)="addExternalEvents()">Add P/O Events</button>
+    </div>
+     <div class="row">
+        <div class="col-md-12">
+          <schedule-control #scheduleControl (onDrop)="drop($event)" (onClick)="click($event)" (onClickEvent)="clickEvent($event)" (onUpdateEvent)="updateEvent($event)"></schedule-control>
+        </div>
+      </div>
+ </div>
+<app-popup-asn #popupASN></app-popup-asn>

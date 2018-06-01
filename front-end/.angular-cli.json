@@ -1,0 +1,80 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "client"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "assetsnew",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/fullcalendar/dist/fullcalendar.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap/scss/bootstrap.scss",
+        "./assetsnew/css/style.css",
+        "./assetsnew/vendor/bootstrap/css/bootstrap.css",
+        "./assets/css/style.css",
+        "../src/app/services/loading-service/loading.service.css",
+        "styles.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/d3/dist/d3.min.js",
+        "../node_modules/ckeditor/ckeditor.js",
+        "assets/vendor/holder/holder.min.js",
+        "assets/vendor/popper/popper.min.js",
+        "assets/vendor/tether/tether.min.js",
+        "assets/vendor/notify/js/bootstrap-notify.min.js",
+        "assets/vendor/typeahead/typeahead.min.js",
+        "assets/vendor/waypoint/noframework.waypoints.min.js",
+        "assets/js/index.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "serve": {
+      "port": 4200
+    },
+    "styleExt": "css",
+    "component": {}
+  }
+}

@@ -1,0 +1,17 @@
+<div id="wrapper">
+  <div class=" navbar breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+      </li>
+    </ul>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <label class="text-primary-swm font-weight-bold">SKU Count:</label> {{summarization.skuCount}}
+      </li>
+      <li class="nav-item">
+        <label class="text-primary-swm font-weight-bold">QTY Total:</label> {{summarization.qtyTotal}}
+      </li>
+    </ul>
+  </div>
+</div>
+<grid-control [option]="gridOption" #grid (onLoaded)="summarize($event)"></grid-control>

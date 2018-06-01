@@ -1,0 +1,316 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-swm" id="header">
+  <a class="navbar-brand" href="#">
+    <img src="{{logoUrl}}" height="41px" width="138px" alt="">
+  </a>
+  <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    MENU
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="openTab(menu.dashboard)">{{languageData["Dashboard"]}}
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{languageData["Dock Scheduling"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.dockAsn)">
+            <i class="mr-2 icon-ico-ans"></i>
+            {{languageData["Dock ASN"]}}
+          </a>
+          <a class="dropdown-item" (click)="openTab(menu.dockSO)">
+            <i class="icon-ico-inbound mr-2 "></i>
+            {{languageData["Dock SO"]}}
+          </a>
+          <a class="dropdown-item" (click)="openTab(menu.checkIn)">
+            <i class="icon-ico-inbound mr-2 "></i>
+            {{languageData["Check In"]}}
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{languageData["Inbound"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.receiptList)">
+            <i class="mr-2 icon-ico-ans"></i>
+            {{languageData["ASN/Receipt"]}}
+          </a>
+          <a class="dropdown-item" (click)="openTab(menu.inboundReportList)">
+            <i class="icon-ico-inbound mr-2 "></i>
+            {{languageData["Inbound Report"]}}
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{languageData["Outbound"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.shipmentList)">
+            <i class="icon-ico-shipment mr-2 "></i>
+            {{languageData["Shipment Order"]}}
+          </a>
+          <a class="dropdown-item" (click)="openTab(menu.outboundReportList)">
+            <i class="icon-ico-outbound mr-2 "></i>
+            {{languageData["Outbound Report"]}}
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{languageData["Inventory"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.inventoryList)">
+            <i class="mr-3 icon-ico-inventory"></i>{{languageData["Inventory List"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.inventoryReport)">
+            <i class="mr-3 icon-ico-inventory"></i>{{languageData["Inventory Report"]}}</a>
+          <a class="dropdown-item">
+            <i class="mr-3 icon-ico-pallet"></i>{{languageData["Pallet In Date"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.move)">
+            <i class="mr-3 icon-ico-move"></i>{{languageData["Move"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.adjustmentList)">
+            <i class="mr-3 icon-ico-adjustment"></i>{{languageData["Adjustment"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.changeStatusList)">
+            <i class="mr-3 icon-ico-status"></i>{{languageData["Change Status"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.lotUpdate)">
+            <i class="mr-3 icon-ico-lotupdate"></i>{{languageData["Lot Update"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.transactionList)">
+            <i class="mr-3 icon-ico-transaction"></i>{{languageData["Transaction"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.stockList)">
+            <i class="mr-3 icon-ico-stockcount"></i>{{languageData["Stock Count"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.postStockList)">
+            <i class="mr-3 icon-ico-premove"></i>{{languageData["Post Stock"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.premoveList)">
+            <i class="mr-3 icon-ico-prebatch"></i>{{languageData["Pre Move"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.internalTransferList)">
+            <i class="mr-3 icon-ico-internal"></i>{{languageData["Internal Transfer"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.dropId)">
+            <i class="mr-3 icon-ico-internal"></i>{{languageData["Drop Id"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.storageList)">
+            <i class="mr-3 icon-ico-internal"></i>{{languageData["Storage List"]}}</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{languageData["Billing"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.chargeTypeList)">
+            <i class="mr-3 icon-ico-move"></i>{{languageData["Charge Type"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.chargeList)">
+            <i class="mr-3 icon-ico-pallet"></i>{{languageData["Charge"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.tariffList)">
+            <i class="mr-3 icon-ico-inventory"></i>{{languageData["Tariff"]}}</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" (click)="openTab(menu.visualize)" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{languageData["Visualize"]}}
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" (click)="openTab(menu.newwarehouse)" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{languageData["newwarehouse"]}}
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{languageData["Configuration"]}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="openTab(menu.customerList)">
+            <i class="mr-3 icon-ico-customer"></i>{{languageData["Customer"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.customergroupList)">
+            <i class="mr-3 icon-ico-pack"></i>{{languageData["Customer Group"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.packList)">
+            <i class="mr-3 icon-ico-pack"></i>{{languageData["Pack"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.locationList)">
+            <i class="mr-3 icon-ico-location"></i>{{languageData["Location"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.zoneList)">
+            <i class="mr-3 icon-ico-zone"></i>{{languageData["Zone"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.carrierList)">
+            <i class="mr-3 icon-ico-carrier"></i>{{languageData["Carrier"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.lineList)">
+            <i class="mr-3 icon-ico-iconlines "></i>{{languageData["Line"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.supplierList)">
+            <i class="mr-3 icon-ico-supplier"></i>{{languageData["Supplier"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.allocateList)">
+            <i class="mr-3 icon-ico-trategy"></i>{{languageData["Allocate"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.putawayList)">
+            <i class="mr-3 icon-ico-pack"></i>{{languageData["Putaway"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.systemCodeList)">
+            <i class="mr-3 icon-ico-systemcode"></i>{{languageData["System Code"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.itemList)">
+            <i class="mr-3 icon-ico-item"></i>{{languageData["Item"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.bomList)">
+            <i class="mr-3 icon-ico-boom"></i>{{languageData["BOM"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.viewhelperList)">
+            <i class="mr-3 icon-ico-boom"></i>{{languageData["Guide"]}}</a>
+          <a class="dropdown-item" (click)="openTab(menu.helperList)">
+            <i class="mr-3 icon-ico-boom"></i>{{languageData["Configuration Guide"]}}</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false"
+          data-toggle="dropdown">
+          {{authService.user.warehousename}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" *ngFor="let warehouse of warehouses"
+            (click)="changeWarehouse(warehouse)">
+            <i class="mr-2 icon-ico-ans"></i>{{warehouse.warehousename}}
+          </a>
+        </div>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav username">
+      <li class="nav-item dropdown">
+        <button class="btn btn-primary btn-sm" (click)="languageService.change()">{{languageService.language}}</button>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.user.username}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" (click)="loadProfileData()" data-toggle="modal" data-target="#profile">My Profile</a>
+          <a class="dropdown-item" (click)="signout()">Log Out</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="modal fade" id="profile" tabindex="-1">
+    <form #frmProfile="ngForm" (ngSubmit)="updateMyProfile(frmProfile.value)" autocomplete="off">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Profile</h5>
+            <button class="close" data-dismiss="modal" type="button">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" *ngIf="data_currentuser">
+            <div class="row pt-2">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  UserName</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="text" class="form-control form-control-sm" name="username" [(ngModel)]="data_currentuser.username" required
+                  readonly/>
+              </div>
+            </div>
+            <small class="badge badge-primary cursor-pointer" (click)="isChangePassword = !isChangePassword">Change password
+              <i class="fa fa-chevron-right" aria-hidden="true" *ngIf="!isChangePassword"></i>
+              <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="isChangePassword"></i>
+            </small>
+            <div class="row pt-2" *ngIf="isChangePassword">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  Current Password</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="password" class="form-control form-control-sm" name="currentpassword" ngModel required/>
+              </div>
+            </div>
+            <div class="row pt-2" *ngIf="isChangePassword">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  Password</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="password" class="form-control form-control-sm" name="password" ngModel required/>
+              </div>
+            </div>
+
+            <div class="row pt-2" *ngIf="isChangePassword">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  Comfirm Password</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="password" class="form-control form-control-sm" name="comfirmpassword" ngModel required/>
+              </div>
+            </div>
+
+            <div class="row pt-2">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  FullName</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="text" class="form-control form-control-sm" name="fullname" [(ngModel)]="data_currentuser.fullname" required/>
+              </div>
+            </div>
+
+            <div class="row pt-2">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  Email</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="text" class="form-control form-control-sm" name="email" [(ngModel)]="data_currentuser.email" required/>
+              </div>
+            </div>
+
+            <div class="row pt-2">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">
+                  Tel</span>
+              </div>
+              <div class="col-8  px-0">
+                <input type="tel" class="form-control form-control-sm" name="tel" [(ngModel)]="data_currentuser.tel" required/>
+              </div>
+            </div>
+
+            <div class="row pt-2">
+              <div class="col-2 mr-0 pr-0">
+                <span class="font-weight-bold ">Notes</span>
+              </div>
+              <div class="col-8  px-0">
+                <textarea class="form-control form-control-sm" rows="2" [(ngModel)]='data_currentuser.notes' name='notes'></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" [disabled]="!frmProfile.form.valid">
+              <i class="fa fa-save"></i>
+            </button>
+            <button class="btn btn-outline-secondary" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</nav>
+<div class="wrapper">
+  <div id="wrapper">
+    <ul class="nav nav-pills mb-3 table-primary-swm border" role="tablist">
+      <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
+        <a class="nav-link text-dark" data-toggle="tab" href="#{{tab.id}}" #tabElement>{{tab.title}}
+          <i class="fa fa-times text-danger" (click)="closeTab(tab)"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div *ngFor="let tab of tabs" class="tab-pane fade show" id="{{tab.id}}">
+        <ng-template dynamic-loader></ng-template>
+      </div>
+    </div>
+  </div>
+</div>

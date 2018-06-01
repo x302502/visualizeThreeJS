@@ -1,0 +1,143 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">Drop Id List</label>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item mr-2">
+        <button class="btn-white-swm px-4">Template</button>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tabDropId">
+      <div class="table-responsive fixed-tabletabInventory">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th class="align-bottom table-small">No</th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.storerkey'; this.loadDropIdData({}) ">
+                  STORERKEY
+                  <i *ngIf="this.propertyName_ff == 'dropid.storerkey' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'dropid.storerkey' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                  </span>
+                  <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup)="loadDropIdData({})" (keyup.back)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.receiptkey'; this.loadDropIdData({}) ">
+                  RECEIPTKEY
+                  <i *ngIf="this.propertyName_ff == 'dropid.receiptkey' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                  <i *ngIf="this.propertyName_ff == 'dropid.receiptkey' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                  </span>
+                  <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_receiptkey" (keyup)="loadDropIdData({})" (keyup.back)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.SKU '; this.loadDropIdData({}) ">
+                  ORDERKEY
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_orderkey" (keyup)="loadDropIdData({})" (keyup.back)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.SKU '; this.loadDropIdData({}) ">
+                  SKU
+                <i *ngIf="this.propertyName_ff == 'dropid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup)="loadDropIdData({})" (keyup.back)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.LPNID'; this.loadDropIdData({}) ">
+                LPNID
+                <i *ngIf="this.propertyName_ff == 'dropid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_lpnid" (keyup.enter)="loadDropIdData({})">
+              </th>
+              <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.unitid'; this.loadDropIdData({}) ">
+                UNITID
+                <i *ngIf="this.propertyName_ff == 'dropid.UNITID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.UNITID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+                <input type="text" class="form-control search-table  my-2"  [(ngModel)]="ff_unitid" (keyup.enter)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.cartonid'; this.loadDropIdData({}) ">
+                  CARTONID
+                 <i *ngIf="this.propertyName_ff == 'dropid.CARTONID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.CARTONID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_cartonid" (keyup)="loadDropIdData({})" (keyup.back)="loadDropIdData({})">
+              </th>
+              <th>PALLETID
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>QTY
+                <input type="text" class="form-control search-table  my-2">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.droptype'; this.loadDropIdData({}) ">
+                  DROPTYPE
+                <i *ngIf="this.propertyName_ff == 'dropid.DROPTYPE' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.DROPTYPE' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_droptype" (keyup.enter)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.commandtype'; this.loadDropIdData({}) ">
+                  COMMANDTYPE
+                <i *ngIf="this.propertyName_ff == 'dropid.COMMANDTYPE' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.COMMANDTYPE' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" (keyup.enter)="loadDropIdData({})">
+              </th>
+              <th>
+                <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'dropid.status'; this.loadDropIdData({}) ">
+                STATUS
+                <i *ngIf="this.propertyName_ff == 'dropid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'dropid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                </span>
+                <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadDropIdData({})" (keyup.enter)="loadDropIdData({})">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_dropId| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total } ; let i =index; " >
+              <td class="table-small">{{i+1}}</td>
+              <td>{{data.STORERKEY}}</td>
+              <td>{{data.RECEIPTKEY}}</td>
+              <td>{{data.ORDERKEY}}</td>
+              <td>{{data.SKU}}</td>
+              <td>{{data.LPNID}}</td>
+              <td>{{data.UNITID}}</td>
+              <td>{{data.CARTONID}}</td>
+              <td>{{data.PALLETID}}</td>
+              <td>{{data.QTY}}</td>
+              <td>{{data.DROPTYPE}}</td>
+              <td>{{data.COMMANDTYPE}}</td>
+              <td>{{data.STATUS}}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadDropIdData({})">
+          <optgroup>12</optgroup>
+          <optgroup>24</optgroup>
+          <optgroup>50</optgroup>
+          <optgroup>100</optgroup>
+          </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadDropIdData({})"></pagination-controls>
+    </div>
+  </div>
+</div>
+

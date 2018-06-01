@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 130 427.805 49.726">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #16759b;
+      }
+
+      .cls-2 {
+        fill: #f7f9fb;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-size: 19px;
+        font-family: Roboto-Regular, Roboto;
+      }
+    </style>
+  </defs>
+  <g id="share_team" data-name="share team" transform="translate(16 130)">
+    <rect id="rec" class="cls-1" width="427.805" height="49.726" transform="translate(0)"/>
+    <path id="share_icon" data-name="share icon" class="cls-2" d="M23.729,9.436a.656.656,0,0,0-.694.694V28.448H1.388V6.8H19.705a.656.656,0,0,0,.694-.694.656.656,0,0,0-.694-.694H.694A.656.656,0,0,0,0,6.106V29.141a.656.656,0,0,0,.694.694H23.729a.656.656,0,0,0,.694-.694V10.13A.743.743,0,0,0,23.729,9.436ZM29.141,0h-6.8a.656.656,0,0,0-.694.694.656.656,0,0,0,.694.694h5.134L8.326,20.538a.51.51,0,0,0-.139.416.656.656,0,0,0,.694.694,1.4,1.4,0,0,0,.416-.139l19.15-19.15V7.494a.694.694,0,0,0,1.388,0V.694A.656.656,0,0,0,29.141,0Z" transform="translate(373.77 9.945)"/>
+    <text id="Share_Team_Page" data-name="Share Team Page" class="cls-3" transform="translate(24.034 31.26)"><tspan x="0" y="0">Share Team Page</tspan></text>
+  </g>
+</svg>

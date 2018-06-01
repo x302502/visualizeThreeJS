@@ -1,0 +1,314 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      
+      <li class="nav-item" >
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frrmAllocate.form.valid" (click)="this.saveAllocateData(entity)">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frrmAllocate="ngForm" autocomplete="false" class="row mt-3 container-fluid">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-2 col-xl-2 font-weight-bold text-primary-swm col-form-label-sm">Code <span class="form-important">*</span></label>
+        <div class="col-md-8 col-lg-10 col-xl-10">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.allocatestrategykey' name='allocatestrategykey' required [readonly]="this.entity.id !== undefined"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12  col-md-6  col-lg-6 col-xl-6 px-4">
+      <div class="form-group row ">
+        <label for="colFormLabelSm" class=" pr-0 col-md-4 col-lg-3 col-xl-3 font-weight-bold text-primary-swm col-form-label-sm pl-2">Description <span class="form-important">*</span></label>
+        <div class="col-md-8 col-lg-9 col-xl-9">
+          <input type="text" class="form-control form-control-sm" [(ngModel)]='entity.descr' name='descr' />
+        </div>
+      </div>
+    </div>
+  </form>
+  <div id="wrapTableAndAction" *ngIf="entity.id">
+    <div class="table-responsive fixed-tabledetail" id="tbldetail">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th rowspan="2" class="align-bottom table-small">
+              <button type="button" class="trash ml-2 d-inline-block btn-trash cursor-pointer" (click)="this.addNewRow()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'allocatestrategylinenumber'; this.loadAllocateDetailData({}) ">
+                Allocate Linenumber
+                <i *ngIf="this.propertyName_detail == 'allocatestrategylinenumber' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'allocatestrategylinenumber' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_allocatestrategylinenumber" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'uom'; this.loadAllocateDetailData({}) ">
+                UOM
+                <i *ngIf="this.propertyName_detail == 'uom' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'uom' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_uom" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'zonepcs'; this.loadPutawayDetailData({}) ">
+                ZonePCS
+                <i *ngIf="this.propertyName_detail == 'zonepcs' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'zonepcs' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_zonepcs" (keyup.enter)="this.loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'pickcode'; this.loadAllocateDetailData({}) ">
+                Pick Code
+                <i *ngIf="this.propertyName_detail == 'pickcode' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'pickcode' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1 " [(ngModel)]="fd_pickcode" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'locationtypeoverride'; this.loadAllocateDetailData({}) ">
+                Location Type Override by
+                <i *ngIf="this.propertyName_detail == 'locationtypeoverride' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'locationtypeoverride' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_locationtypeoverride" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'locationtypeoverridestripe'; this.loadAllocateDetailData({}) ">
+                Location Type OverDestripe
+                <i *ngIf="this.propertyName_detail == 'locationtypeoverridestripe' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'locationtypeoverridestripe' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_locationtypeoverridestripe" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'allowoverallocations'; this.loadAllocateDetailData({}) ">
+                Allow Overal Locations
+                <i *ngIf="this.propertyName_detail == 'allowoverallocations' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'allowoverallocations' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <select class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_allowoverallocations" (change)="this.fd_allowoverallocations = $event.target.value; this.loadAllocateDetailData({})">
+                <option value=""> All</option>
+                <option value="0"> InActive</option>
+                <option value="1"> Active</option>
+              </select>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'pickcodesql'; this.loadAllocateDetailData({}) ">
+                Pickcode SQL
+                <i *ngIf="this.propertyName_detail == 'pickcodesql' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'pickcodesql' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_pickcodesql" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'stepnumber'; this.loadAllocateDetailData({}) ">
+                Step Number
+                <i *ngIf="this.propertyName_detail == 'stepnumber' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'stepnumber' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_stepnumber" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'groupuompicks'; this.loadAllocateDetailData({}) ">
+                Group UOM Picks
+                <i *ngIf="this.propertyName_detail == 'groupuompicks' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'groupuompicks' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <select class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_groupuompicks" (change)="this.fd_groupuompicks = $event.target.value; this.loadAllocateDetailData({})">
+                <option value=""> All</option>
+                <option value="0"> InActive</option>
+                <option value="1"> Active</option>
+              </select>
+            </th>
+            <th rowspan="2">
+              <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'descr'; this.loadAllocateDetailData({}) ">
+                Description
+                <i *ngIf="this.propertyName_detail == 'descr' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_detail == 'descr' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table form-control-sm my-1" [(ngModel)]="fd_descr" (keyup.enter)="loadAllocateDetailData({})">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngIf="data_temp">
+            <td>
+              <button type="button" class="trash ml-2 d-inline-block btn-trash py-0  cursor-pointer" (click)="this.saveRow(data_temp)">
+                <i class="fa fa-save text-success" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-link" (click)="this.data_temp = null;">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="allocatestrategylinenumber" [(ngModel)]="data_temp.allocatestrategylinenumber" readonly />
+            </td>
+            <td>
+              <select class="form-control form-control-sm" name="uom" [(ngModel)]="data_temp.uom">
+                <option *ngFor="let uom of data_uom" [ngValue]="uom.code">{{uom.description}}</option>
+              </select>
+            </td>
+            <td>
+              <div class="input-group stylish-input-group">
+                  <input type="text" class="form-control form-control-sm" name="zonepcs" [(ngModel)]="data_temp.zonepcs"
+                    (keyup.enter)="this.openModalZone(-1)">
+                  <span class="input-group-addon icon-search" (click)="this.openModalZone(-1)"></span>
+              </div>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="pickcode" [(ngModel)]="data_temp.pickcode" />
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="locationtypeoverride" [(ngModel)]="data_temp.locationtypeoverride" />
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="locationtypeoverridestripe" [(ngModel)]="data_temp.locationtypeoverridestripe" />
+            </td>
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="allowoverallocations" [(ngModel)]="data_temp.allowoverallocations" >
+                <span class="custom-control-label"></span>
+              </label>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="pickcodesql" [(ngModel)]="data_temp.pickcodesql" />
+            </td>
+            <td>
+              <input type="number" class="form-control form-control-sm" name="stepnumber" [(ngModel)]="data_temp.stepnumber" />
+            </td >
+            <td>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="groupuompicks" [(ngModel)]="data_temp.groupuompicks" >
+                <span class="custom-control-label"></span>
+              </label>
+            </td>
+            <td>
+              <input type="text" class="form-control form-control-sm" name="descr" [(ngModel)]="data_temp.descr" />
+            </td>
+          </tr>
+          <tr *ngFor="let data of data_allocatedetail  | paginate: { id: 'id_allocatedetail', itemsPerPage: this.itemsPerPage_allocatedetail, currentPage: this.currentPage_allocatedetail, totalItems: this.total_allocatedetail }; let i = index;" >
+            <td class="align-bottom table-small">
+              <a *ngIf="!data.isEdit" data-toggle="modal" href="#{{id.modalDelete}}" #modalDelete (click)="this.selected_allocatedetail = data;">
+                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+              </a>
+              <button type="button" class="trash ml-2 d-inline-block btn-trash py-0  cursor-pointer" *ngIf="data.isEdit" (click)="this.saveRow(data)">
+                <i class="fa fa-save text-success" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="d-inline-block btn btn-xs btn-link" (click)="data.isEdit = !data.isEdit">
+                <i *ngIf="!data.isEdit" class="fa fa-pencil"></i>
+                <i  *ngIf="data.isEdit" class="fa fa-times"></i>
+              </button>
+            </td>
+            <td class="align-middle">
+              {{data.allocatestrategylinenumber}}
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.uom:null}}
+              <select *ngIf="data.isEdit" class="form-control form-control-sm" name="uom[{{i}}]" [(ngModel)]="data.uom" [disabled]="!data.isEdit " >
+                <option *ngFor="let uom of data_uom" [ngValue]="uom.code">{{uom.description}}</option>
+              </select>
+            </td>
+            <td>
+              {{!data.isEdit?data.zonepcs:null}}
+              <div *ngIf="data.isEdit" class="input-group stylish-input-group">
+                  <input type="text" class="form-control" name="zonepcs[{{i}}]" [(ngModel)]="data.zonepcs"
+                    (keyup.enter)="this.openModalZone(1, i)">
+                  <span class="input-group-addon icon-search" (click)="this.openModalZone(1, i)"></span>
+              </div>
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.pickcode:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="pickcode[{{i}}]" [(ngModel)]="data.pickcode" />
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.locationtypeoverride:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="locationtypeoverride[{{i}}]" [(ngModel)]="data.locationtypeoverride" />
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.locationtypeoverridestripe:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="locationtypeoverridestripe[{{i}}]" [(ngModel)]="data.locationtypeoverridestripe" />
+            </td>
+            <td class="align-middle">
+              <span class="btn btn-sm btn-success" *ngIf="data.allowoverallocations && !data.isEdit">Active</span>
+              <span class="btn btn-sm btn-danger" *ngIf="!data.allowoverallocations && !data.isEdit">InActive</span>
+              <label class="custom-control custom-checkbox" *ngIf="data.isEdit">
+                <input type="checkbox" class="custom-control-input" name="allowoverallocations[{{i}}]" [(ngModel)]="data.allowoverallocations" >
+                <span class="custom-control-label"></span>
+              </label>
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.pickcodesql:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="pickcodesql[{{i}}]" [(ngModel)]="data.pickcodesql" />
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.stepnumber:null}}
+              <input *ngIf="data.isEdit" type="number" class="form-control form-control-sm" name="stepnumber[{{i}}]" [(ngModel)]="data.stepnumber" />
+            </td>
+            <td class="align-middle">
+              <span class="btn btn-sm btn-success" *ngIf="data.groupuompicks && !data.isEdit">Active</span>
+              <span class="btn btn-sm btn-danger" *ngIf="!data.groupuompicks && !data.isEdit">InActive</span>
+              <label class="custom-control custom-checkbox" *ngIf="data.isEdit">
+                <input type="checkbox" class="custom-control-input" name="groupuompicks[{{i}}]" [(ngModel)]="data.groupuompicks" >
+                <span class="custom-control-label"></span>
+              </label>
+            </td>
+            <td class="align-middle">
+              {{!data.isEdit?data.descr:null}}
+              <input *ngIf="data.isEdit" type="text" class="form-control form-control-sm" name="descr[{{i}}]" [(ngModel)]="data.descr" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage_allocatedetail" [(ngModel)]="this.itemsPerPage_allocatedetail" (change)="this.itemsPerPage_allocatedetail = $event.target.value; this.loadAllocateDetailData({})">
+          <option *ngFor="let data of this.appServices.account.paginate" [value]="data.short">{{data.short}}</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_allocatedetail" (pageChange)="this.currentPage_allocatedetail = $event; this.loadAllocateDetailData({})"></pagination-controls>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="{{id.modalDelete}}" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger">Delete Allocate Detail</h5>
+        </div>
+        <div class="modal-body">
+          <p>Do you want to delete this Alocate Detail?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" (click)="deleteRow()"><i class="fa fa-thumbs-o-up"></i></button>
+          <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal"><i class="fa fa-thumbs-o-down"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- <div class="modal fade" id="modalDelete" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger">Delete Allocate Detail</h5>
+        </div>
+        <div class="modal-body">
+          <p>Do you want to delete these Alocate Detail?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" (click)="deleteAllocateDetailData()"><i class="fa fa-thumbs-o-up"></i></button>
+          <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal"><i class="fa fa-thumbs-o-down"></i></button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <app-popup-zone #modalZone (onSelect)="selectZone($event)"></app-popup-zone>
+
+</section>

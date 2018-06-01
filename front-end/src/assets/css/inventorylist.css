@@ -1,0 +1,45 @@
+#list .v-scroll.table-list {
+	height: calc(100vh - 355px);
+}
+
+#log .v-scroll,
+#storage .v-scroll,
+#billing .v-scroll {
+	height: calc(100vh - 355px);
+}
+
+/*/RESPONSIVE IPAD*/
+
+@media screen and (max-width: 1024px) {
+	#log .v-scroll {
+		height: calc(100vh - 377px) !important;
+	}
+	#list .v-scroll.table-list,
+	#storage .v-scroll,
+	#billing .v-scroll {
+		height: calc(100vh - 377px) !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#log .v-scroll {
+		height: calc(100vh - 350px) !important;
+	}
+	#list .v-scroll.table-list,
+	#storage .v-scroll,
+	#billing .v-scroll {
+		height: calc(100vh - 350px) !important;
+	}
+}
+
+/*/RESPONSIVE MOIBLE*/
+
+@media screen and (max-width: 504px) {
+	#list .v-scroll.table-list {
+		height: calc(100vh - 356px) !important;
+	}
+
+	#log .v-scroll {
+		height: calc(100vh - 372px) !important;
+	}
+}

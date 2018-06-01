@@ -1,0 +1,312 @@
+<custom-modal id="{{modalId}}">
+  <div class="custom-modal">
+    <div class="custom-modal-body">
+      <h2 class="text-center">Appointment Information</h2>
+      <div class="row my-3">
+        <div class="col-md-2">
+          
+        </div>
+        <div class="col-md-2">
+          <span for="">Appointment Date</span>
+          <p>
+            <b>{{date | date : 'dd-MM-yyyy HH:mm' }}</b>
+          </p>
+        </div>
+        <div class="col-md-2">
+          <span for="">Appointment Duration (hr)</span>
+          <select class="form-control" [(ngModel)]="dataPopup.docklimit" name="docklimit">
+            <option [ngValue]="undefined" disabled selected>Select time</option>
+            <option value="30">0:30</option>
+            <option value="60">1:00</option>
+            <option value="90">1:30</option>
+            <option value="120">2:00</option>
+            <option value="150">2:30</option>
+          </select>
+        </div>
+        <div class="col-md-2 ">
+          <span for="">Type of Shipment</span>
+          <select name="typeOfShipment" [(ngModel)]="dataPopup.typeOfShipment" class="form-control">
+            <option [ngValue]="undefined" disabled selected>Select type</option>
+            <option value="inBound">Inbound</option>
+            <option value="outBound">Outbound</option>
+          </select>
+        </div>
+        <div *ngIf="dataPopup.typeOfShipment =='inBound'" class="col-md-2">
+          <span for="">Pucharse Order </span>
+          <ng2-completer inputClass="form-control " inputName="receiptkey" [(ngModel)]="dataPopup.receiptkey" [datasource]="data_receiptkey"
+            [ngModelOptions]="{standalone: true}" (change)="findElementReceipt()" [placeholder]="'Select Receiptkey'">
+          </ng2-completer>
+
+        </div>
+        <div *ngIf="dataPopup.typeOfShipment =='outBound'" class="col-md-2">
+          <span for="">Delivery Order </span>
+          <ng2-completer inputClass="form-control " inputName="orderkey" [(ngModel)]="dataPopup.orderkey" [datasource]="data_orderkey"  [ngModelOptions]="{standalone: true}"
+          (change)="findElementOrder()"  [placeholder]="'Select orderkey'">
+                </ng2-completer>
+        </div>
+
+      </div>
+      <!-- <div class="row my-3">
+        <div class="col-md-3">
+          <span>Supplier</span>
+          <input class="form-control" [(ngModel)]="dataPopup.supplier" type="text">
+        </div>
+        <div class="col-md-3">
+          <span>BOL</span>
+          <input class="form-control" [(ngModel)]="dataPopup.bol" type="text">
+        </div>
+        <div class="col-md-3">
+          <span>Truck Number</span>
+          <input class="form-control" [(ngModel)]="dataPopup.truckno" type="text">
+        </div>
+        <div class="col-md-3">
+          <span>Driver Name</span>
+          <input class="form-control" [(ngModel)]="dataPopup.drivername" type="text">
+        </div>
+      </div> -->
+
+      <div class="row my-3">
+        <!-- table data_purchase -->
+        <table *ngIf = "data_purchase.length > 0" class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>STORERKEY
+              </th>
+              <th>P/O
+
+              </th>
+              <th>DURATION
+
+              </th>
+              <th>BEGINTIME
+
+              </th>
+              <th>ENDTIME
+
+              </th>
+              <th>SUPPLIER
+
+              </th>
+              <th>BOL
+
+              </th>
+              <th>TRUCK NUMBER
+
+              </th>
+              <th>DRIVER NAME
+
+              </th>
+              <th>OPTION
+
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary-swm" *ngFor="let data of data_purchase;let i =index;">
+              <td>
+                {{i+1}}
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.storerkey" type="text" name="storerkey[{{data.sort}}]" readonly>
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.receiptkey" type="text" name="receiptkeylist[{{data.sort}}]" readonly>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="data.docklimit" value="{{data.docklimit}}" name="docklimit">
+                  <!-- <option [ngValue]="undefined" disabled selected>Select time</option> -->
+                  <option value="30">0:30</option>
+                  <option value="60">1:00</option>
+                  <option value="90">1:30</option>
+                  <option value="120">2:00</option>
+                  <option value="150">2:30</option>
+                </select>
+              </td>
+              <td>
+                <b> {{data.begintime| date : 'dd-MM-yyyy HH:mm'}}</b>
+              </td>
+              <td>
+                <b>{{data.endtime | date : 'dd-MM-yyyy HH:mm'}}</b>
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.supplier" type="text" name="supplier[{{data.sort}}]">
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.bol" type="text" name="bol[{{data.sort}}]">
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.truckno" type="text" name="truckno[{{data.sort}}]">
+              </td>
+              <td>
+                <input class="form-control" [(ngModel)]="data.drivername" type="text" name="drivername[{{data.sort}}]">
+              </td>
+              <td>
+                <button class="form-control" name="deletedata[{{data.sort}}]" (click)="deleteListPurchase(data)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- table data_shipment -->
+        <table *ngIf = "data_shipment.length > 0" class="table table-sm table-hover">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>STORERKEY
+                </th>
+                <th>D/O
+  
+                </th>
+                <th>DURATION
+  
+                </th>
+                <th>BEGINTIME
+  
+                </th>
+                <th>ENDTIME
+  
+                </th>
+                <th>CUSTOMER
+  
+                </th>
+                <th>SHIP TO
+  
+                </th>
+                <th>VOYAGECODE
+  
+                </th>
+                <!-- <th>BOL
+  
+                </th> -->
+                <th>TRUCK NUMBER
+  
+                </th>
+                <th>DRIVER NAME
+  
+                </th>
+                <th>OPTION
+  
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-primary-swm" *ngFor="let data of data_shipment;let i =index;">
+                <td>
+                  {{i+1}}
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.storerkey" type="text" name="storerkey[{{data.sort}}]" readonly>
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.orderkey" type="text" name="orderkeylist[{{data.sort}}]" readonly>
+                </td>
+                <td>
+                  <select class="form-control" [(ngModel)]="data.docklimit" value="{{data.docklimit}}" name="docklimit">
+                    <!-- <option [ngValue]="undefined" disabled selected>Select time</option> -->
+                    <option value="30">0:30</option>
+                    <option value="60">1:00</option>
+                    <option value="90">1:30</option>
+                    <option value="120">2:00</option>
+                    <option value="150">2:30</option>
+                  </select>
+                </td>
+                <td>
+                  <b> {{data.begintime| date : 'dd-MM-yyyy HH:mm'}}</b>
+                </td>
+                <td>
+                  <b>{{data.endtime | date : 'dd-MM-yyyy HH:mm'}}</b>
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.customer" type="text" name="customer[{{data.sort}}]">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.shipTo" type="text" name="shipTo[{{data.sort}}]">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.voyagecode" type="text" name="voyagecode[{{data.sort}}]">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.truckno" type="text" name="truckno[{{data.sort}}]">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="data.drivername" type="text" name="drivername[{{data.sort}}]">
+                </td>
+                <td>
+                  <button class="form-control" name="deletedata[{{data.sort}}]" (click)="deleteListShipment(data)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+        <div class="row my-3">
+          <div class="col-md-1"></div>
+          <div class="col-md-2 ">
+            <span>Item SKU</span>
+            <input class="form-control" type="text" [(ngModel)]="data_init.itemsku">
+          </div>
+          <div class="col-md-2">
+            <span>Quantity</span>
+            <input class="form-control" [(ngModel)]="data_init.qty" type="number">
+          </div>
+          <div class="col-md-2">
+            <span>Netweight</span>
+            <input class="form-control" [(ngModel)]="data_init.netweight" type="number">
+          </div>
+          <div class="col-md-2">
+            <span>Grossweight</span>
+            <input class="form-control" [(ngModel)]="data_init.grossweight" type="number">
+          </div>
+          <div class="col-md-2">
+            <span>Cube</span>
+            <input class="form-control" [(ngModel)]="data_init.cube" type="number">
+          </div>
+          <div class="col-md-1 mt-3">
+            <button class="btn btn-default" (click)="addItem()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let data of data_itemAdded">
+          <div class="col-md-2">
+            <span>Item SKU</span>
+            <input class="form-control" readonly value="{{data.itemsku}}">
+          </div>
+          <div class="col-md-2">
+            <span>Quantity</span>
+            <input class="form-control" readonly value="{{data.qty}}">
+          </div>
+          <div class="col-md-2">
+            <span>Netweight</span>
+            <input class="form-control" readonly value="{{data.netweight}}">
+          </div>
+          <div class="col-md-2">
+            <span>Grossweight</span>
+            <input class="form-control" readonly value="{{data.grossweight}}">
+          </div>
+          <div class="col-md-2">
+            <span>Cube</span>
+            <input class="form-control" readonly value="{{data.cube}}">
+          </div>
+          <div class="col-md-2 mt-3">
+            <button class="btn btn-default" (click)="deleteItem(data.sort)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      
+      <div class="clearfix text-right">
+        <button class="btn btn-primary" (click)="saveToDock()">
+          <i class="fa fa-save"></i>
+        </button>
+        <button class="btn btn-secondary btn-sm" (click)="close()">
+            <i class="fa fa-times"></i> Cancel</button>
+      </div>
+
+    </div>
+  </div>
+  <div class="custom-modal-background"></div>
+</custom-modal>

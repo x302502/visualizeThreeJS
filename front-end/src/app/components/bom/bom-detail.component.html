@@ -1,0 +1,69 @@
+<section *ngIf="entity">
+  <div class="navbar">
+    <div></div>
+    <ul class="nav justify-content-end my-1">
+      <li class="nav-item">
+        <button class="btn-primary-swm px-5 text-white border-0 mx-3" [disabled]="!frm.form.valid" (click)="save()">Save</button>
+      </li>
+    </ul>
+  </div>
+  <form #frm="ngForm" class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Owner</span>
+        </div>
+        <div class="col-8 px-0">
+          <select [(ngModel)]="entity.storerkey" name="storerkey" class="form-control" [disabled]="entity.addwho" required>
+            <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.company}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Product</span>
+        </div>
+        <div class="col-8  px-0">
+          <ng2-completer disableInput="{{entity.addwho?true:false}}" inputClass="form-control form-control-sm" inputName="sku" name="sku" [(ngModel)]="entity.sku"
+            [datasource]="data_sku" [minSearchLength]="0" openOnClick="true" selectOnClick="true" autoMatch="true"></ng2-completer>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Material</span>
+        </div>
+        <div class="col-8 px-0">
+          <ng2-completer disableInput="{{entity.addwho?true:false}}" inputClass="form-control" inputName="componentsku" [(ngModel)]="entity.componentsku"
+            name="componentsku" inputId="componentsku" [datasource]="data_componentsku" [minSearchLength]="0" openOnClick="true"
+            selectOnClick="true" autoMatch="true"></ng2-completer>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 px-4">
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Quantity</span>
+        </div>
+        <div class="col-8 px-0">
+          <input type="number" class="form-control" name="qty" [(ngModel)]="entity.qty" required />
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Sequence</span>
+        </div>
+        <div class="col-8  px-0">
+          <input type="number" class="form-control" name="sequence" [(ngModel)]="entity.sequence" required />
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 mr-0 pr-0">
+          <span class="font-weight-bold ">Notes</span>
+        </div>
+        <div class="col-8 px-0">
+          <textarea class="form-control" rows="2" [(ngModel)]='entity.notes' name='notes'></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

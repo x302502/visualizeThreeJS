@@ -1,0 +1,195 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <a class="text-primary-swm font-weight-bold">CHARGE</a>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+      <div class=" mr-2">
+        <a class=" btn-white-swm px-4" data-toggle="modal" data-target="#ModalCreateNewChargeList"> New Charge</a>
+      </div>
+    </div>
+  </div>
+  <!-- Modal to Create New charge -->
+  <div class="modal fade" id="ModalCreateNewChargeList" tabindex="-1">
+    <form #frmEdit="ngForm" (ngSubmit)="newChargeData(frmEdit.value)">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">CREATE NEW CHARGE DATA </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">CHARGE CODE</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='chargecode'>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">CHARGE NAME</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='chargename'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">CHARGE NAME ERP</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='chargenameerp'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">CHARGE TYPE CODE</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='chargetypecode'>
+                  </div>
+                </div>
+                <div class="form-group row mt-1">
+                  <span class="col-4 font-weight-bold ">NOTE</span>
+                  <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" ngModel name='notes'>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary custom-close" [disabled]="!frmEdit.form.valid">
+              <i class="fa fa-save"></i>
+            </button>
+            <button class="btn btn-secondary" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Table charge data -->
+  <div class="tab-content">
+    <div class="table-responsive fixed-tablenotab ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>ACTION
+            </th>
+            <th>CHARGE CODE
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>CHARGE NAME
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>CHARGE NAME ERP
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>CHARGE TYPE CODE
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+            <th>NOTE
+              <input type="text" class="form-control search-table  my-2">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary-swm" *ngFor="let data of data_charge| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+            <td>
+              {{i+1}}
+            </td>
+            <td>
+              <div>
+                <!-- Show Make new Detai,Edit and Delete button -->
+                <div *ngIf="i !== editRow; else none">
+                  <!-- <button type="button" class="btn btn-default" id="edit" (click)="Edit(i)"> -->
+                  <i class="fa fa-pencil" aria-hidden="true" id="edit" (click)="Edit(i)"></i>
+                  <!-- </button> -->
+                  <!-- <button type="button" id="delete" href='#modalDelete' data-toggle="modal" class="btn btn-danger"> -->
+                  <i class="fa fa-trash-o ml-2" aria-hidden="true" id="delete" href='#modalDelete' data-toggle="modal"></i>
+                  <!-- </button> -->
+                  <!-- Modal Delete  -->
+                  <div class="modal fade" id="modalDelete" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-danger">Delete Charge records</h5>
+                        </div>
+                        <div class="modal-body">
+                          <p>Do you want to delete these records?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-danger" (click)="DeleteChargeData(data)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                          </button>
+                          <button class="btn btn-outline-secondary" data-dismiss="modal">
+                            <i class="fa fa-thumbs-o-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #none>
+                  <!-- <button type="button" id="save" class="btn btn-primary" (click)="UpdateChargeRow(data);BacktoEdit(i)"> -->
+                  <i class="fa fa-check" aria-hidden="true" (click)="UpdateChargeRow(data);BacktoEdit(i)"></i>
+                  <!-- </button> -->
+                  <!-- <button type="button" id="cancel" class="btn btn-default" (click)="BacktoEdit(i)"> -->
+                  <i class="fa fa-times ml-2" aria-hidden="true" (click)="BacktoEdit(i)"></i>
+                  <!-- </button> -->
+                </ng-template>
+              </div>
+            </td>
+
+            <td>
+              {{data.chargecode}}
+            </td>
+            <td *ngIf="( i ) === editRow">
+              <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.chargename" name="chargename">
+            </td>
+            <td *ngIf="( i ) !== editRow">
+              {{data.chargename}}
+            </td>
+            <td *ngIf="( i ) === editRow">
+              <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.chargenameerp" name="chargenameerp">
+            </td>
+            <td *ngIf="( i ) !== editRow">
+              {{data.chargenameerp}}
+            </td>
+            <td *ngIf="( i ) === editRow">
+              <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.chargetypecode" name="chargetypecode">
+            </td>
+            <td *ngIf="( i ) !== editRow">
+              {{data.chargetypecode}}
+            </td>
+            <td *ngIf="( i ) === editRow">
+              <input type="text" id="edit-col" class="form-control" [(ngModel)]="data.notes" name="notes">
+            </td>
+            <td *ngIf="( i ) !== editRow">
+              {{data.notes}}
+            </td>
+
+          </tr>
+          <tr id="pagination"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadChargeData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event; this.loadChargeData({})"></pagination-controls>
+    </div>
+  </div>
+  <!-- Modal Edit -->
+</div>

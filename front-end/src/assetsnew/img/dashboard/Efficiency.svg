@@ -1,0 +1,197 @@
+<svg id="Group_135" data-name="Group 135" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="686.582 198.588 672.72 328.785">
+  <defs>
+    <style>
+      .cls-1, .cls-15, .cls-18, .cls-22, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-12, .cls-17, .cls-2, .cls-21, .cls-4, .cls-5, .cls-6 {
+        fill: #576271;
+      }
+
+      .cls-2 {
+        font-size: 19px;
+      }
+
+      .cls-12, .cls-15, .cls-2, .cls-21, .cls-4 {
+        font-family: Roboto-Regular, Roboto;
+      }
+
+      .cls-13, .cls-24, .cls-3 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #e0e3da;
+      }
+
+      .cls-19, .cls-4, .cls-5 {
+        font-size: 10px;
+      }
+
+      .cls-5 {
+        font-family: Roboto-LightItalic, Roboto;
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      .cls-21, .cls-6 {
+        font-size: 14px;
+      }
+
+      .cls-6 {
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+
+      .cls-7 {
+        fill: #003277;
+      }
+
+      .cls-12, .cls-20, .cls-8 {
+        font-size: 9px;
+      }
+
+      .cls-19, .cls-20, .cls-8 {
+        font-family: Roboto-Bold, Roboto;
+        font-weight: 700;
+      }
+
+      .cls-8 {
+        letter-spacing: 0.05em;
+      }
+
+      .cls-9 {
+        fill: #eaeaea;
+      }
+
+      .cls-10 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-11 {
+        opacity: 0.5;
+      }
+
+      .cls-11, .cls-16 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-13 {
+        stroke: #f7f9fb;
+      }
+
+      .cls-14, .cls-19, .cls-20 {
+        fill: #16759b;
+      }
+
+      .cls-15 {
+        font-size: 6px;
+      }
+
+      .cls-18 {
+        stroke: #95989a;
+      }
+
+      .cls-22 {
+        stroke: #fff;
+        stroke-width: 2px;
+      }
+
+      .cls-23 {
+        stroke: none;
+      }
+
+      .cls-25 {
+        filter: url(#Path_2);
+      }
+
+      .cls-26 {
+        filter: url(#Rectangle_4);
+      }
+    </style>
+    <filter id="Rectangle_4" x="686.583" y="198.588" width="672.72" height="328.785" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#fafafa"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_2" x="686.582" y="272.671" width="672.72" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.043" y1="0.5" x2="0.928" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#109bf8"/>
+      <stop offset="1" stop-color="#e211f4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.044" y1="0.5" x2="0.971" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#109bf8"/>
+      <stop offset="1" stop-color="#003277"/>
+    </linearGradient>
+  </defs>
+  <g class="cls-26" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <rect id="Rectangle_4-2" data-name="Rectangle 4" class="cls-1" width="654.72" height="310.785" transform="translate(695.58 204.59)"/>
+  </g>
+  <text id="Efficiency" class="cls-2" transform="translate(720.446 244.136)"><tspan x="0" y="0">Efficiency</tspan></text>
+  <g class="cls-25" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <path id="Path_2-2" data-name="Path 2" class="cls-3" d="M3090-1500.007h654.72" transform="translate(-2394.42 1779.18)"/>
+  </g>
+  <text id="Global_systems_hardware" data-name="Global systems hardware" class="cls-4" transform="translate(720.446 340.388)"><tspan x="0" y="0">Global systems hardware</tspan></text>
+  <text id="_5_than_last_month" data-name="+5% than last month" class="cls-5" transform="translate(911.889 340.388)"><tspan x="0" y="0">+5% than last month</tspan></text>
+  <text id="Systems" class="cls-6" transform="translate(720.446 322.841)"><tspan x="0" y="0">Systems</tspan></text>
+  <rect id="Rectangle_5" data-name="Rectangle 5" class="cls-7" width="20.719" height="14.918" rx="7.459" transform="translate(786.746 312.327)"/>
+  <text id="_90" data-name="90" class="cls-8" transform="translate(796.719 321.985)"><tspan x="-5.389" y="0">90</tspan></text>
+  <rect id="Rectangle_6" data-name="Rectangle 6" class="cls-9" width="288.408" height="14.918" rx="7.459" transform="translate(901.944 312.327)"/>
+  <rect id="Rectangle_7" data-name="Rectangle 7" class="cls-10" width="83.52" height="23.386" transform="translate(1241.735 318.128)"/>
+  <rect id="Rectangle_8" data-name="Rectangle 8" class="cls-11" width="243.747" height="11.603" rx="5.801" transform="translate(903.601 313.985)"/>
+  <rect id="Rectangle_9" data-name="Rectangle 9" class="cls-1" width="80.179" height="20.045" transform="translate(1243.405 319.799)"/>
+  <text id="INSPECT" class="cls-12" transform="translate(1263.45 332.253)"><tspan x="0" y="0">INSPECT</tspan></text>
+  <path id="Path_3" data-name="Path 3" class="cls-13" d="M1067-3357.152l604.85.136" transform="translate(-346.554 3722.394)"/>
+  <text id="Successful_delivery_of_product" data-name="Successful delivery of product" class="cls-4" transform="translate(720.446 413.319)"><tspan x="0" y="0">Successful delivery of product</tspan></text>
+  <text id="_-9_than_last_month" data-name="-9% than last month" class="cls-5" transform="translate(911.889 413.319)"><tspan x="0" y="0">-9% than last month</tspan></text>
+  <text id="Delivery" class="cls-6" transform="translate(720.446 395.772)"><tspan x="0" y="0">Delivery</tspan></text>
+  <rect id="Rectangle_10" data-name="Rectangle 10" class="cls-7" width="20.719" height="14.918" rx="7.459" transform="translate(782.603 385.258)"/>
+  <text id="_11" data-name="11" class="cls-8" transform="translate(792.575 394.915)"><tspan x="-5.389" y="0">11</tspan></text>
+  <rect id="Rectangle_11" data-name="Rectangle 11" class="cls-9" width="288.408" height="14.918" rx="7.459" transform="translate(901.944 385.258)"/>
+  <rect id="Rectangle_12" data-name="Rectangle 12" class="cls-10" width="83.52" height="23.386" transform="translate(1241.735 391.059)"/>
+  <path id="Union_1" data-name="Union 1" class="cls-14" d="M2.1,17.4H0V0H79.56V17.4h-64.9L8.377,23.683Z" transform="translate(1025.429 360.395)"/>
+  <rect id="Rectangle_15" data-name="Rectangle 15" class="cls-1" width="80.179" height="20.045" transform="translate(1243.405 392.73)"/>
+  <text id="INSPECT-2" data-name="INSPECT" class="cls-12" transform="translate(1263.45 405.184)"><tspan x="0" y="0">INSPECT</tspan></text>
+  <path id="Path_4" data-name="Path 4" class="cls-13" d="M1067-3357.152l604.85.136" transform="translate(-346.554 3795.324)"/>
+  <text id="QUESTIONABLE" class="cls-15" transform="translate(1035.374 370.539)"><tspan x="0" y="0">QUESTIONABLE</tspan></text>
+  <text id="Conversion_of_site_visitors" data-name="Conversion of site visitors" class="cls-4" transform="translate(720.446 486.25)"><tspan x="0" y="0">Conversion of site visitors</tspan></text>
+  <text id="_14_than_last_month" data-name="+14% than last month" class="cls-5" transform="translate(911.889 486.25)"><tspan x="0" y="0">+14% than last month</tspan></text>
+  <text id="Web_Traffic" data-name="Web Traffic" class="cls-6" transform="translate(720.446 468.702)"><tspan x="0" y="0">Web Traffic</tspan></text>
+  <rect id="Rectangle_16" data-name="Rectangle 16" class="cls-7" width="20.719" height="14.918" rx="7.459" transform="translate(804.979 458.189)"/>
+  <text id="_71" data-name="71" class="cls-8" transform="translate(814.952 467.846)"><tspan x="-5.389" y="0">71</tspan></text>
+  <rect id="Rectangle_17" data-name="Rectangle 17" class="cls-9" width="288.408" height="14.918" rx="7.459" transform="translate(901.944 458.189)"/>
+  <rect id="Rectangle_18" data-name="Rectangle 18" class="cls-11" width="255.35" height="11.603" rx="5.801" transform="translate(903.601 459.846)"/>
+  <rect id="Rectangle_19" data-name="Rectangle 19" class="cls-10" width="83.52" height="23.386" transform="translate(1241.735 463.99)"/>
+  <rect id="Rectangle_20" data-name="Rectangle 20" class="cls-1" width="80.179" height="20.045" transform="translate(1243.405 465.66)"/>
+  <text id="INSPECT-3" data-name="INSPECT" class="cls-12" transform="translate(1263.45 478.115)"><tspan x="0" y="0">INSPECT</tspan></text>
+  <rect id="Rectangle_21" data-name="Rectangle 21" class="cls-16" width="227.172" height="11.603" rx="5.801" transform="translate(903.601 313.985)"/>
+  <rect id="Rectangle_22" data-name="Rectangle 22" class="cls-11" width="158.385" height="11.603" rx="5.801" transform="translate(903.601 386.915)"/>
+  <rect id="Rectangle_23" data-name="Rectangle 23" class="cls-16" width="133.522" height="11.603" rx="5.801" transform="translate(903.601 386.915)"/>
+  <rect id="Rectangle_24" data-name="Rectangle 24" class="cls-16" width="201.481" height="11.603" rx="5.801" transform="translate(903.601 459.846)"/>
+  <path id="Path_5" data-name="Path 5" class="cls-17" d="M5.361,2.529,2.883.051C2.832.051,2.782,0,2.731,0c-.1,0-.152.051-.2.051L.051,2.529c0,.051-.051.1-.051.2a.239.239,0,0,0,.253.253A.509.509,0,0,0,.4,2.933L2.428.91v9.71a.239.239,0,0,0,.253.253.239.239,0,0,0,.253-.253V.86L4.956,2.883a.186.186,0,0,0,.152.051.239.239,0,0,0,.253-.253A.1.1,0,0,0,5.361,2.529Z" transform="translate(903.601 478.394)"/>
+  <path id="Path_6" data-name="Path 6" class="cls-17" d="M5.361,2.529,2.883.051C2.832.051,2.782,0,2.731,0c-.1,0-.152.051-.2.051L.051,2.529c0,.051-.051.1-.051.2a.239.239,0,0,0,.253.253A.509.509,0,0,0,.4,2.933L2.428.91v9.71a.239.239,0,0,0,.253.253.239.239,0,0,0,.253-.253V.86L4.956,2.883a.186.186,0,0,0,.152.051.239.239,0,0,0,.253-.253A.1.1,0,0,0,5.361,2.529Z" transform="translate(909 416.336) rotate(180)"/>
+  <path id="Path_7" data-name="Path 7" class="cls-17" d="M5.361,2.529,2.883.051C2.832.051,2.782,0,2.731,0c-.1,0-.152.051-.2.051L.051,2.529c0,.051-.051.1-.051.2a.239.239,0,0,0,.253.253A.509.509,0,0,0,.4,2.933L2.428.91v9.71a.239.239,0,0,0,.253.253.239.239,0,0,0,.253-.253V.86L4.956,2.883a.186.186,0,0,0,.152.051.239.239,0,0,0,.253-.253A.1.1,0,0,0,5.361,2.529Z" transform="translate(903.601 332.532)"/>
+  <g id="Rectangle_25" data-name="Rectangle 25" class="cls-18" transform="translate(990.621 229.451)">
+    <rect class="cls-23" width="169.896" height="31.493"/>
+    <rect class="cls-24" x="0.5" y="0.5" width="168.896" height="30.493"/>
+  </g>
+  <g id="Rectangle_26" data-name="Rectangle 26" class="cls-18" transform="translate(1177.092 229.451)">
+    <rect class="cls-23" width="148.348" height="31.493"/>
+    <rect class="cls-24" x="0.5" y="0.5" width="147.348" height="30.493"/>
+  </g>
+  <text id="FROM:" class="cls-19" transform="translate(1036.367 247.567)"><tspan x="-30.347" y="0">FROM:</tspan></text>
+  <text id="TO:" class="cls-20" transform="translate(1201.037 246.567)"><tspan x="-14.199" y="0">TO:</tspan></text>
+  <text id="_04-24-2017" data-name="04-24-2017" class="cls-21" transform="translate(1049.463 249.081)"><tspan x="0" y="0">04-24-2017</tspan></text>
+  <text id="_04-26-2017" data-name="04-26-2017" class="cls-21" transform="translate(1213.557 249.081)"><tspan x="0" y="0">04-26-2017</tspan></text>
+  <rect id="Rectangle_27" data-name="Rectangle 27" class="cls-14" width="29.007" height="31.493" transform="translate(1131.51 229.451)"/>
+  <path id="Path_8" data-name="Path 8" class="cls-22" d="M6.318,0a.335.335,0,0,0-.1.033L3.259,2.86.266.033C.233.033.2,0,.166,0A.157.157,0,0,0,0,.166a.335.335,0,0,0,.033.1L3.126,3.192a.122.122,0,0,0,.1.033.335.335,0,0,0,.1-.033L6.418.266a.122.122,0,0,0,.033-.1C6.484.067,6.418,0,6.318,0Z" transform="translate(1143.113 243.381)"/>
+</svg>

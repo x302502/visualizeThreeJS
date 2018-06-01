@@ -1,0 +1,12 @@
+<custom-modal id="{{modalId}}">
+  <div class="custom-modal">
+    <div class="custom-modal-body">
+      <grid-control [option]="gridOption" *ngIf="gridOption" #grid></grid-control>
+      <div class="clearfix text-right mt-2">
+        <button class="btn btn-secondary btn-sm" (click)="closeModal()">
+          <i class="fa fa-times"></i> Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-modal-background"></div>
+</custom-modal>

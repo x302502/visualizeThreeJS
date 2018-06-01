@@ -1,0 +1,9 @@
+.btn.btn-outline-secondary{
+    border-color: #ced4da
+}
+input{
+    font-size: 12px!important;
+}
+.datetime{
+    width: calc(100% - 129px);
+}

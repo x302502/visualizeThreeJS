@@ -1,0 +1,413 @@
+<div id="content" class="container-fluid dashboard">
+  <section class="d-flex justify-content-between">
+    <div>
+      <h1 class="mt-4  ml-3 text-headline">
+        <span class="icon-ico-poststock  text-headline" style="font-size:1.2rem;"></span>Post Stock</h1>
+    </div>
+  </section>
+  <hr>
+  <ul class="nav nav-pills  mt-3">
+    <li class="nav-item mx-0">
+      <a class="nav-link tms-link tab-border-0 border-radius-left active py-0 py-2  border border-primary" data-toggle="tab" href="#tablist"
+        role="tab">List Post Stock</a>
+    </li>
+    <li class="nav-item tms-link mx-0">
+      <a class="nav-link tab-border-0 border-radius-right py-0  py-2 px-5 border border-primar" data-toggle="tab" href="#tabdetail"
+        #tabdetail role="tab">Detail</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tablist">
+      <div class="row  mt-3">
+        <div class="col-12">
+          <div class="mt-3">
+            <div class="table-responsive mt-4">
+              <table class="table table-striped table-light table-sm  width-table">
+                <thead class="font-table">
+                  <tr>
+                    <th rowspan="2">
+                    </th>
+                    <th>
+                      Warehouse
+                      <input type="text" class="form-control search-table  my-2" disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'stockcountcode'; this.loadStockCountData({}) ">
+                        StockCount Code
+                        <i *ngIf="this.propertyName_list == 'stockcountcode' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'stockcountcode' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fl_stockcountcode" (keyup.enter)="loadStockCountData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'remark'; this.loadStockCountData({}) ">
+                        Remark
+                        <i *ngIf="this.propertyName_list == 'remark' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'remark' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fl_remark" (keyup.enter)="loadStockCountData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'adddate'; this.loadStockCountData({}) ">
+                        Add Date
+                        <i *ngIf="this.propertyName_list == 'adddate' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'adddate' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'addwho'; this.loadStockCountData({}) ">
+                        Add Who
+                        <i *ngIf="this.propertyName_list == 'addwho' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'addwho' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fl_addwho" (keyup.enter)="loadStockCountData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'editdate'; this.loadStockCountData({}) ">
+                        Edit Date
+                        <i *ngIf="this.propertyName_list == 'editdate' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'editdate' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'editwho'; this.loadStockCountData({}) ">
+                        Edit Who
+                        <i *ngIf="this.propertyName_list == 'editwho' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'editwho' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fl_editwho" (keyup.enter)="loadStockCountData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_list = this.order_list=='ASC' ? 'DESC' : 'ASC'; this.propertyName_list = 'status'; this.loadStockCountData({}) ">
+                        Status
+                        <i *ngIf="this.propertyName_list == 'status' && this.order_list=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_list == 'status' && this.order_list=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <select class="form-control search-table  my-2" [(ngModel)]="fl_status" (change)="this.fl_status = $event.target.value; this.loadStockCountData({})">
+                        <option value=""> All</option>
+                        <option value="0"> New</option>
+                        <option value="1"> Active</option>
+                        <option value="2"> Close</option>
+                      </select>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody class="table-hover">
+                  <tr class="table-light" *ngFor="let data of data_stockcount | paginate: { id: 'id_stockcount', itemsPerPage: itemsPerPage_stockcount, currentPage: currentPage_stockcount, totalItems: this.total_stockcount  }">
+                    <td class="align-middle">
+                      <button type="button" class="btn btn-xs btn-success py-0" (click)="this.findStockCountData(data);"> Detail
+                        <i class="fa fa-angle-double-right"></i>
+                      </button>
+                    </td>
+                    <td class="align-middle">{{data.whseid}}</td>
+                    <td class="align-middle">{{data.stockcountcode}}</td>
+                    <td class="align-middle">{{data.remark}}</td>
+                    <td class="align-middle">{{data.adddate|date}}</td>
+                    <td class="align-middle">{{data.addwho}}</td>
+                    <td class="align-middle">{{data.editdate|date}}</td>
+                    <td class="align-middle">{{data.editwho}}</td>
+                    <td>
+                      <span *ngIf="data.status === 0" class="btn btn-sm btn-primary">New</span>
+                      <span *ngIf="data.status === 1" class="btn btn-sm btn-success">Active</span>
+                      <span *ngIf="data.status === 2" class="btn btn-sm btn-danger">Close</span>
+                    </td>
+                    <td>
+                      <button *ngIf="data.status !== 2" type="button" class="btn btn-sm btn-danger" (click)="closeStockCount(data)"> Close </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="form-inline">
+                <span>Show &nbsp;</span>
+                <select name="itemsPerPage_stockcount" [(ngModel)]="itemsPerPage_stockcount" (change)="this.itemsPerPage_stockcount = $event.target.value; this.loadStockCountData({})">
+                  <option>12</option>
+                  <option>24</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+                <span>&nbsp;entries</span>
+              </div>
+              <pagination-controls id="id_stockcount" (pageChange)="this.currentPage_stockcount = $event; this.loadStockCountData({})"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabdetail">
+      <div class="row mt-3" *ngIf="selected_stockcount">
+        <div class="col-12">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-outline-info " (click)="this.times = 1; loadStockCountDetailData({})">
+              <input type="radio" name="times1" autocomplete="off"> Input By Page (Times 1)
+            </label>
+            <label class="btn btn-outline-success" (click)="this.times = 2; loadStockCountDetailData({})">
+              <input type="radio" name="times2" autocomplete="off">Input By Page (Times 2)
+            </label>
+            <label class="btn btn-outline-warning" (click)="this.times = 3; loadStockCountDetailData({})">
+              <input type="radio" name="times3" autocomplete="off"> Input By Page (Times 3)
+            </label>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" [ngClass]="{'disabled': data_stockcountdetail.length == 0}">
+              <i class="fa fa-print"></i> Print
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item text-primary cursor-pointer" (click)="doPrintStockCount_Times(1)">
+                <i class="fa fa-print"></i> StockCount (TImes 1)</a>
+              <a *ngIf="data_stockcountdetail[0]?(data_stockcountdetail[0].keydate1):false" class="dropdown-item text-primary cursor-pointer"
+                (click)="doPrintStockCount_Times(2)">
+                <i class="fa fa-print"></i> StockCount (Times 2)</a>
+              <a *ngIf="data_stockcountdetail[0]?(data_stockcountdetail[0].keydate2):false" class="dropdown-item text-primary cursor-pointer"
+                (click)="doPrintStockCount_Times(3)">
+                <i class="fa fa-print"></i> StockCount (Times 3)</a>
+            </div>
+          </div>
+          <div class="float-right">
+            <button (click)="doExport('Stockcount-Detail')" type="button" class="btn btn-default ">
+              <i class="fa fa-upload"></i> Export </button>
+            <button *ngIf="selected_stockcount.status !== 2" type="button" class="btn btn-danger " data-toggle="modal" data-target="#modalpostStock">
+              <i class="fa fa-angle-double-up"></i> Post Stock </button>
+            <div class="modal fade" id="modalpostStock" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-danger">Poststock</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>Do you want to Poststock PSC No:
+                      <b>{{selected_stockcount.stockcountcode}}</b>?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-danger" (click)="PostStockData()">
+                      <i class="fa fa-thumbs-o-up"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" data-dismiss="modal">
+                      <i class="fa fa-thumbs-o-down"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12">
+          <div class="mt-3">
+            <div class="table-responsive" id="tbldetail">
+              <table class="table">
+                <thead class="thead-default">
+                  <tr>
+                    <th rowspan="2">
+                      <button type="button" class="trash ml-2 d-inline-block btn-trash" (click)="this.addNewRow()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                      </button>
+                    </th>
+                    <th>Warehouse
+                      <input type="text" class="form-control search-table  my-2" disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'storerkey'; this.loadStockCountDetailData({}) ">
+                        Owner
+                        <i *ngIf="this.propertyName_detail == 'storerkey' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'storerkey' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_storerkey" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'sku'; this.loadStockCountDetailData({}) ">
+                        Item Code
+                        <i *ngIf="this.propertyName_detail == 'sku' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'sku' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_sku" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'qtycase'; this.loadStockCountDetailData({}) ">
+                        Quantity Case
+                        <i *ngIf="this.propertyName_detail == 'qtycase' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'qtycase' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase" (keyup.enter)="loadStockCountDetailData({})">
+
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'qtypiece'; this.loadStockCountDetailData({}) ">
+                        Quantity Piece
+                        <i *ngIf="this.propertyName_detail == 'qtypiece' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'qtypiece' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtypiece" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'lottable01'; this.loadStockCountDetailData({}) ">
+                        Batch No
+                        <i *ngIf="this.propertyName_detail == 'lottable01' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'lottable01' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_lottable01" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'lottable04'; this.loadStockCountDetailData({}) ">
+                        Producttion Date
+                        <i *ngIf="this.propertyName_detail == 'lottable04' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'lottable04' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_lottable04" (keyup.enter)="loadStockCountDetailData({})"
+                        disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'lottable05'; this.loadStockCountDetailData({}) ">
+                        Expired Date
+                        <i *ngIf="this.propertyName_detail == 'lottable05' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'lottable05' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_lottable05" (keyup.enter)="loadStockCountDetailData({})"
+                        disabled>
+                    </th>
+                    <th>
+                      <span class="cursor-pointer" (click)="this.order_detail = this.order_detail=='ASC' ? 'DESC' : 'ASC'; this.propertyName_detail = 'location'; this.loadStockCountDetailData({}) ">
+                        Location
+                        <i *ngIf="this.propertyName_detail == 'location' && this.order_detail=='ASC'" class="fa fa-angle-up"></i>
+                        <i *ngIf="this.propertyName_detail == 'location' && this.order_detail=='DESC'" class="fa fa-angle-down"></i>
+                      </span>
+                      <input type="text" class="form-control search-table  my-2" [(ngModel)]="fd_location" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>Qantity Case (Times {{this.times}})
+                      <input *ngIf="this.times == 1 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase1" (keyup.enter)="loadStockCountDetailData({})">
+                      <input *ngIf="this.times == 2 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase2" (keyup.enter)="loadStockCountDetailData({})">
+                      <input *ngIf="this.times == 3 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase3" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                    <th>Qantity Piece (Times {{this.times}})
+                      <input *ngIf="this.times == 1 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase1" (keyup.enter)="loadStockCountDetailData({})">
+                      <input *ngIf="this.times == 2 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase2" (keyup.enter)="loadStockCountDetailData({})">
+                      <input *ngIf="this.times == 3 " type="text" class="form-control search-table  my-2" [(ngModel)]="fd_qtycase3" (keyup.enter)="loadStockCountDetailData({})">
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="badge-info" *ngIf="data_temp">
+                    <td>
+                      <button type="button" class="btn btn-link" [disabled]="data_temp?(!data_temp.storerkey || !data_temp.sku || !data_temp.location):true"
+                        (click)="submitNewRow()">
+                        <i class="fa fa-save text-success" aria-hidden="true"></i>
+                      </button>
+                      <button type="button" class="btn btn-link" (click)="this.data_temp = null;">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" name="whseid" [(ngModel)]="data_temp.whseid" readonly/>
+                    </td>
+                    <td>
+                      <ng2-completer inputClass="form-control" inputName="storerkey" [(ngModel)]="data_temp.storerkey" [datasource]="data_owner"
+                        [minSearchLength]="0" openOnClick="true" selectOnClick="true" autoMatch="true"></ng2-completer>
+                    </td>
+                    <td>
+                      <ng2-completer inputClass="form-control" inputName="sku" [(ngModel)]="data_temp.sku" [datasource]="data_sku" [minSearchLength]="0"
+                        openOnClick="true" selectOnClick="true" autoMatch="true"></ng2-completer>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="qtycase" [(ngModel)]="data_temp.qtycase" autocomplete="off" readonly/>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="qtypiece" [(ngModel)]="data_temp.qtypiece" autocomplete="off" readonly/>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" name="lottable01" [(ngModel)]="data_temp.lottable01" autocomplete="off" />
+                    </td>
+                    <td>
+                      <input type="date" class="form-control" name="lottable04" [(ngModel)]="data_temp.lottable04" autocomplete="off" />
+                    </td>
+                    <td>
+                      <input type="date" class="form-control" name="lottable05" [(ngModel)]="data_temp.lottable05" autocomplete="off" />
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" name="location" [(ngModel)]="data_temp.location" autocomplete="off" />
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="qtycase{{times}}" [(ngModel)]="data_temp['qtycase'+times]" autocomplete="off"
+                        min="0" />
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="qtypiece{{times}}" [(ngModel)]="data_temp['qtypiece'+times]" autocomplete="off"
+                        min="0" />
+                    </td>
+                  </tr>
+                  <tr *ngFor="let data of data_stockcountdetail | paginate: { id: 'id_stockcountdetail', itemsPerPage: itemsPerPage_stockcountdetail, currentPage: currentPage_stockcountdetail, totalItems: this.total_stockcountdetail  }; let i = index;">
+                    <td>
+                      {{data.rowno}}
+                    </td>
+                    <td>
+                      {{data.whseid}}
+                    </td>
+                    <td>
+                      {{data.storerkey}}
+                    </td>
+                    <td>
+                      {{data.sku}}
+                    </td>
+                    <td>
+                      {{data.qtycase}}
+                    </td>
+                    <td>
+                      {{data.qtypiece}}
+                    </td>
+                    <td>
+                      {{data.lottable01}}
+                    </td>
+                    <td>
+                      {{data.lottable04 | date}}
+                    </td>
+                    <td>
+                      {{data.lottable05 | date}}
+                    </td>
+                    <td>
+                      {{data.location}}
+                    </td>
+                    <td>
+                      <input *ngIf="!data['keydate'+times] && selected_stockcount.status !== 2" class="form-control" type="number" name="qtycase{{times}}"
+                        [(ngModel)]="data['qtycase'+times]" autocomplete="off" (keyup.enter)="updateStockCountDetailData(data)"
+                      />
+                      <span *ngIf="data['keydate'+times] || selected_stockcount.status === 2">{{data['qtycase'+times]}}</span>
+                    </td>
+                    <td>
+                      <input *ngIf="!data['keydate'+times] && selected_stockcount.status !== 2" class="form-control" type="number" name="qtypiece{{times}}"
+                        [(ngModel)]="data['qtypiece'+times]" autocomplete="off" (keyup.enter)="updateStockCountDetailData(data)"
+                      />
+                      <span *ngIf="data['keydate'+times] || selected_stockcount.status === 2">{{data['qtypiece'+times]}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="form-inline">
+                <span>Show &nbsp;</span>
+                <select name="itemsPerPage_stockcountdetail" [(ngModel)]="itemsPerPage_stockcountdetail" (change)="this.itemsPerPage_stockcountdetail = $event.target.value; this.loadStockCountDetailData({})">
+                  <option>12</option>
+                  <option>24</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+                <span>&nbsp;entries</span>
+              </div>
+              <pagination-controls id="id_stockcountdetail" (pageChange)="this.currentPage_stockcountdetail = $event; this.loadStockCountDetailData({})"></pagination-controls>
+            </div>
+          </div>
+          <div class="float-left" *ngIf="data_stockcountdetail.length > 0 && !data_stockcountdetail[0]['keydate'+times] && selected_stockcount.status !== 2">
+            <button type="button" class="btn btn-default" (click)="loadStockCountDetailData({})">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="addNewRow()">Add Row</button>
+            <button type="button" class="btn btn-success" [disabled]="data_temp?(!data_temp.storerkey || !data_temp.sku || !data_temp.location):true"
+              (click)="submitNewRow()">Submit Row</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

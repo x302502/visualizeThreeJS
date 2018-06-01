@@ -1,0 +1,18 @@
+/* .completer-dropdown {
+    overflow-y: auto;
+    max-height: 100px;
+  } */
+  .fixed-tabletabMove {
+    height: calc(100vh - 240px);
+}
+/* .completer-dropdown{
+	margin-top: 5px !important;
+	max-width: 100% !important;
+	overflow-y: scroll !important;
+	overflow-x: hidden !important;
+  height: 200px !important;
+  position: relative;
+} */
+/* table td .fixColumn {
+  min-width: 200px;
+} */

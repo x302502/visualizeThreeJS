@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?cjs9if');
+  src:  url('../fonts/icomoon.eot?cjs9if#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?cjs9if') format('truetype'),
+    url('../fonts/icomoon.woff?cjs9if') format('woff'),
+    url('../fonts/icomoon.svg?cjs9if#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ico-adjustment:before {
+  content: "\e900";
+}
+.icon-ico-ans:before {
+  content: "\e901";
+  
+}
+.icon-ico-billing:before {
+  content: "\e902";
+ 
+}
+.icon-ico-boom:before {
+  content: "\e903";
+  
+}
+.icon-ico-carrier:before {
+  content: "\e904";
+ 
+}
+.icon-ico-customer:before {
+  content: "\e905";
+  color: #808080;
+}
+.icon-ico-customergroup:before {
+  content: "\e906";
+  
+}
+.icon-ico-iconlines:before {
+  content: "\e907";
+  
+}
+.icon-ico-inbound:before {
+  content: "\e908";
+  
+}
+.icon-ico-internal:before {
+  content: "\e909";
+ 
+}
+.icon-ico-inventory:before {
+  content: "\e90a";
+ 
+}
+.icon-ico-item:before {
+  content: "\e90b";
+ 
+}
+.icon-ico-location:before {
+  content: "\e90c";
+ 
+}
+.icon-ico-lotupdate:before {
+  content: "\e90d";
+  
+}
+.icon-ico-move:before {
+  content: "\e90e";
+
+}
+.icon-ico-outbound:before {
+  content: "\e90f";
+  
+}
+.icon-ico-pack:before {
+  content: "\e910";
+}
+.icon-ico-pallet:before {
+  content: "\e911";
+ 
+}
+.icon-ico-poststock:before {
+  content: "\e912";
+  
+}
+.icon-ico-prebatch:before {
+  content: "\e913";
+  
+}
+.icon-ico-premove:before {
+  content: "\e914";
+  
+}
+.icon-ico-reportdesign:before {
+  content: "\e915";
+ 
+}
+.icon-ico-shipment:before {
+  content: "\e916";
+ 
+}
+.icon-ico-status:before {
+  content: "\e917";
+ 
+}
+.icon-ico-stockcount:before {
+  content: "\e918";
+  
+}
+.icon-ico-supplier:before {
+  content: "\e919";
+  
+}
+.icon-ico-support:before {
+  content: "\e91a";
+ 
+}
+.icon-ico-systemcode:before {
+  content: "\e91b";
+  
+}
+.icon-ico-transaction:before {
+  content: "\e91c";
+ 
+}
+.icon-ico-trategy:before {
+  content: "\e91d";
+ 
+}
+.icon-ico-zone:before {
+  content: "\e91e";
+  
+}

@@ -1,0 +1,12 @@
+
+.fixed-header {
+    position: fixed;
+    top:0; left:0;
+    width: 100%; 
+  }
+  th:first-child(n) {
+   width: 5%;
+  }
+  .fixed-tabletabInventory {
+    height: calc(100vh - 235px);
+}

@@ -1,0 +1,764 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold"> Stock Count</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+  </div>
+
+  <ul class="nav nav-pills mb-3 table-primary-swm border" id="pills-tab">
+    <li class="nav-item">
+      <a class="nav-link text-dark active" id="pills-lis-tab" data-toggle="pill" href="#tabfullcount">FULL COUNT</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-dark" id="pills-log-tab" data-toggle="pill" href="#tabsku">SKU</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-dark" id="pills-storage-tab" data-toggle="pill" href="#tabzoneloc">ZONE - LOC</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-dark" id="pills-sumary-tab" data-toggle="pill" href="#tabchangeindate">CHANGE IN DATE</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" id="pills-sumary-tab" data-toggle="pill" href="#tabstockcount">STOCK COUNT</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tabfullcount">
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="mt-3">
+            <div class="col-12">
+              <div class="nav justify-content-end my-1 shipment-btn">
+                <div class=" mr-2">
+                  <a class="btn btn-primary" (click)="doExport(0)">Export</a>
+                </div>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-danger">Print</button>
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li class="mb-2 cursor-pointer" (click)="doPrint(0)">Not Quantity</li>
+                    <li class=" cursor-pointer" (click)="doPrint(0, 1)">Quantity</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="table-responsive mt-4">
+                <table class="table table-striped table-light table-sm  width-table">
+                  <thead class="font-table">
+                    <tr>
+                      <th rowspan="2"></th>
+                      <th>
+                        <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.loc'; this.loadListFullCountData({}) ">
+                          Bin
+                          <i *ngIf="this.propertyName_ff == 'lotxlocxid.loc' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_ff == 'lotxlocxid.loc' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup.enter)="loadListFullCountData({})">
+                      </th>
+                      <th>
+                        <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.sku'; this.loadListFullCountData({}) ">
+                          Item Code
+                          <i *ngIf="this.propertyName_ff == 'lotxlocxid.sku' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_ff == 'lotxlocxid.sku' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup.enter)="loadListFullCountData({})">
+                      </th>
+                      <th>
+                        Qty Case
+                        <input type="text" class="form-control search-table  my-2" disabled>
+                      </th>
+                      <th>
+                        Qty Pieces
+                        <input type="text" class="form-control search-table  my-2" disabled>
+                      </th>
+                      <th>
+                        <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotattribute.lottable01'; this.loadListFullCountData({}) ">
+                          Batch No
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable01' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable01' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lottable01" (keyup.enter)="loadListFullCountData({})">
+                      </th>
+                      <th>
+                        <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotattribute.lottable04'; this.loadListFullCountData({}) ">
+                          Mfg date
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable04' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable04' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lottable04" (keyup.enter)="loadListFullCountData({})"
+                          disabled>
+                      </th>
+                      <th>
+                        <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotattribute.lottable05'; this.loadListFullCountData({}) ">
+                          Exp date
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable05' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                          <i *ngIf="this.propertyName_ff == 'lotattribute.lottable05' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+                        </span>
+                        <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lottable05" (keyup.enter)="loadListFullCountData({})"
+                          disabled>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-hover">
+                    <tr class="table-light" *ngFor="let data of data_FullCount | paginate: { id: 'id_FullCount', itemsPerPage: itemsPerPage_FullCount, currentPage: currentPage_FullCount, totalItems: this.total_FullCount  }; let i = index;">
+                      <td class="align-middle">{{i+1}}</td>
+                      <td class="align-middle">{{data.location}}</td>
+                      <td class="align-middle">{{data.sku}}</td>
+                      <td class="align-middle">{{data.qtycase | number}}</td>
+                      <td class="align-middle">{{data.qtypiece | number}}</td>
+                      <td class="align-middle">{{data.lottable01}}</td>
+                      <td class="align-middle">{{data.lottable04 | date}}</td>
+                      <td class="align-middle">{{data.lottable05 | date}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 d-flex justify-content-between">
+              <div class="form-inline">
+                <span>Show &nbsp;</span>
+                <select name="itemsPerPage_FullCount" [(ngModel)]="itemsPerPage_FullCount" (change)="this.itemsPerPage_FullCount = $event.target.value; this.loadListFullCountData({})">
+                  <option>12</option>
+                  <option>24</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+                <span>&nbsp;entries</span>
+              </div>
+              <pagination-controls id="id_FullCount" (pageChange)="this.currentPage_FullCount = $event; this.loadListFullCountData({})"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabsku">
+      <div class="row mt-3">
+        <div class="col-4">
+          <div class="d-flex flex-row">
+            <div class="input-group">
+              <span class="input-group-addon">Owner</span>
+              <select [(ngModel)]="data_owner_current" name="storerkey" class="form-control" (change)="changeOwner($event.target.value)">
+
+                <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : [] " [ngValue]="data.storerkey">{{data.storerkey}} - {{data.company}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="nav justify-content-end my-1 shipment-btn">
+            <button type="button" class="btn btn-outline-warning mr-1" [disabled]="!data_owner_current || selected_SKU.length === 0"
+              (click)="doPreview(1)">Pewview</button>
+            <div class=" mr-2">
+              <a class="btn btn-primary" (click)="doExport(1)">Export</a>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger">Print</button>
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="mb-2 cursor-pointer" (click)="doPrint(1)">Not Quantity</li>
+                <li class=" cursor-pointer" (click)="doPrint(1, 1)">Quantity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-0" *ngIf="this.data_owner_current">
+        <div class="col-4 border">
+          <div class="table-responsive mt-4">
+            <table class="table">
+              <thead class="font-table">
+                <tr class="tr-default">
+                  <th rowspan="2">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [checked]="isAllChecked(1)" (change)="checkAll($event, 1)">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fsl = this.order_fsl=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fsl = 'sku'; this.loadItemData({}) ">
+                      Item Code
+                      <i *ngIf="this.propertyName_fsl == 'sku' && this.order_fsl=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fsl == 'sku' && this.order_fsl=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fsl_sku" (keyup.enter)="this.loadItemData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fsl = this.order_fsl=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fsl = 'descr'; this.loadItemData({}) ">
+                      Item Name
+                      <i *ngIf="this.propertyName_fsl == 'descr' && this.order_fsl=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fsl == 'descr' && this.order_fsl=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fsl_descr" (keyup.enter)="this.loadItemData({})">
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of data_SKU_left | paginate: { id: 'id_SKU_left', itemsPerPage: itemsPerPage_SKU_left, currentPage: currentPage_SKU_left, totalItems: this.total_SKU_left  }">
+                  <td>
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data, 1)" [(ngModel)]="data.state">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </td>
+                  <td>{{data.sku}}</td>
+                  <td>{{data.descr}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-inline">
+              <span>Show &nbsp;</span>
+              <select name="itemsPerPage_SKU_left" [(ngModel)]="itemsPerPage_SKU_left" (change)="this.itemsPerPage_SKU_left = $event.target.value; this.loadItemData({})">
+                <option>12</option>
+                <option>24</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+              <span>&nbsp;entries</span>
+            </div>
+            <pagination-controls id="id_SKU_left" (pageChange)="this.currentPage_SKU_left = $event; this.loadItemData({})"></pagination-controls>
+          </div>
+        </div>
+        <div class="col-8 border">
+          <div class="table-responsive mt-4">
+            <table class="table table-striped table-light table-sm  width-table">
+              <thead class="font-table">
+                <tr>
+                  <th>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fsr = this.order_fsr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fsr = 'lotxlocxid.loc'; this.loadListSKUData({}) ">
+                      Bin
+                      <i *ngIf="this.propertyName_fsr == 'lotxlocxid.loc' && this.order_fsr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fsr == 'lotxlocxid.loc' && this.order_fsr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fsr_loc" (keyup.enter)="this.loadListSKUData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fsr = this.order_fsr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fsr = 'lotxlocxid.sku'; this.loadListSKUData({}) ">
+                      Item Code
+                      <i *ngIf="this.propertyName_fsr == 'lotxlocxid.sku' && this.order_fsr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fsr == 'lotxlocxid.sku' && this.order_fsr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fsr_sku" (keyup.enter)="this.loadListSKUData({})">
+                  </th>
+                  <th>
+                    Qty Case
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    Qty Pieces
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fsr = this.order_fsr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fsr = 'lotattribute.lottable01'; this.loadListSKUData({}) ">
+                      Batch No
+                      <i *ngIf="this.propertyName_fsr == 'lotattribute.lottable01' && this.order_fsr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fsr == 'lotattribute.lottable01' && this.order_fsr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fsr_lottable01" (keyup.enter)="this.loadListSKUData({' like':$event.target.value})">
+                  </th>
+                  <th>
+                    Mfg date
+                    <input type="date" class="form-control search-table  my-2" [(ngModel)]="fsr_lottable04" (keyup.enter)="this.loadListSKUData({})"
+                      disabled>
+                  </th>
+                  <th>
+                    Exp date
+                    <input type="date" class="form-control search-table  my-2" [(ngModel)]="fsr_lottable05" (keyup.enter)="this.loadListSKUData({})"
+                      disabled>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of data_SKU_right | paginate: { id: 'id_SKU_right', itemsPerPage: itemsPerPage_SKU_right, currentPage: currentPage_SKU_right, totalItems: this.total_SKU_right }; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{data.location}}</td>
+                  <td>{{data.sku}}</td>
+                  <td>{{data.qtycase | number}}</td>
+                  <td>{{data.qtypiece | number}}</td>
+                  <td>{{data.lottable01}}</td>
+                  <td>{{data.lottable04 | date}}</td>
+                  <td>{{data.lottable05 | date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-inline">
+              <span>Show &nbsp;</span>
+              <select name="itemsPerPage_SKU_right" [(ngModel)]="itemsPerPage_SKU_right" (change)="this.itemsPerPage_SKU_right = $event.target.value; this.loadListSKUData({})">
+                <option>12</option>
+                <option>24</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+              <span>&nbsp;entries</span>
+            </div>
+            <pagination-controls id="id_SKU_right" (pageChange)="this.currentPage_SKU_right = $event; this.loadListSKUData({})"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabzoneloc">
+      <div class="row mt-3">
+        <div class="col-4">
+          <div class="d-flex flex-row">
+            <div class="input-group">
+              <span class="input-group-addon">Zone/Location</span>
+              <select [(ngModel)]="data_zoneloc_current" name="zoneloc" (change)="changeZoneLoc($event.target.value)" class="form-control">
+                <option value="0">Zone</option>
+                <option value="1">Location</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="nav justify-content-end my-1 shipment-btn">
+            <button type="button" class="btn btn-outline-warning mr-1" [disabled]="!data_zoneloc_current || selected_ZoneLoc.length === 0"
+              (click)="doPreview(2)"> Pewview</button>
+            <div class=" mr-2">
+              <a class="btn btn-primary" (click)="doExport(2)">Export</a>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger">Print</button>
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="mb-2 cursor-pointer" (click)="doPrint(2)">Not Quantity</li>
+                <li class=" cursor-pointer" (click)="doPrint(2, 1)">Quantity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-0">
+        <div class="col-4 border">
+          <div class="table-responsive mt-4">
+            <table class="table">
+              <thead class="font-table">
+                <tr>
+                  <th rowspan="2">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [checked]="isAllChecked(2)" (change)="checkAll($event, 2)">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </th>
+                  <th>
+                    <span class=" cursor-pointer" (click)="this.order_fzl = this.order_fzl=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzl = 'putawayzone'; this.loadZoneLocData({}) ">
+                      Zone
+                      <i *ngIf="this.propertyName_fzl == 'putawayzone' && this.order_fzl=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzl == 'putawayzone' && this.order_fzl=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzl_putawayzone" (keyup.enter)="this.loadZoneLocData({})">
+                  </th>
+                  <th *ngIf="this.data_zoneloc_current != '0' ">
+                    <span class="cursor-pointer" (click)="this.order_fzl = this.order_fzl=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzl = 'loc'; this.loadZoneLocData({}) ">
+                      Location
+                      <i *ngIf="this.propertyName_fzl == 'loc' && this.order_fzl=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzl == 'loc' && this.order_fzl=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzl_loc" (keyup.enter)="this.loadZoneLocData({})">
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-hover">
+                <tr class="table-light" *ngFor="let data of data_ZoneLoc_left | paginate: { id: 'id_ZoneLoc_left', itemsPerPage: itemsPerPage_ZoneLoc_left, currentPage: currentPage_ZoneLoc_left, totalItems: this.total_ZoneLoc_left  }">
+                  <td>
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data, 2)" [(ngModel)]="data.state">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </td>
+                  <td class="align-middle">{{data.putawayzone}}</td>
+                  <td class="align-middle">{{data.loc}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-inline">
+              <span>Show &nbsp;</span>
+              <select name="itemsPerPage_ZoneLoc_left" [(ngModel)]="itemsPerPage_ZoneLoc_left" (change)="this.itemsPerPage_ZoneLoc_left = $event.target.value; this.loadZoneLocData({})">
+                <option>12</option>
+                <option>24</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+              <span>&nbsp;entries</span>
+            </div>
+            <pagination-controls id="id_ZoneLoc_left" (pageChange)="this.currentPage_ZoneLoc_left = $event; this.loadZoneLocData({})"></pagination-controls>
+          </div>
+        </div>
+        <div class="col-8 border">
+          <div class="table-responsive mt-4">
+            <table class="table table-striped table-light table-sm  width-table">
+              <thead class="font-table">
+                <tr>
+                  <th>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fzr = this.order_fzr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzr = 'lotxlocxid.loc'; this.loadListZoneLocData({}) ">
+                      Bin
+                      <i *ngIf="this.propertyName_fzr == 'lotxlocxid.loc' && this.order_fzr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzr == 'lotxlocxid.loc' && this.order_fzr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzr_loc" (keyup.enter)="this.loadListZoneLocData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fzr = this.order_fzr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzr = 'lotxlocxid.sku'; this.loadListZoneLocData({}) ">
+                      Item Code
+                      <i *ngIf="this.propertyName_fzr == 'lotxlocxid.sku' && this.order_fzr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzr == 'lotxlocxid.sku' && this.order_fzr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzr_sku" (keyup.enter)="this.loadListZoneLocData({})">
+                  </th>
+                  <th>
+                    Qty Case
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    Qty Pieces
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fzr = this.order_fzr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzr = 'lotattribute.lottable01'; this.loadListZoneLocData({}) ">
+                      Batch No
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable01' && this.order_fzr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable01' && this.order_fzr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzr_lottable01" (keyup.enter)="this.loadListZoneLocData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fzr = this.order_fzr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzr = 'lotattribute.lottable04'; this.loadListZoneLocData({}) ">
+                      Mfg date
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable04' && this.order_fzr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable04' && this.order_fzr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzr_lottable04" (keyup.enter)="this.loadListZoneLocData({})"
+                      disabled>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fzr = this.order_fzr=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fzr = 'lotattribute.lottable05'; this.loadListZoneLocData({}) ">
+                      Exp date
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable05' && this.order_fzr=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fzr == 'lotattribute.lottable05' && this.order_fzr=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fzr_lottable05" (keyup.enter)="this.loadListZoneLocData({})"
+                      disabled>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-hover">
+                <tr class="table-light" *ngFor="let data of data_ZoneLoc_right  | paginate: { id: 'id_ZoneLoc_right', itemsPerPage: itemsPerPage_ZoneLoc_right, currentPage: currentPage_ZoneLoc_right, totalItems: this.total_ZoneLoc_right  }; let i = index;">
+                  <td class="align-middle">{{i+1}}</td>
+                  <td class="align-middle">{{data.location}}</td>
+                  <td class="align-middle">{{data.sku}}</td>
+                  <td class="align-middle">{{data.qtycase | number}}</td>
+                  <td class="align-middle">{{data.qtypiece | number}}</td>
+                  <td class="align-middle">{{data.lottable01}}</td>
+                  <td class="align-middle">{{data.lottable04 | date}}</td>
+                  <td class="align-middle">{{data.lottable05 | date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-inline">
+              <span>Show &nbsp;</span>
+              <select name="itemsPerPage_ZoneLoc_right" [(ngModel)]="itemsPerPage_ZoneLoc_right" (change)="this.itemsPerPage_ZoneLoc_right = $event.target.value; this.loadListZoneLocData({})">
+                <option>12</option>
+                <option>24</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+              <span>&nbsp;entries</span>
+            </div>
+            <pagination-controls id="id_ZoneLoc_right" (pageChange)="this.currentPage_ZoneLoc_right = $event; this.loadListZoneLocData({})"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabchangeindate">
+      <div class="row mt-3">
+        <div class="col-8 form-inline">
+          <div class="col-4">
+            <div class="input-group">
+              <span class="input-group-addon">Owner</span>
+              <select [(ngModel)]="data_owner_current" name="storerkey" class="form-control" (change)="changeOwner($event.target.value)">
+                <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.storerkey}} - {{data.company}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group">
+              <span class="input-group-addon">From Date</span>
+              <input [(ngModel)]="data_fromdate" type="date" class="form-control" name="fromdate" />
+              <!-- <span class="input-group-addon"></span> -->
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group">
+              <span class="input-group-addon">To Date</span>
+              <input [(ngModel)]="data_todate" type="date" class="form-control" name="todate" />
+              <!-- <span class="input-group-addon"></span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="nav justify-content-end my-1 shipment-btn">
+            <button type="button" class="btn btn-outline-warning mr-1" [disabled]="!data_owner_current || !data_fromdate || !data_todate "
+              (click)="doPreview(3)"> Pewview</button>
+            <div class=" mr-2">
+              <a class="btn btn-primary" (click)="doExport(3)">Export</a>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger">Print</button>
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="mb-2 cursor-pointer" (click)="doPrint(3)">Not Quantity</li>
+                <li class=" cursor-pointer" (click)="doPrint(3, 1)">Quantity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-0">
+        <div class="col-12 border">
+          <div class="table-responsive mt-4">
+            <table class="table table-striped table-light table-sm  width-table">
+              <thead class="font-table">
+                <tr>
+                  <th>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fc = this.order_fc=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fc = 'lotxlocxid.loc'; this.loadListChangeInDateData({}) ">
+                      Bin
+                      <i *ngIf="this.propertyName_fc == 'lotxlocxid.loc' && this.order_fc=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fc == 'lotxlocxid.loc' && this.order_fc=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fc_loc" (keyup.enter)="this.loadListChangeInDateData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fc = this.order_fc=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fc = 'lotxlocxid.sku'; this.loadListChangeInDateData({}) ">
+                      Item Code
+                      <i *ngIf="this.propertyName_fc == 'lotxlocxid.sku' && this.order_fc=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fc == 'lotxlocxid.sku' && this.order_fc=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fc_sku" (keyup.enter)="this.loadListChangeInDateData({})">
+                  </th>
+                  <th>
+                    Qty Case
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>Qty Pieces
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fc = this.order_fc=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fc = 'lotattribute.lottable01'; this.loadListChangeInDateData({}) ">
+                      Batch No
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable01' && this.order_fc=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable01' && this.order_fc=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fc_lottable01" (keyup.enter)="this.loadListChangeInDateData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fc = this.order_fc=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fc = 'lotattribute.lottable04'; this.loadListChangeInDateData({}) ">
+                      Mfg date
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable04' && this.order_fc=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable04' && this.order_fc=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" (keyup.enter)="this.loadListChangeInDateData({})" disabled>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fc = this.order_fc=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fc = 'lotattribute.lottable05'; this.loadListChangeInDateData({}) ">
+                      Exp date
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable05' && this.order_fc=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fc == 'lotattribute.lottable05' && this.order_fc=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" (keyup.enter)="this.loadListChangeInDateData({})" disabled>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-hover">
+                <tr class="table-light" *ngFor="let data of data_ChangeInDate | paginate: { id: 'id_ChangeInDate', itemsPerPage: itemsPerPage_ChangeInDate, currentPage: currentPage_ChangeInDate, totalItems: this.total_ChangeInDate  }; let i = index;">
+                  <td class="align-middle">{{i+1}}</td>
+                  <td class="align-middle">{{data.location}}</td>
+                  <td class="align-middle">{{data.sku}}</td>
+                  <td class="align-middle">{{data.qtycase | number}}</td>
+                  <td class="align-middle">{{data.qtypiece | number}}</td>
+                  <td class="align-middle">{{data.lottable01}}</td>
+                  <td class="align-middle">{{data.lottable04 | date}}</td>
+                  <td class="align-middle">{{data.lottable05 | date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+          <div class="form-inline">
+            <span>Show &nbsp;</span>
+            <select name="itemsPerPage_ChangeInDate" [(ngModel)]="itemsPerPage_ChangeInDate" (change)="this.itemsPerPage_ChangeInDate = $event.target.value; this.loadListChangeInDateData()">
+              <optgroup>12</optgroup>
+              <optgroup>24</optgroup>
+              <optgroup>50</optgroup>
+              <optgroup>100</optgroup>
+            </select>
+            <span>&nbsp;entries</span>
+          </div>
+          <pagination-controls id="id_ChangeInDate" (pageChange)="this.currentPage_ChangeInDate = $event; this.loadListChangeInDateData()"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tabstockcount">
+      <div class="row mt-3">
+        <div class="col-4">
+          <div class="d-flex flex-row">
+            <div class="input-group">
+              <span class="input-group-addon">Owner</span>
+              <select [(ngModel)]="data_owner_current" name="storerkey" class="form-control" (change)="changeOwner($event.target.value)">
+                <option *ngFor="let data of this.appServices.account !== undefined ? this.appServices.account.owners : []" [ngValue]="data.storerkey">{{data.storerkey}} - {{data.company}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="nav justify-content-end my-1 shipment-btn">
+            <button type="button" class="btn btn-outline-warning mr-1" [disabled]="!data_owner_current" (click)="doPreview(4)"> Pewview</button>
+            <div class=" mr-2">
+              <a class="btn btn-primary" (click)="doExport(3)">Export</a>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger">Print</button>
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="mb-2 cursor-pointer" (click)="doPrint(4)">Not Quantity</li>
+                <li class=" cursor-pointer" (click)="doPrint(4, 1)">Quantity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-0">
+        <div class="col-4 border">
+          <div class="table-responsive mt-4">
+            <table class="table ">
+              <thead class="font-table">
+                <tr>
+                  <th rowspan="2">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [checked]="isAllChecked(4)" (change)="checkAll($event, 4)">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </th>
+                  <th>Options
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-hover">
+                <tr class="table-light" *ngFor="let data of data_StockCount_left">
+                  <td>
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data, 4)" [(ngModel)]="data.state">
+                      <span class="custom-control-label"></span>
+                    </label>
+                  </td>
+                  <td class="align-middle">{{data.label}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-8 border">
+          <div class="table-responsive mt-4">
+            <table class="table table-striped table-light table-sm  width-table">
+              <thead class="font-table">
+                <tr>
+                  <th>
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fs = this.order_fs=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fs = 'lotxlocxid.loc'; this.loadListStockCountData({}) ">
+                      Bin
+                      <i *ngIf="this.propertyName_fs == 'lotxlocxid.loc' && this.order_fs=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fs == 'lotxlocxid.loc' && this.order_fs=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fs_loc" (keyup.enter)="this.loadListStockCountData({})">
+                  </th>
+                  <th>
+                    <span class="cursor-pointer" (click)="this.order_fs = this.order_fs=='ASC' ? 'DESC' : 'ASC'; this.propertyName_fs = 'lotxlocxid.sku'; this.loadListStockCountData({}) ">
+                      Item Code
+                      <i *ngIf="this.propertyName_fs == 'lotxlocxid.sku' && this.order_fs=='ASC'" class="fa fa-angle-up"></i>
+                      <i *ngIf="this.propertyName_fs == 'lotxlocxid.sku' && this.order_fs=='DESC'" class="fa fa-angle-down"></i>
+                    </span>
+                    <input type="text" class="form-control search-table  my-2" [(ngModel)]="fs_sku" (keyup.enter)="this.loadListStockCountData({})">
+                  </th>
+                  <th>
+                    Qty Case
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th>
+                    Qty Pieces
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                  <th *ngFor="let col of selected_StockCount">
+                    {{col.label}}
+                    <input type="text" class="form-control search-table  my-2" disabled>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-hover">
+                <tr class="table-light" *ngFor="let data of data_StockCount_right | paginate: { id: 'id_StockCount_right', itemsPerPage: itemsPerPage_StockCount_right, currentPage: currentPage_StockCount_right, totalItems: this.total_StockCount_right }; let i = index;">
+                  <td class="align-middle">{{i+1}}</td>
+                  <td class="align-middle">{{data.location}}</td>
+                  <td class="align-middle">{{data.sku}}</td>
+                  <td class="align-middle">{{data.qtycase | number}}</td>
+                  <td class="align-middle">{{data.qtypiece | number}}</td>
+                  <td *ngFor="let col of selected_StockCount">
+                    <span *ngIf="col.key === 'lottable05' || col.key === 'lottable04' || col.key === 'lottable11' || col.key === 'lottable12' ">
+                      {{ data[col.key] | date }} </span>
+                    <span *ngIf="col.key !== 'lottable05' && col.key !== 'lottable04' && col.key !== 'lottable11' && col.key !== 'lottable12' ">
+                      {{ data[col.key] }} </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-inline">
+              <span>Show &nbsp;</span>
+              <select class="custom-select custom-select-sm" name="itemsPerPage_StockCount_right" [(ngModel)]="itemsPerPage_StockCount_right"
+                (change)="this.itemsPerPage_StockCount_right = $event.target.value; this.loadListStockCountData({})">
+                <option>12</option>
+                <option>24</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+              <span class="entry">&nbsp;entries</span>
+            </div>
+            <pagination-controls id="id_StockCount_right" (pageChange)="this.currentPage_StockCount_right = $event; this.loadListStockCountData({})"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

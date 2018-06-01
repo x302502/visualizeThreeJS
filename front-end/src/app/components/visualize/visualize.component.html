@@ -1,0 +1,26 @@
+<div class="my-container">
+  <ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+<div class="visualizeMenu">
+  <div class="fixcenter">
+    <button class="btn btn-outline-primary mb-1 mr-1 hvr-bounce-to-left btn-visualize" (click)="open('background')">Create background </button>
+  </div>
+  <div class="fixcenter">
+    <button class="btn btn-outline-primary mb-1 mr-1 hvr-bounce-to-left btn-visualize">Remove background </button>
+  </div>
+  <div class="fixcenter">
+    <button class="btn btn-outline-primary mb-1 mr-1 hvr-bounce-to-left btn-visualize" (click)="open('rack')">Create Rack</button>
+  </div>
+  <div class="fixcenter">
+    <button class="btn btn-outline-primary mb-1 mr-1 hvr-bounce-to-left btn-visualize">Remove Rack</button>
+  </div>
+  <div class="fixcenter">
+    <button class="btn btn-outline-primary mb-1 mr-1 hvr-bounce-to-left btn-visualize" >Show Modal</button>
+  </div>
+</div>
+<div class="visualizeContainer" #visualizeContainer></div>
+<app-poup-visualize 
+  (myClick) = "cloneData($event)"
+  [modalId]="modalId" 
+  [dataModal]="dataModal" >
+</app-poup-visualize>

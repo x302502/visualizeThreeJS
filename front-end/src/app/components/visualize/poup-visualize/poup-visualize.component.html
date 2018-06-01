@@ -1,0 +1,25 @@
+<div class="modal fadeIn" id="{{modalId}}">
+  <div class="modal-dialog " style="margin-left: 30%;width: 40%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{dataModal.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="form-group row"  *ngFor="let item of dataModal.listInput">
+          <label class="col-sm-3">{{item.title}}</label>
+          <div class="col-sm-9">
+            <input type="{{item.type}}" class="form-control" name="{{item.name}}" [(ngModel)]="item.value">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="setData()"> Ok </button>
+      </div>
+    </div>
+  </div>
+</div>

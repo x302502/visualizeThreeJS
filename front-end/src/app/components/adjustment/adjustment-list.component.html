@@ -1,0 +1,160 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold"> Adjustment</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+    </div>
+  </div>
+  <div class="tab-content">
+    <div class="table-responsive fixed-tableAdjustment ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>
+              <input class="align-bottom table-small" type="checkbox" [checked]="isAllChecked()" (change)="checkAll($event)">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STORERKEY'; this.loadAdjustmentData({}) ">
+                STORERKEY
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup)="loadAdjustmentData({})" (keyup.back)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'receiptdetail.EXTERNRECEIPTKEY'; this.loadAdjustmentData({}) ">
+                PO
+                <i *ngIf="this.propertyName_ff == 'receiptdetail.EXTERNRECEIPTKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'receiptdetail.EXTERNRECEIPTKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_po" (keyup)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LPNID'; this.loadAdjustmentData({}) ">
+                LPNID
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_lpnid" (keyup)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.SKU '; this.loadAdjustmentData({}) ">
+                SKU
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup)="loadAdjustmentData({})" (keyup.back)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOT '; this.loadAdjustmentData({}) ">
+                LOT
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lot" (keyup)="loadAdjustmentData({})" (keyup.back)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STATUS'; this.loadAdjustmentData({}) ">
+                STATUS
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadAdjustmentData({})" (keyup.back)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOC'; this.loadAdjustmentData({}) ">
+                LOC
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup)="loadAdjustmentData({})" (keyup.back)="loadAdjustmentData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTY'; this.loadAdjustmentData({}) ">
+                QTY_PCS
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadAdjustmentData({})">
+            </th>
+            <th class="align-top">QTY-CASE
+            </th>
+            <th class="align-top">QTY-PCS_ADJUST
+            </th>
+            <th class="align-top">QTY-CASE_ADJUST
+            </th>
+            <th class="align-top">REASON-ADJUST
+            </th>
+            <th class="align-top">REMARK
+            </th>
+            <th class="align-top">ACTION
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary-swm" *ngFor="let data of data_adjustment| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total } ; let i = index;">
+            <td>
+              <input class="align-bottom table-small" type="checkbox" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+            </td>
+            <td>{{data.STORERKEY}}</td>
+            <td>{{data.EXTERNRECEIPTKEY}}</td>
+            <td>{{data.LPNID}}</td>
+            <td>{{data.SKU}}</td>
+            <td>{{data.LOT}}</td>
+            <td>{{data.STATUS}}</td>
+            <td>{{data.LOC}}</td>
+            <td>{{data.QTY | number}}</td>
+            <td>{{data.OnHand_Case | number}}</td>
+            <td>
+              <input class="form-control form-control-sm" currencyMask [(ngModel)]="data.adjust_qty_pcs" name="adjust_qty_pcs[{{i}}]">
+            </td>
+            <td>
+              <input class="form-control form-control-sm" currencyMask [(ngModel)]="data.adjust_qty_case" name="adjust_qty_case[{{i}}]">
+            </td>
+            <td>
+              <select class="form-control form-control-sm" [(ngModel)]="data.code" name="code{{i}}">
+                <option [ngValue]="undefined" disabled selected>Select reason</option>
+                <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.description}}</option>
+              </select>
+              <!-- <form #f="ngForm">
+                <select class="form-control form-control-sm" name="code{{i}}" [ngModel]="data.code">
+                  <option value="" disabled>--Select--</option>
+                  <option *ngFor="let data of data_codelkup" value="{{data.code}}">
+                    {{ data.description}}
+                  </option>
+                </select>
+              <!-- </form> -->
+              <!-- <p>Form value: {{ data.value | json }}</p> -->
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.remark' name='remark[{{i}}]'>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="updateAdjustmentData(data)">
+                <i class="fa fa-save"></i>
+              </button>
+            </td>
+          </tr>
+          <tr id="pagination"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value;this.loadAdjustmentData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadAdjustmentData({})"></pagination-controls>
+    </div>
+  </div>
+</div>

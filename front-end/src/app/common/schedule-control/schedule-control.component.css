@@ -1,0 +1,59 @@
+/* Tooltip */
+.schedule-tooltip-default {
+    position: fixed;
+    background: #ffffff;
+    margin: 0;
+    border-radius: 4px;
+    border: 2px solid #bebebe;
+    box-shadow: 2px -2px 2px #bebebe;
+    display: none;
+    z-index: 99999;
+    width:340px;
+}
+.schedule-tooltip-default .col-sm-6, .schedule-tooltip-default .col-sm-12{
+        padding-left:5px;
+        padding-right:5px;
+    }
+
+    .schedule-tooltip-default .header {
+        height: 26px;
+        background: #16759B;
+        color: #FFFFFF;
+        line-height:26px;
+        padding-left:5px;
+        padding-right:5px;
+    }
+
+    .schedule-tooltip-default .body {
+        padding-top:5px;
+        line-height:30px;
+    }
+
+    .schedule-tooltip-default .title {
+        color: #16759B;
+    }
+
+    .schedule-tooltip-default .detail {
+        color: #525252;
+    }
+/* Extenal area */
+.external-events {
+    float: left;
+    width: 190px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+    overflow-y: auto;
+}
+.external-events .fc-event {
+    margin: 10px 0;
+    cursor: pointer;
+}
+.calendar {
+    float: right;
+    width: calc(100% - 200px);
+}
+.calendar.no-external-events {
+    width: 100%;
+}

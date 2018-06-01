@@ -1,0 +1,17 @@
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 64px;
+    height: 24px;
+    position: absolute;
+    right: 6%;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+.custom-color-col {
+    position: relative;
+}

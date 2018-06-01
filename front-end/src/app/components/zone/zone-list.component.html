@@ -1,0 +1,13 @@
+<div class="navbar breadcrumb-swm justify-content-between my-0">
+  <ul class="nav">
+    <li class="breadcrumb-item " aria-current="page">
+      <!-- <a class="text-primary-swm font-weight-bold" routerLink="/dashboard">Back Home</a> -->
+    </li>
+  </ul>
+  <ul class="nav justify-content-end my-1">
+    <li class="nav-item mr-2">
+      <button class=" text-white btn-primary-swm border-0 px-4 btnnew-customer" (click)="create()">New</button>
+    </li>
+  </ul>
+</div>
+<grid-control [option]="gridOption" #grid (onImportExcel)="importExcel($event)"></grid-control>

@@ -1,0 +1,58 @@
+<div class="container mt-5 mb-5">
+  <div class="row mt-5">
+    <div class="col-11 col-sm-12 col-md-10 col-lg-8 box-shadow mx-auto">
+      <div class="row bg-white">
+        <div class="col-sm-7 col-md-8 col-lg-8 p-0">
+          <img class="img-fluid" src="assets/img/login.jpg" />
+        </div>
+        <form #frmlogin="ngForm" autocomplete="off" (ngSubmit)="signin(frmlogin.value)" autocomplete="off" class="col-sm-5 col-md-4 col-lg-4 my-auto pt-1 pb-1">
+          <h1 style="font-family:Montserrat-Thin, sans-serif;">Sign in</h1>
+          <input type="text" class="form-control mb-2 mt-3 form-control-sm rounded" name="username" placeholder="Username" required autofocus ngModel>
+          <input type="password" class="form-control form-control-sm rounded" name="password" placeholder="Password" required ngModel>
+          <button [disabled]="!frmlogin.form.valid"  class="btn btn-sm btn-primary btn-block mt-3 mb-3">Sign in</button>
+          <a data-toggle="modal" data-target="#modalForgotPasswordUsers" class="text-muted">Forgot my password</a>
+        </form>
+        <div class="modal fade" id="modalForgotPasswordUsers" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form #frmForgotPassword="ngForm" id="frmForgotPassword" autocomplete="off">
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger">Forgot Account Info</h5>
+                  <button class="close" data-dismiss="modal" type="button">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row mt-3">
+                    <div class="col-12">
+                      <div class="row pt-2" >
+                        <div class="col-2 mr-0 pr-0">
+                          <span class="font-weight-bold "> <span  class="text-danger"> &nbsp;*</span> UserName</span>
+                        </div>
+                        <div class="col-8  px-0">
+                          <input class="form-control form-control-sm" type="text" name="username" autofocus required ngModel>
+                        </div>
+                      </div>
+                      <div class="row pt-2" >
+                        <div class="col-2 mr-0 pr-0">
+                          <span class="font-weight-bold "> <span  class="text-danger"> &nbsp;*</span> Email</span>
+                        </div>
+                        <div class="col-8  px-0">
+                          <input class="form-control form-control-sm" type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required ngModel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" [disabled]="!frmForgotPassword.form.valid" (click)="forgotPasswordUsersData(frmForgotPassword.value)"><i class="fa fa-thumbs-o-up"></i></button>
+                  <button class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-thumbs-o-down"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

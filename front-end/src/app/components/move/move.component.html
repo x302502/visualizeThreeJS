@@ -1,0 +1,254 @@
+<div id="wrapper">
+  <!-- <section class="d-flex justify-content-between">
+        <div>
+            <h1 class="mt-4  ml-3 text-headline"><span class="icon-ico-move  text-headline" style="font-size:1.2rem;"></span>Move</h1>
+        </div>
+        <div>
+            <button type="button" class="btn  mt-3 px-5  mr-4 export ">Export</button>
+        </div>
+    </section> -->
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold">Move</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+      <div class=" mr-2">
+        <!-- <a class=" btn-white-swm px-4" data-toggle="modal" data-target="#modalImport">Import</a> -->
+      </div>
+      <div class=" mr-2">
+        <a class=" btn-white-swm px-4" (click)="export()">Export</a>
+      </div>
+      <div class="modal fade" id="modalImport" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Select File</h5>
+            </div>
+            <div class="modal-body">
+              <input type="file" (change)="onFileChange($event)" />
+              <div class="table-responsive mt-3">
+                <div class="col-md-12">
+                  <table class="table table-striped" *ngIf="data_row_excel">
+                    <thead>
+                      <th rowspan="2"></th>
+                      <th *ngFor="let data of data_headers">{{data}}</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of data_row_excel;let i = index;">
+                        <td>
+                          <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" (change)="onChoose($event, data)">
+                            <span class="custom-control-label"></span>
+                          </label>
+                        </td>
+                        <!-- <td>{{data.STORERKEY}}</td> -->
+                        <td>
+                          <input class="form-control form-control-sm " type="text" required minlength="1" [(ngModel)]='data.STORERKEY' name='STORERKEY[{{i}}]'>
+                        </td>
+                        <td>{{data.PO}}</td>
+                        <td>{{data.LPNID}}</td>
+                        <td>{{data.SKU}}</td>
+                        <td>{{data.LOT}}</td>
+                        <td>{{data.STATUS}}</td>
+                        <td>{{data.FROMLOC}}</td>
+                        <td>{{data.QTY}}</td>
+                        <td>{{data.UNIT}}</td>
+                        <td>{{data.QTYMOVE}}</td>
+                        <td>{{data.TOLPNID}}</td>
+                        <td>{{data.TOLOCATION}}</td>
+                        <td>{{data.REASON}}</td>
+                        <td>
+                          <button class="btn btn-primary" (click)="updateMoveData(data)">
+                            <i class="fa fa-save"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-danger" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-sm-between align-items-center my-3 ">
+    <div class="d-flex">
+      <button type="button" class="btn-white-swm px-4 ml-3 p-2 " (click)="saveToPreMove()" >Save Pre-Move List</button>
+      <a class="btn-white-swm px-4 ml-3 p-2" (click)="open()">Open Pre-Move List</a>
+    </div>
+    <div class="d-flex ">
+      <button type="button" class="btn-white-swm px-4 p-2 mr-3 " >
+        <a class="px-3" href="/assets/Template/TemplateForMove.xlsx" download>Template</a>
+      </button>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div class="table-responsive fixed-tabletabMove ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <!-- <th rowspan="2">
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox">
+                            <span class="custom-control-label"></span>
+                        </label>
+                   </th> -->
+            <th rowspan="2">
+              <input type="checkbox" class="align-bottom table-small" [checked]="isAllChecked()" (change)="checkAll($event)">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STORERKEY'; this.loadMoveData({}) ">
+                STORERKEY
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'receipt.EXTERNRECEIPTKEY'; this.loadMoveData({}) ">
+                PO
+                <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_po" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LPNID'; this.loadMoveData({}) ">
+                LPNID
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2"  [(ngModel)]="ff_lpnid" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.SKU '; this.loadMoveData({}) ">
+                SKU
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOT '; this.loadMoveData({}) ">
+                LOT
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lot" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STATUS'; this.loadMoveData({}) ">
+                STATUS
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOC'; this.loadMoveData({}) ">
+                LOC
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTY'; this.loadMoveData({}) ">
+                QTY_PCS
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadMoveData({})">
+            </th>
+             <!-- <th class="align-top">QTY-CASE
+            </th> -->
+            <!-- <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'pack.PACKUOM3'; this.loadMoveData({}) ">
+                UNIT
+                <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_unit" (keyup)="loadMoveData({})" (keyup.back)="loadMoveData({})">
+            </th> -->
+            <th class="align-top">QTY-MOVE
+            </th>
+            <th class="align-top">TO LPNID
+            </th>
+            <th class="align-top">TO LOCATION
+            </th>
+            <th class="align-top">REASON
+            </th>
+            <th class="align-top">ACTION</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+          <tr class="table-primary-swm" *ngFor="let data of data_move| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total } ; let i =index;">
+            <td>
+              <input type="checkbox" class="align-bottom table-small" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+            </td>
+            <td>{{data.STORERKEY}}</td>
+            <td>{{data.EXTERNRECEIPTKEY}}</td>
+            <td>{{data.LPNID}}</td>
+            <td>{{data.SKU}}</td>
+            <td>{{data.LOT}}</td>
+            <td>{{data.STATUS}}</td>
+            <td>{{data.LOC}}</td>
+            <td>{{data.QTY | number}}</td>
+            <!-- <td>{{data.OnHand_Case | number}}</td> -->
+            <!-- <td>{{data.PACKUOM3}}</td> -->
+            <td>
+              <input class="form-control form-control-sm" currencyMask  min="1"   [options]="{allowNegative: false }"
+                [(ngModel)]='data.move_qty' name='move_qty[{{i}}]'>
+            </td>
+            <td style="min-width:200px">
+              <input class="form-control form-control-sm" type="text" required minlength="1"  [(ngModel)]='data.tolpnid' name='tolpnid[{{i}}]'>
+              <!-- <ng2-completer inputClass="form-control form-control-sm" inputName="tolpnid[{{i}}]" [(ngModel)]="data.tolpnid" [datasource]="data_lpnid"
+                [placeholder]="'Select Lpn'">
+              </ng2-completer> -->
+            </td>
+            <td>
+              <ng2-completer inputClass="form-control form-control-sm" inputName="tolocation[{{i}}]" [(ngModel)]="data.tolocation" [datasource]="data_location"
+                [placeholder]="'Select Location'">
+              </ng2-completer>
+            </td>
+            <td>
+              <input class="form-control form-control-sm" type="text" [(ngModel)]='data.reason' name='reason[{{i}}]'>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="updateMoveData(data)" >
+                <i class="fa fa-save"></i>
+              </button>
+            </td>
+          </tr>
+          <tr id="pagination"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadMoveData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadMoveData({})"></pagination-controls>
+    </div>
+  </div>
+</div>

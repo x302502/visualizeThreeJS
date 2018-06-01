@@ -1,0 +1,145 @@
+<div id="wrapper">
+  <div class=" navbar  breadcrumb-swm justify-content-between my-0">
+    <ul class="nav ">
+      <li class="breadcrumb-item " aria-current="page">
+        <label class="text-primary-swm font-weight-bold"> Change Status</label>
+      </li>
+    </ul>
+    <!--	end breadcrumb-->
+    <div class="nav justify-content-end my-1 shipment-btn">
+    </div>
+  </div>
+  <div class="tab-content">
+    <div class="table-responsive fixed-tableChangeStatus ">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>
+              <input class="align-bottom table-small" type="checkbox" [checked]="isAllChecked()" (change)="checkAll($event)">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STORERKEY'; this.loadChangeStatusData({}) ">
+                STORERKEY
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STORERKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_storerkey" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})" >
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'receipt.EXTERNRECEIPTKEY'; this.loadChangeStatusData({}) ">
+                PO
+                <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'receipt.EXTERNRECEIPTKEY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_po" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LPNID'; this.loadChangeStatusData({}) ">
+                LPNID
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LPNID' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" style="font-size:13px;padding:9px;" class="form-control search-table  my-2" [(ngModel)]="ff_lpnid" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.SKU '; this.loadChangeStatusData({}) ">
+                SKU
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.SKU' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_sku" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOT '; this.loadChangeStatusData({}) ">
+                LOT
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOT' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_lot" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.STATUS'; this.loadChangeStatusData({}) ">
+                STATUS
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.STATUS' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_status" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.LOC'; this.loadChangeStatusData({}) ">
+                LOC
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.LOC' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_loc" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'lotxlocxid.QTY'; this.loadChangeStatusData({}) ">
+                QTY
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'lotxlocxid.QTY' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_qty" (keyup.enter)="loadChangeStatusData({})">
+            </th>
+            <th>
+              <span class="cursor-pointer" (click)="this.order_ff = this.order_ff=='ASC' ? 'DESC' : 'ASC'; this.propertyName_ff = 'pack.PACKUOM3'; this.loadChangeStatusData({}) ">
+                UNIT
+                <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='ASC'" class="fa fa-angle-up"></i>
+                <i *ngIf="this.propertyName_ff == 'pack.PACKUOM3' && this.order_ff=='DESC'" class="fa fa-angle-down"></i>
+              </span>
+              <input type="text" class="form-control search-table  my-2" [(ngModel)]="ff_unit" (keyup)="loadChangeStatusData({})" (keyup.back)="loadChangeStatusData({})">
+            </th>
+            <th class="align-top">CHANGE STATUS </th>
+            <th class="align-top">REASON </th>
+            <th class="align-top">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary-swm" *ngFor="let data of data_status| paginate: { id: 'id_pack', itemsPerPage: this.itemsPerPage, currentPage: this.currentPage, totalItems: this.total };let i =index;">
+            <td>
+              <input class="align-bottom table-small" type="checkbox" (change)="onChoose($event, data)" [(ngModel)]="data.state">
+            </td>
+            <td>{{data.STORERKEY}}</td>
+            <td>{{data.EXTERNRECEIPTKEY}}</td>
+            <td>{{data.LPNID}}</td>
+            <td>{{data.SKU}}</td>
+            <td>{{data.LOT}}</td>
+            <td>{{data.STATUS}}</td>
+            <td>{{data.LOC}}</td>
+            <td>{{data.QTY | number}}</td>
+            <td>{{data.PACKUOM3}}</td>
+            <td>
+              <select class="form-control form-control-sm " [(ngModel)]="data.code" name="code{{i}}">
+                <option [ngValue]="undefined" disabled selected>Select status</option>
+                <option *ngFor="let data of data_codelkup" [ngValue]="data.code">{{data.code}}</option>
+              </select>
+            </td>
+            <td>
+              <input class="form-control form-control-sm " type="text" [(ngModel)]='data.reason' name='reason[{{i}}]'>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="updateChangeStatusData(data)">
+                <i class="fa fa-save"></i>
+              </button>
+            </td>
+          </tr>
+          <tr id="pagination"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="navbar navbar-light bg-light px-0 px-2" id="footer">
+      <div class="show-entries">
+        <span class="show">Show &nbsp;</span>
+        <select class="custom-select custom-select-sm" name="itemsPerPage" [(ngModel)]="this.itemsPerPage" (change)="this.itemsPerPage = $event.target.value; this.loadChangeStatusData({})">
+          <option>12</option>
+          <option>24</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        <span class="entry">&nbsp;entries</span>
+      </div>
+      <pagination-controls id="id_pack" (pageChange)="this.currentPage = $event;this.loadChangeStatusData({})"></pagination-controls>
+    </div>
+  </div>
+
+</div>

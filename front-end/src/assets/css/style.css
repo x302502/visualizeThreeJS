@@ -1,0 +1,358 @@
+/*FILE IMPORT CSS*/
+@import url(fonts.css);
+@import url(normalize.css);
+@import url(icomoon.css);
+@import url(btn.css);
+@import url(table.css);
+@import url(typography.css);
+@import url(form.css);
+@import url(newasn.css);
+@import url(inboundreport.css);
+@import url(shipmenorder.css);
+@import url(inventorylist.css);
+
+/*FILE IMPORT CSS*/
+/*/SCROLL BAR*/
+*::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: #EEEEEE;
+	/* or add it to the track */
+}
+*::-webkit-scrollbar-thumb {
+	background: #BFBFBF;
+	border-radius: 100rem;
+}
+
+body {
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+button {
+	outline: 0 !important;
+}
+/*HEADER*/
+
+#header .navbar-brand {
+	margin-right: 30px;
+}
+
+#header.bg-swm {
+	background: linear-gradient(rgba(22, 117, 155, .8), rgba(22, 117, 155, .8)),
+	url(../img/bg-nav.png);
+	font-weight: 600;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#header .dropdown-menu {
+	border-radius: 0;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+	border: none;
+
+}
+
+#header .dropdown.show>a {
+	background: none;
+}
+
+#header .dropdown-menu:before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 45%;
+	margin-left: -50px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #fff transparent;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+	background: #16759B;
+	color: #fff !important;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+	color: #16759B;
+}
+
+#navbarSupportedContent .navbar-nav.mr-auto .dropdown-toggle::after {
+	content: '\f107';
+	font-family: 'FontAwesome';
+	border: none;
+	margin-left: .1em;
+	vertical-align: top;
+}
+
+#navbarSupportedContent .navbar-nav.mr-auto li.nav-item {
+	margin-right: 20px;
+}
+
+#navbarSupportedContent .username {
+	font-weight: 500;
+}
+
+.username .dropdown.show>a {
+	background: none;
+}
+
+
+.username .dropdown-menu-right:before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 55% !important;
+	margin-left: -50px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #fff transparent;
+}
+/*END HEADER*/
+
+/*BREADCRUMB*/
+.breadcrumb {
+	background: none;
+}
+
+.breadcrumb-swm {
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+	display: inline-block;
+	padding-right: .5rem;
+	padding-left: .5rem;
+	color: #868e96;
+	content: "\f105";
+	font-family: 'FontAwesome';
+}
+/*END BREADCRUMB*/
+/*PAGINATION*/
+.page-link {
+	color: #16759B;
+}
+/*END PAGINATION*/
+/*BTN DROPDOWN ITEM FONT NEW ASN*/
+.dropdown.show>a {
+	background: #16759b;
+	color:#fff;
+}
+.dropdown-menu:before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	margin-left: 25px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #16759B transparent;
+}
+
+.dropdown-menu {
+	border-radius: 3px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+	border: 1px solid #16759B;
+	margin: .5rem;
+	font-size: .8rem;
+}
+
+.dropdown-menu.button:before {
+	margin-left: 145px !important;
+
+}
+
+.dropdown-menu.button {
+	right: 0;
+	left: -100% !important;
+}
+
+.btn-trash {
+	background: none;
+	border: none;
+}
+
+
+/*Edit by Tinh Nguyen */
+/* .tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+} */
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: 150%;
+	left: 50%;
+	margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+	content: “”;
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+.completer-holder {
+	position: relative;
+}
+.completer-dropdown{
+	margin-top: 5px !important;
+	max-width: 100% !important;
+	overflow-y: scroll !important;
+	overflow-x: hidden !important;
+	height: 200px !important;
+	position: absolute;
+	
+}
+.icon-datecalendar{
+	position: relative;
+}
+.icon-datecalendar:after {
+	content: '\f073';
+	font-family: 'FontAwesome';
+	position: absolute;
+	font-size: 14px;
+	top: 25%;
+	right: 10px;
+
+}
+.icon-datesearch{
+	position: relative;
+}
+.icon-datesearch:after {
+	content: '\f073';
+	font-family: 'FontAwesome';
+	position: absolute;
+	font-size: 14px;
+	padding-left: 15%;
+	top: 29%;
+	right: 10px;
+
+}
+
+.icon-date{
+	position: relative;
+}
+.icon-date:after {
+	content: '\f073';
+	font-family: 'FontAwesome';
+	position: absolute;
+	font-size: 14px;
+	right: 5px;
+
+}
+.icon-search{
+	position: relative;
+}
+.icon-search:after {
+	content: '\f002';
+	font-family: 'FontAwesome';
+	position: absolute;
+	font-size: 14px;
+	right: 5px;
+}
+
+
+.stylish-input-group .input-group-addon{
+	background: white !important;
+	border: 1px solid #ced4da;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+.text-orangered{
+	color: orangered
+}
+.text-green{
+	color:green
+}
+.text-orchid{
+	color:orchid
+}
+
+
+
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+button[type=button]:disabled {
+	background-color: #E9ECEF !important;
+	border: 1px solid #ced4da;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+	#header {
+		font-size:12px;
+	}
+	#total {
+		font-size: 12px;
+	}
+}
+
+
+@media screen and (max-width: 768px) {
+	/*/RESPONSIVE NAVIGATION*/
+	#header .dropdown-menu:before {
+		border: none;
+	}
+	/*RESPONSIVE	ASN-FOOTER*/
+	#footer .show-entries {
+		display: inline-block;
+		font-size: 14px;
+	}
+	#footer .show-entries .entry {
+		display: none;
+	}
+	.v-scroll {
+		height: calc(100vh - 260px);
+
+	}
+	/*/RESPONSIVE NEWASN*/
+}
+
+@media screen and (max-width: 504px) {
+	.breadcrumb-swm .breadcrumb-item {
+		font-size: 8px;
+	}
+	/*	BTN ACTION ASN*/
+	.btn-action-asn #extend {
+		margin-top: 1rem;
+	}
+	.btn-action-asn {
+		margin-top: .5rem;
+	}
+	.v-scroll {
+		height: calc(100vh - 260px);
+
+	}
+}
